@@ -183,7 +183,26 @@
             </section>
 
             <section>
-                <iframe style="border:none;height:100%;width:500px" src="https://wisehouse.app/chat/LkKNlwl7tjAFaMXliSDh?nochat&nosummary"></iframe>
+                <!-- ======================================= -->
+                <!-- THiS IS THE INTEGRATION WITH WISE HOUSE -->
+                <!-- ======================================= -->
+                <!-- 
+                    It is an iframe that embeds the website of a property directly into your website. In its 
+                    raw form, this website contains three section: 3D model, the chat, and the summary. These 
+                    can be disabled through search options.
+                    
+                    The src attribute has the structure of the link (https://wisehouse.app/chat/:modelID)
+                    and a set of options are passed. In this case, `nochat` and `nosummary` disable the summary 
+                    and the chat, leaving only the 3D model.
+                    
+                    The model needs to be public for it to work.
+                    
+                    You can apply styles to the iframe.
+                 -->
+                <iframe 
+                    style="border:none;height:100%;width:500px" 
+                    src="https://wisehouse.app/chat/LkKNlwl7tjAFaMXliSDh?nochat&nosummary"
+                ></iframe>
             </section>
         </div>
     </main>
