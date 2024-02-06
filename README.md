@@ -75,6 +75,8 @@ Putting together multiple customization options implies chaining them, separatin
 
 ### Examples
 
+* Show everything --> [See it in action](https://wisehouse-app.github.io/web_examples/examples/all_together.html) or [View the source code](examples/all_together.html)
+* Show everything 2 --> [See it in action](https://wisehouse-app.github.io/web_examples/examples/all_together_realtor.html) or [View the source code](examples/all_together_realtor.html)
 * Show only a chat --> [See it in action](https://wisehouse-app.github.io/web_examples/examples/only_chat.html) or [View the source code](examples/only_chat.html)
 * Show only a 3D render --> [See it in action](https://wisehouse-app.github.io/web_examples/examples/only_3d.html) or [View the source code](examples/only_3d.html)
 
@@ -136,12 +138,12 @@ Opciones de configuración pueden utilizarse para definir que paneles aparecen y
 | `inwall` | El color del interior de los muros en el render 3D | https://wisehouse.app/chat/LkKNlwl7tjAFaMXliSDh?inwall=ff11ff |
 | `outwall` | El color del exterior de los muros en el render 3D | https://wisehouse.app/chat/LkKNlwl7tjAFaMXliSDh?outwall=ff11ff |
 | `floor` | El color del piso en el render 3D | https://wisehouse.app/chat/LkKNlwl7tjAFaMXliSDh?floor=ff11ff |
-| `ceiling` | El color del cielo en el render 3D | https://wisehouse.app/chat/LkKNlwl7tjAFaMXliSDh?ceiling=ff11ff |
+| `ceiling` | El color del cielo (de la propiedad) en el render 3D | https://wisehouse.app/chat/LkKNlwl7tjAFaMXliSDh?ceiling=ff11ff |
   
 
 ### Juntando todo
 
-Multiples opciones de configuración se pueden definir al encadenarlos, separados por un signo `&`. Por ejemploÑ
+Multiples opciones de configuración se pueden definir al encadenarlos, separados por un signo `&`. Por ejemplo:
 
 ```html
 <iframe 
@@ -153,5 +155,7 @@ Multiples opciones de configuración se pueden definir al encadenarlos, separado
 
 ### Ejemplos
 
+* Mostrar todo --> [Ver como funciona](https://wisehouse-app.github.io/web_examples/examples/all_together.html) or [Ver el código fuente](examples/all_together.html)
+* Mostrar todo 2 --> [Ver como funciona](https://wisehouse-app.github.io/web_examples/examples/all_together_realtor.html) or [Ver el código fuente](examples/all_together_realtor.html)
 * Mostrar solo el chat --> [Ver como funciona](https://wisehouse-app.github.io/web_examples/examples/only_chat.html) or [Ver el código fuente](examples/only_chat.html)
 * Mostrar solo el render --> [Ver como funciona](https://wisehouse-app.github.io/web_examples/examples/only_3d.html) or [Ver el código fuente](examples/only_3d.html)
