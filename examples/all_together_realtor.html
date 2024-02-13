@@ -7,360 +7,502 @@
     <meta charSet="utf-8" />
 
     <title>123 Serenity Lane, where tranquility meets sophistication</title>
+    <style>
+        * {
+            box-sizing: content-box;
+        }
+
+        body {
+            width: 100vw;
+            font-family: Arial, Helvetica, sans-serif;
+            justify-self: center;
+            box-sizing: border-box;
+        }
+
+        main>div {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 70rem;
+
+        }
+
+        /* IMAGES CONTAINER */
+        div#images {
+            width: fit-content;
+            margin: auto;
+            position: relative;
+            height: fit-content;
+        }
+
+
+        div#images {
+            display: grid;
+            height: 100%;
+            width: fit-content;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0.1rem;
+        }
+
+        div.image {
+            position: relative;
+            overflow: hidden;
+            height: 220px;
+            width: 220px;
+        }
+
+        div.image>img {
+            height: 100%;
+            border-radius: 10px;
+            color: transparent;
+            background-size: cover;
+            background-position: 50% 50%;
+            background-repeat: no-repeat;
+        }
+
+        /* NAME OF THE PROPERTY */
+        div#property_title {
+            z-index: 10;
+            width: 100%;
+            padding-top: 10px;
+            background-color: white;
+        }
+
+        /* SPECS AND CHAT */
+        div#specs_chat {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        div#prop_description {
+            width: 50%;
+        }
+
+        div#price_tag {
+            display: flex;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        div#contact_form {
+            margin: 1rem;
+            padding: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            width: 30%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        div#wise-house {
+            padding: 0.3rem;
+            flex-grow: 1;
+        }
+
+        /* LOCATION */
+        div#location {
+            padding-top: 0.5rem;
+            background-color: white;
+            border-radius: 5px;
+        }
+
+        div#location img {
+            max-width: 100%;
+        }
+
+
+        @media (max-width: 720px) {
+            body {
+                padding: 0;
+            }
+
+            main>div {
+                max-width: 95vw;
+            }
+
+            /* IMAGES */
+            div#images {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            div#images>div {
+                height: 12vw;
+                width: 12vw;
+                display: inline-block;
+            }
+
+            div#images> :first-child {
+                height: 85vw;
+                width: 85vw;
+                margin: 0.5rem;
+            }
+
+            /* NAME OF THE PROPERTY */
+            div#property_title {
+                text-align: center;
+                margin: 1rem, auto;
+
+            }
+
+            /* SPECS AND CHAT */
+            div#specs_chat {
+                flex-direction: column;
+            }
+
+            div#prop_description {
+                width: 100%;
+            }
+
+            div#price_tag>p {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 0.5em;
+            }
+
+            div#contact_form {
+                box-sizing: border-box;
+                width: 100%;
+                height: 130vh;
+                margin: 0;
+                box-shadow: none;
+            }
+            div#wise-house > h1 {
+                width: 100%;
+                text-align: center;
+                font-size: 1.6rem;
+            }
+
+        }
+    </style>
 </head>
 
-<body style="width: 100vw; padding: 5vw;font-family: Arial, Helvetica, sans-serif;justify-self: center;">
+
+<body>
 
 
     <main>
-        <div style="margin-left:auto; margin-right:auto; max-width: 80rem;">
-            <div>
-                <div>
+        <!-- <div>
+            <div>-->
+        <div>
 
 
-                    <div style="width:fit-content;margin:auto; position:relative;height: fit-content;">
-                        <div style="max-width:100%;margin-bottom:0.5rem">
-                            <div style="display:flex; width: 100%; max-height:480px;">
-                                <div style="min-width: 50%; min-height:490px; display: block;">
-                                    <div
-                                        style="display:grid; height:100%; grid-template-columns: repeat(4, minmax(0, 1fr));gap:0.1rem;">
+            <div id="images">
 
-                                        <div style="position: relative;overflow:hidden;height:100%;">
-                                            <img title="123 Serenity Lane, where tranquility meets sophistication"
-                                                alt="123 Serenity Lane, where tranquility meets sophistication"
-                                                loading="lazy" decoding="async" data-nimg="1"
-                                                style="height:100%;border-radius:10px;color:transparent;background-size:cover;background-position:50% 50%;background-repeat:no-repeat;"
-                                                src="../assets/Floorplan-1.jpeg" />
-                                        </div>
+                <div class="image">
+                    <img title="123 Serenity Lane, where tranquility meets sophistication"
+                        alt="123 Serenity Lane, where tranquility meets sophistication" loading="lazy" decoding="async"
+                        data-nimg="1" src="../assets/Floorplan-1.jpeg" />
+                </div>
 
-                                        <div style="position: relative;overflow:hidden;height:100%;">
-                                            <img title="123 Serenity Lane, where tranquility meets sophistication"
-                                                alt="123 Serenity Lane, where tranquility meets sophistication"
-                                                loading="lazy" decoding="async" data-nimg="1"
-                                                style="height:100%;border-radius:10px;color:transparent;background-size:cover;background-position:50% 50%;background-repeat:no-repeat;"
-                                                src="../assets/Designer-1.jpeg" />
-                                        </div>
-                                        <div style="position: relative;overflow:hidden;height:100%;">
-                                            <img title="123 Serenity Lane, where tranquility meets sophistication"
-                                                alt="123 Serenity Lane, where tranquility meets sophistication"
-                                                loading="lazy" decoding="async" data-nimg="1"
-                                                style="height:100%;border-radius:10px;color:transparent;background-size:cover;background-position:50% 50%;background-repeat:no-repeat;"
-                                                src="../assets/Designer-2.jpeg" />
-                                        </div>
-                                        <div style="position: relative;overflow:hidden;height:100%;">
-                                            <img title="123 Serenity Lane, where tranquility meets sophistication"
-                                                alt="123 Serenity Lane, where tranquility meets sophistication"
-                                                loading="lazy" decoding="async" data-nimg="1"
-                                                style="height:100%;border-radius:10px;color:transparent;background-size:cover;background-position:50% 50%;background-repeat:no-repeat;"
-                                                src="../assets/Designer-3.jpeg" />
-                                        </div>
+                <div class="image">
+                    <img title="123 Serenity Lane, where tranquility meets sophistication"
+                        alt="123 Serenity Lane, where tranquility meets sophistication" loading="lazy" decoding="async"
+                        data-nimg="1" src="../assets/Designer-1.jpeg" />
+                </div>
+                <div class="image">
+                    <img title="123 Serenity Lane, where tranquility meets sophistication"
+                        alt="123 Serenity Lane, where tranquility meets sophistication" loading="lazy" decoding="async"
+                        data-nimg="1" src="../assets/Designer-2.jpeg" />
+                </div>
+                <div class="image">
+                    <img title="123 Serenity Lane, where tranquility meets sophistication"
+                        alt="123 Serenity Lane, where tranquility meets sophistication" loading="lazy" decoding="async"
+                        data-nimg="1" src="../assets/Designer-3.jpeg" />
+                </div>
 
-                                        <div style="position: relative;overflow:hidden;height:100%;">
-                                            <img title="123 Serenity Lane, where tranquility meets sophistication"
-                                                alt="123 Serenity Lane, where tranquility meets sophistication"
-                                                loading="lazy" decoding="async" data-nimg="1"
-                                                style="height:100%;border-radius:10px;color:transparent;background-size:cover;background-position:50% 50%;background-repeat:no-repeat;"
-                                                src="../assets/Designer-4.jpeg" />
-                                        </div>
-                                        <div style="position: relative;overflow:hidden;height:100%;">
-                                            <img title="123 Serenity Lane, where tranquility meets sophistication"
-                                                alt="123 Serenity Lane, where tranquility meets sophistication"
-                                                loading="lazy" decoding="async" data-nimg="1"
-                                                style="height:100%;border-radius:10px;color:transparent;background-size:cover;background-position:50% 50%;background-repeat:no-repeat;"
-                                                src="../assets/Designer-5.jpeg" />
-                                        </div>
-                                        <div style="position: relative;overflow:hidden;height:100%;">
-                                            <img title="123 Serenity Lane, where tranquility meets sophistication"
-                                                alt="123 Serenity Lane, where tranquility meets sophistication"
-                                                loading="lazy" decoding="async" data-nimg="1"
-                                                style="height:100%;border-radius:10px;color:transparent;background-size:cover;background-position:50% 50%;background-repeat:no-repeat;"
-                                                src="../assets/Designer-6.jpeg" />
-                                        </div>
-                                        <div style="position: relative;overflow:hidden;height:100%;">
-                                            <img title="123 Serenity Lane, where tranquility meets sophistication"
-                                                alt="123 Serenity Lane, where tranquility meets sophistication"
-                                                loading="lazy" decoding="async" data-nimg="1"
-                                                style="height:100%;border-radius:10px;color:transparent;background-size:cover;background-position:50% 50%;background-repeat:no-repeat;"
-                                                src="../assets/Designer-7.jpeg" />
-                                        </div>
+                <div class="image">
+                    <img title="123 Serenity Lane, where tranquility meets sophistication"
+                        alt="123 Serenity Lane, where tranquility meets sophistication" loading="lazy" decoding="async"
+                        data-nimg="1" src="../assets/Designer-4.jpeg" />
+                </div>
+                <div class="image">
+                    <img title="123 Serenity Lane, where tranquility meets sophistication"
+                        alt="123 Serenity Lane, where tranquility meets sophistication" loading="lazy" decoding="async"
+                        data-nimg="1" src="../assets/Designer-5.jpeg" />
+                </div>
+                <div class="image">
+                    <img title="123 Serenity Lane, where tranquility meets sophistication"
+                        alt="123 Serenity Lane, where tranquility meets sophistication" loading="lazy" decoding="async"
+                        data-nimg="1" src="../assets/Designer-6.jpeg" />
+                </div>
+                <div class="image">
+                    <img title="123 Serenity Lane, where tranquility meets sophistication"
+                        alt="123 Serenity Lane, where tranquility meets sophistication" loading="lazy" decoding="async"
+                        data-nimg="1" src="../assets/Designer-7.jpeg" />
+                </div>
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+            </div>
+            <div id="property_title">
+                <div style="display:flex; align-items: center;justify-content: center; padding-bottom: 15px;">
+                    <div style="width:100%; padding-top: 0;">
+                        <h1 style="display:inline-flex; flex-direction: column; width:100%;font-weight: bold;">
+                            <span>
+                                123 Serenity Lane
+                            </span>
+                            <span style="font-size: 0.9rem; font-weight: 400;">Located in Wonderland, where
+                                tranquility meets sophistication</span>
+                        </h1>
                     </div>
-                    <div style="z-index:10; width:100%; padding-top:10px; background-color: white;">
-                        <div style="display:flex; align-items: center;justify-content: center; padding-bottom: 15px;">
-                            <div style="width:100%; padding-top: 0;">
-                                <h1 style="display:inline-flex; flex-direction: column; width:100%;font-weight: bold;">
-                                    <span>
-                                        123 Serenity Lane
-                                    </span>
-                                    <span style="font-size: 0.9rem; font-weight: 400;">Located in Wonderland, where
-                                        tranquility meets sophistication</span>
-                                </h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="display:flex;gap: 1.5rem;justify-content: center;">
-                        <div style="width: 50%;">
-                            <div style="margin-top: 1rem;">
-                                <div style="display:flex; flex-direction: column;">
-                                    <div style="display:flex; flex-direction: column; margin-top: 1rem; gap: 1rem;">
-                                        <div style="display:flex; font-size: 2rem; font-weight:bold;">
-                                            <p>
-                                                $1,550,000
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div style="display: flex; flex-direction:column; margin-top: 1rem;">
-                                        <div style="min-width: 100%">
-                                            <div
-                                                style="display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 0.5rem;">
-                                                <div>
-                                                    <div style="display: flex; align-items: center; gap: 0.2rem">
-                                                        <div style="display:flex;align-items: center;">
-                                                            <div style="font-size: 1.3rem; width: fit">
-                                                                <svg stroke="currentColor" fill="currentColor"
-                                                                    stroke-width="0" viewBox="0 0 24 24" height="1em"
-                                                                    width="1em" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                        d="M22 7.999a1 1 0 0 0-.516-.874l-9.022-5a1.003 1.003 0 0 0-.968 0l-8.978 4.96a1 1 0 0 0-.003 1.748l9.022 5.04a.995.995 0 0 0 .973.001l8.978-5A1 1 0 0 0 22 7.999zm-9.977 3.855L5.06 7.965l6.917-3.822 6.964 3.859-6.918 3.852z">
-                                                                    </path>
-                                                                    <path
-                                                                        d="M20.515 11.126 12 15.856l-8.515-4.73-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5-.97-1.748z">
-                                                                    </path>
-                                                                    <path
-                                                                        d="M20.515 15.126 12 19.856l-8.515-4.73-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5-.97-1.748z">
-                                                                    </path>
-                                                                </svg>
-                                                            </div>
-                                                        </div>
-                                                        <div style="display: flex; align-items: end;gap:0.2rem;">
-                                                            <p style="font-weight: light; margin:0.05rem;">
-                                                                Property size:
-                                                            </p>
-                                                            <p
-                                                                style="font-weight:bold;text-align:left;font-size:1.0rem;margin:0.05rem;">
-                                                                976 m²
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <div style="display:flex; align-items:center;gap:0.2rem;">
-                                                        <div style="display:flex; align-items:center;">
-                                                            <div style="font-size: 1.3rem;">
-                                                                <svg stroke="currentColor" fill="currentColor"
-                                                                    stroke-width="0" t="1569683683230"
-                                                                    viewBox="0 0 1024 1024" version="1.1" height="1em"
-                                                                    width="1em" xmlns="http://www.w3.org/2000/svg">
-                                                                    <defs></defs>
-                                                                    <path
-                                                                        d="M342 88H120c-17.7 0-32 14.3-32 32v224c0 8.8 7.2 16 16 16h48c8.8 0 16-7.2 16-16V168h174c8.8 0 16-7.2 16-16v-48c0-8.8-7.2-16-16-16zM920 664h-48c-8.8 0-16 7.2-16 16v176H682c-8.8 0-16 7.2-16 16v48c0 8.8 7.2 16 16 16h222c17.7 0 32-14.3 32-32V680c0-8.8-7.2-16-16-16zM342 856H168V680c0-8.8-7.2-16-16-16h-48c-8.8 0-16 7.2-16 16v224c0 17.7 14.3 32 32 32h222c8.8 0 16-7.2 16-16v-48c0-8.8-7.2-16-16-16zM904 88H682c-8.8 0-16 7.2-16 16v48c0 8.8 7.2 16 16 16h174v176c0 8.8 7.2 16 16 16h48c8.8 0 16-7.2 16-16V120c0-17.7-14.3-32-32-32z">
-                                                                    </path>
-                                                                </svg>
-                                                            </div>
-                                                        </div>
-                                                        <div style="display:flex; align-items:end;gap:0.3rem">
-                                                            <p style="font-weight: light;margin:0.05rem;">
-                                                                Lot size:
-                                                            </p>
-                                                            <p
-                                                                style="font-weight:bold;text-align:left;font-size:1.0rem;margin:0.05rem;">
-                                                                1585 m²
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <div style="display:flex; align-items:center;gap:0.2rem;">
-                                                        <div style="display:flex;align-items:center;">
-                                                            <div style="font-size: 1.3rem;">
-                                                                <svg stroke="currentColor" fill="currentColor"
-                                                                    stroke-width="0" viewBox="0 0 24 24" height="1em"
-                                                                    width="1em" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                        d="M20 9.557V3h-2v2H6V3H4v6.557C2.81 10.25 2 11.525 2 13v4a1 1 0 0 0 1 1h1v4h2v-4h12v4h2v-4h1a1 1 0 0 0 1-1v-4c0-1.475-.811-2.75-2-3.443zM18 7v2h-5V7h5zM6 7h5v2H6V7zm14 9H4v-3c0-1.103.897-2 2-2h12c1.103 0 2 .897 2 2v3z">
-                                                                    </path>
-                                                                </svg>
-                                                            </div>
-                                                        </div>
-                                                        <div style="display:flex; align-items:end;gap:0.3rem">
-                                                            <p style="font-weight: light;margin:0.05rem;">
-                                                                Bedrooms:
-                                                            </p>
-                                                            <p
-                                                                style="font-weight:bold;text-align:left;font-size:1.0rem;margin:0.05rem;">
-                                                                124</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <div style="display:flex; align-items:center;gap:0.2rem;">
-                                                        <div style="display:flex;align-items:center;">
-                                                            <div style="font-size: 1.3rem;">
-                                                                <svg stroke="currentColor" fill="currentColor"
-                                                                    stroke-width="0" viewBox="0 0 24 24" height="1em"
-                                                                    width="1em" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                        d="M21 10H7V7c0-1.103.897-2 2-2s2 .897 2 2h2c0-2.206-1.794-4-4-4S5 4.794 5 7v3H3a1 1 0 0 0-1 1v2c0 2.606 1.674 4.823 4 5.65V22h2v-3h8v3h2v-3.35c2.326-.827 4-3.044 4-5.65v-2a1 1 0 0 0-1-1zm-1 3c0 2.206-1.794 4-4 4H8c-2.206 0-4-1.794-4-4v-1h16v1z">
-                                                                    </path>
-                                                                </svg>
-                                                            </div>
-                                                        </div>
-                                                        <div style="display:flex; align-items:end;gap:0.3rem">
-                                                            <p style="font-weight: light;margin:0.05rem;">
-                                                                Bathrooms:
-                                                            </p>
-                                                            <p
-                                                                style="font-weight:bold;text-align:left;font-size:1.0rem;margin:0.05rem;">
-                                                                33</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <div style="display:flex; align-items:center;gap:0.2rem;">
-                                                        <div style="display:flex;align-items:center;">
-                                                            <div style="font-size: 1.3rem;">
-                                                                <svg stroke="currentColor" fill="currentColor"
-                                                                    stroke-width="0" viewBox="0 0 24 24" height="1em"
-                                                                    width="1em" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                        d="m20.772 10.156-1.368-4.105A2.995 2.995 0 0 0 16.559 4H7.441a2.995 2.995 0 0 0-2.845 2.051l-1.368 4.105A2.003 2.003 0 0 0 2 12v5c0 .753.423 1.402 1.039 1.743-.013.066-.039.126-.039.195V21a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-2h12v2a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-2.062c0-.069-.026-.13-.039-.195A1.993 1.993 0 0 0 22 17v-5c0-.829-.508-1.541-1.228-1.844zM4 17v-5h16l.002 5H4zM7.441 6h9.117c.431 0 .813.274.949.684L18.613 10H5.387l1.105-3.316A1 1 0 0 1 7.441 6z">
-                                                                    </path>
-                                                                    <circle cx="6.5" cy="14.5" r="1.5"></circle>
-                                                                    <circle cx="17.5" cy="14.5" r="1.5"></circle>
-                                                                </svg>
-                                                            </div>
-                                                        </div>
-                                                        <div style="display:flex; align-items:end;gap:0.3rem">
-                                                            <p style="font-weight: light;margin:0.05rem;">
-                                                                Parking:
-                                                            </p>
-                                                            <p
-                                                                style="font-weight:bold;text-align:left;font-size:1.0rem;margin:0.05rem;">
-                                                                13</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <div style="display:flex; align-items:center;gap:0.2rem;">
-                                                        <div style="display:flex;align-items:center;">
-                                                            <div style="font-size: 1.3rem;">
-                                                                <svg stroke="currentColor" fill="currentColor"
-                                                                    stroke-width="0" viewBox="0 0 1024 1024"
-                                                                    height="1em" width="1em"
-                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                        d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z">
-                                                                    </path>
-                                                                </svg>
-                                                            </div>
-                                                        </div>
-                                                        <div style="display:flex; align-items:end;gap:0.3rem">
-                                                            <p style="font-weight: light;margin:0.05rem;">
-                                                                Year built:
-                                                            </p>
-                                                            <p
-                                                                style="font-weight:bold;text-align:left;font-size:1.0rem;margin:0.05rem;">
-                                                                2212
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div style="display:flex;align-items:center;width:100%;margin:auto;">
-                                            <span
-                                                style="background:#c5e7ff;color:#001e2d;padding:0.8rem;border-radius:5px;cursor: pointer;">
-                                                Schedule a private showing
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="padding-top:1rem; padding-bottom: 0.5rem; background:white">
-                                <div style="overflow: hidden;">
-                                    <div class="relative">
-                                        <p style="margin-bottom: 0.5rem; font-size:larger;font-weight: bold;">
-                                            Description</p>
-                                        <div class="h-auto mb-3">
-                                            <p>From the moment you step through the grand front entrance, you'll be
-                                                captivated by the air of effortless elegance that permeates this
-                                                exquisite dwelling.</p>
-
-                                            <p>Sun-drenched interiors seamlessly blend modern design with classic
-                                                touches, creating a space that is both inviting and effortlessly
-                                                stylish.</p>
-
-                                            <p>The gourmet kitchen, boasting gleaming stainless steel appliances and
-                                                sleek countertops, is a chef's dream come true.</p>
-
-                                            <p>Gather with loved ones in the expansive living room, where cozy nights by
-                                                the fireplace await.</p>
-
-                                            <p>The tranquil master suite is a private oasis, featuring a luxurious
-                                                bathroom and a walk-in closet that will make you feel like royalty.</p>
-
-                                            <p>Step outside to discover a backyard that is an entertainer's paradise.
-                                            </p>
-
-                                            <p>Soak up the sun on the expansive patio, host unforgettable pool parties,
-                                                or unwind in the tranquil garden.</p>
-
-
-                                            <p>Located in the heart of a vibrant community, you'll enjoy easy access to
-                                                top-rated schools, shopping, dining, and entertainment.</p>
-
-                                            <p>Don't miss your chance to make this extraordinary property your own.
-                                                Schedule a private showing today!</p>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            style="margin:1rem; padding:0.5rem;box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);width:30%; display:flex; flex-direction: column;">
-
-                            <div style="padding:0.3rem; flex-grow: 1;">
-                                <h1 style="font-size:1rem;">Talk to this property</h1>
-                                <iframe style="border:none;height:100%;width:100%"
-                                    src="https://wisehouse.app/chat/LkKNlwl7tjAFaMXliSDh?ground=ffffff&bg=ffffff"></iframe>
-                            </div>
-                            <div style="margin-top: 50px;">
-                                <h1 style="font-size:1rem;">Or contact us</h1>
-                                <small style="margin-top:10px">Email:</small><br>
-                                <input type="text"><br>
-                                <small style="margin-top:10px">Your message:</small><br>
-                                <textarea name="" id="" cols="30" rows="10"></textarea><br>
-                                <div style="margin-top:20px">
-                                    <p
-                                        style="width:fit-content;background:#c5e7ff;color:#001e2d;padding:0.8rem;border-radius:5px;;">
-                                        Send!
+                </div>
+            </div>
+            <div id="specs_chat">
+                <div id="prop_description">
+                    <div>
+                        <div style="display:flex; flex-direction: column;">
+                            <div style="display:flex; flex-direction: column;  gap: 1rem;">
+                                <div id="price_tag">
+                                    <p style="margin:0;">
+                                        $1,550,000
                                     </p>
                                 </div>
                             </div>
                         </div>
+                        <div>
+                            <div style="display: flex; flex-direction:column; margin-top: 1rem;">
+                                <div style="min-width: 100%">
+                                    <div
+                                        style="display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 0.5rem;">
+                                        <div>
+                                            <div style="display: flex; align-items: center; gap: 0.2rem">
+                                                <div style="display:flex;align-items: center;">
+                                                    <div style="font-size: 1.3rem; width: fit">
+                                                        <svg stroke="currentColor" fill="currentColor" stroke-width="0"
+                                                            viewBox="0 0 24 24" height="1em" width="1em"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M22 7.999a1 1 0 0 0-.516-.874l-9.022-5a1.003 1.003 0 0 0-.968 0l-8.978 4.96a1 1 0 0 0-.003 1.748l9.022 5.04a.995.995 0 0 0 .973.001l8.978-5A1 1 0 0 0 22 7.999zm-9.977 3.855L5.06 7.965l6.917-3.822 6.964 3.859-6.918 3.852z">
+                                                            </path>
+                                                            <path
+                                                                d="M20.515 11.126 12 15.856l-8.515-4.73-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5-.97-1.748z">
+                                                            </path>
+                                                            <path
+                                                                d="M20.515 15.126 12 19.856l-8.515-4.73-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5-.97-1.748z">
+                                                            </path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <div style="display: flex; align-items: end;gap:0.2rem;">
+                                                    <p style="font-weight: light; margin:0.05rem;">
+                                                        Property size:
+                                                    </p>
+                                                    <p
+                                                        style="font-weight:bold;text-align:left;font-size:1.0rem;margin:0.05rem;">
+                                                        976 m²
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div style="display:flex; align-items:center;gap:0.2rem;">
+                                                <div style="display:flex; align-items:center;">
+                                                    <div style="font-size: 1.3rem;">
+                                                        <svg stroke="currentColor" fill="currentColor" stroke-width="0"
+                                                            t="1569683683230" viewBox="0 0 1024 1024" version="1.1"
+                                                            height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                                            <defs></defs>
+                                                            <path
+                                                                d="M342 88H120c-17.7 0-32 14.3-32 32v224c0 8.8 7.2 16 16 16h48c8.8 0 16-7.2 16-16V168h174c8.8 0 16-7.2 16-16v-48c0-8.8-7.2-16-16-16zM920 664h-48c-8.8 0-16 7.2-16 16v176H682c-8.8 0-16 7.2-16 16v48c0 8.8 7.2 16 16 16h222c17.7 0 32-14.3 32-32V680c0-8.8-7.2-16-16-16zM342 856H168V680c0-8.8-7.2-16-16-16h-48c-8.8 0-16 7.2-16 16v224c0 17.7 14.3 32 32 32h222c8.8 0 16-7.2 16-16v-48c0-8.8-7.2-16-16-16zM904 88H682c-8.8 0-16 7.2-16 16v48c0 8.8 7.2 16 16 16h174v176c0 8.8 7.2 16 16 16h48c8.8 0 16-7.2 16-16V120c0-17.7-14.3-32-32-32z">
+                                                            </path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <div style="display:flex; align-items:end;gap:0.3rem">
+                                                    <p style="font-weight: light;margin:0.05rem;">
+                                                        Lot size:
+                                                    </p>
+                                                    <p
+                                                        style="font-weight:bold;text-align:left;font-size:1.0rem;margin:0.05rem;">
+                                                        1585 m²
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div style="display:flex; align-items:center;gap:0.2rem;">
+                                                <div style="display:flex;align-items:center;">
+                                                    <div style="font-size: 1.3rem;">
+                                                        <svg stroke="currentColor" fill="currentColor" stroke-width="0"
+                                                            viewBox="0 0 24 24" height="1em" width="1em"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M20 9.557V3h-2v2H6V3H4v6.557C2.81 10.25 2 11.525 2 13v4a1 1 0 0 0 1 1h1v4h2v-4h12v4h2v-4h1a1 1 0 0 0 1-1v-4c0-1.475-.811-2.75-2-3.443zM18 7v2h-5V7h5zM6 7h5v2H6V7zm14 9H4v-3c0-1.103.897-2 2-2h12c1.103 0 2 .897 2 2v3z">
+                                                            </path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <div style="display:flex; align-items:end;gap:0.3rem">
+                                                    <p style="font-weight: light;margin:0.05rem;">
+                                                        Bedrooms:
+                                                    </p>
+                                                    <p
+                                                        style="font-weight:bold;text-align:left;font-size:1.0rem;margin:0.05rem;">
+                                                        124</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div style="display:flex; align-items:center;gap:0.2rem;">
+                                                <div style="display:flex;align-items:center;">
+                                                    <div style="font-size: 1.3rem;">
+                                                        <svg stroke="currentColor" fill="currentColor" stroke-width="0"
+                                                            viewBox="0 0 24 24" height="1em" width="1em"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M21 10H7V7c0-1.103.897-2 2-2s2 .897 2 2h2c0-2.206-1.794-4-4-4S5 4.794 5 7v3H3a1 1 0 0 0-1 1v2c0 2.606 1.674 4.823 4 5.65V22h2v-3h8v3h2v-3.35c2.326-.827 4-3.044 4-5.65v-2a1 1 0 0 0-1-1zm-1 3c0 2.206-1.794 4-4 4H8c-2.206 0-4-1.794-4-4v-1h16v1z">
+                                                            </path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <div style="display:flex; align-items:end;gap:0.3rem">
+                                                    <p style="font-weight: light;margin:0.05rem;">
+                                                        Bathrooms:
+                                                    </p>
+                                                    <p
+                                                        style="font-weight:bold;text-align:left;font-size:1.0rem;margin:0.05rem;">
+                                                        33</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div style="display:flex; align-items:center;gap:0.2rem;">
+                                                <div style="display:flex;align-items:center;">
+                                                    <div style="font-size: 1.3rem;">
+                                                        <svg stroke="currentColor" fill="currentColor" stroke-width="0"
+                                                            viewBox="0 0 24 24" height="1em" width="1em"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="m20.772 10.156-1.368-4.105A2.995 2.995 0 0 0 16.559 4H7.441a2.995 2.995 0 0 0-2.845 2.051l-1.368 4.105A2.003 2.003 0 0 0 2 12v5c0 .753.423 1.402 1.039 1.743-.013.066-.039.126-.039.195V21a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-2h12v2a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-2.062c0-.069-.026-.13-.039-.195A1.993 1.993 0 0 0 22 17v-5c0-.829-.508-1.541-1.228-1.844zM4 17v-5h16l.002 5H4zM7.441 6h9.117c.431 0 .813.274.949.684L18.613 10H5.387l1.105-3.316A1 1 0 0 1 7.441 6z">
+                                                            </path>
+                                                            <circle cx="6.5" cy="14.5" r="1.5"></circle>
+                                                            <circle cx="17.5" cy="14.5" r="1.5"></circle>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <div style="display:flex; align-items:end;gap:0.3rem">
+                                                    <p style="font-weight: light;margin:0.05rem;">
+                                                        Parking:
+                                                    </p>
+                                                    <p
+                                                        style="font-weight:bold;text-align:left;font-size:1.0rem;margin:0.05rem;">
+                                                        13</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div style="display:flex; align-items:center;gap:0.2rem;">
+                                                <div style="display:flex;align-items:center;">
+                                                    <div style="font-size: 1.3rem;">
+                                                        <svg stroke="currentColor" fill="currentColor" stroke-width="0"
+                                                            viewBox="0 0 1024 1024" height="1em" width="1em"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z">
+                                                            </path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <div style="display:flex; align-items:end;gap:0.3rem">
+                                                    <p style="font-weight: light;margin:0.05rem;">
+                                                        Year built:
+                                                    </p>
+                                                    <p
+                                                        style="font-weight:bold;text-align:left;font-size:1.0rem;margin:0.05rem;">
+                                                        2212
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="display:flex;align-items:center;width:100%;margin:auto;">
+                                    <span
+                                        style="background:#c5e7ff;color:#001e2d;padding:0.8rem;border-radius:5px;cursor: pointer; margin-top:0.5rem;box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);">
+                                        Schedule a private showing
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div style="padding-top:0.5rem; background-color: white; border-radius: 5px;">
-                        <div style="display:flex;flex-direction: column; width: 100%; max-width:425px;">
-                            <p style="margin-bottom: 0.5rem; font-size:larger;font-weight: bold;">Location</p>
-                            <div style="min-width: 100%; margin-top: 20px;">
-                                <img alt="map" loading="lazy" width="425" height="425" decoding="async" data-nimg="1"
-                                    class="object-cover w-full rounded-xl"
-                                    style="color:transparent;background-size:cover;background-position:50% 50%;background-repeat:no-repeat;"
-                                    src="../assets/Location.jpeg" />
+                    <div style="padding-top:1rem; padding-bottom: 0.5rem; background:white">
+                        <div style="overflow: hidden;">
+                            <div class="relative">
+                                <p style="margin-bottom: 0.5rem; font-size:larger;font-weight: bold;">
+                                    Description</p>
+                                <div class="h-auto mb-3">
+                                    <p>From the moment you step through the grand front entrance, you'll be
+                                        captivated by the air of effortless elegance that permeates this
+                                        exquisite dwelling.</p>
+
+                                    <p>Sun-drenched interiors seamlessly blend modern design with classic
+                                        touches, creating a space that is both inviting and effortlessly
+                                        stylish.</p>
+
+                                    <p>The gourmet kitchen, boasting gleaming stainless steel appliances and
+                                        sleek countertops, is a chef's dream come true.</p>
+
+                                    <p>Gather with loved ones in the expansive living room, where cozy nights by
+                                        the fireplace await.</p>
+
+                                    <p>The tranquil master suite is a private oasis, featuring a luxurious
+                                        bathroom and a walk-in closet that will make you feel like royalty.</p>
+
+                                    <p>Step outside to discover a backyard that is an entertainer's paradise.
+                                    </p>
+
+                                    <p>Soak up the sun on the expansive patio, host unforgettable pool parties,
+                                        or unwind in the tranquil garden.</p>
+
+
+                                    <p>Located in the heart of a vibrant community, you'll enjoy easy access to
+                                        top-rated schools, shopping, dining, and entertainment.</p>
+
+                                    <p>Don't miss your chance to make this extraordinary property your own.
+                                        Schedule a private showing today!</p>
+
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div id="contact_form">
 
+                    <div id="wise-house">
+                        <h1 style="font-size:1rem;">Talk to this property</h1>
+                        <iframe style="border:none;height:100%;width:100%"
+                            src="https://wisehouse.app/chat/LkKNlwl7tjAFaMXliSDh?ground=ffffff&bg=ffffff"></iframe>
+                    </div>
+                    <div style="margin-top: 50px;">
+                        <h1 style="font-size:1rem;">Or contact us</h1>
+                        <small style="margin-top:10px">Email:</small><br>
+                        <input type="text"><br>
+                        <small style="margin-top:10px">Your message:</small><br>
+                        <textarea name="" id="" cols="30" rows="10"></textarea><br>
+                        <div style="margin-top:20px">
+                            <p
+                                style="width:fit-content;background:#c5e7ff;color:#001e2d;padding:0.8rem;border-radius:5px;;">
+                                Send!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="location">
+                <div style="display:flex;flex-direction: column; width: 100%; max-width:425px;">
+                    <p style="margin-bottom: 0.5rem; font-size:larger;font-weight: bold;">Location</p>
+                    <div style="min-width: 100%; margin-top: 20px;">
+                        <img alt="map" loading="lazy" decoding="async" data-nimg="1"
+                            class="object-cover w-full rounded-xl"
+                            style="color:transparent;background-size:cover;background-position:50% 50%;background-repeat:no-repeat;"
+                            src="../assets/Location.jpeg" />
+                    </div>
+                </div>
             </div>
         </div>
+
+        <!--</div>
+        </div> -->
 
     </main>
 
