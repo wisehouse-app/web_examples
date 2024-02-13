@@ -102,9 +102,17 @@
             flex-direction: row;
         }
 
+        section#wise-house {
+            max-width: 400px;            
+        }
+        
+
         @media (max-width: 768px) {
             .side {
                 flex-direction: column;
+            }
+            section#wise-house{
+                height: 80vh;
             }
         }
     </style>
@@ -182,7 +190,7 @@
                 </div>
             </section>
 
-            <section>
+            <section id="wise-house">
                 <!-- ======================================= -->
                 <!-- THiS IS THE INTEGRATION WITH WISE HOUSE -->
                 <!-- ======================================= -->
@@ -200,8 +208,8 @@
                     You can apply styles to the iframe.
                  -->
                 <iframe 
-                    style="border:none;height:100%;width:320px" 
-                    src="https://wisehouse.app/chat/LkKNlwl7tjAFaMXliSDh?ground=ffffff"
+                    style="border:none;height:100%;width:100%" 
+                    src="https://wisehouse.app/chat/LkKNlwl7tjAFaMXliSDh?ground=ffffff&bg=f4f4f4&accent=1c355e&receivedbg=1c355e&receivedcolor=fff&sentbg=ccc&sentcolor=5f504d"
                 ></iframe>
             </section>
         </div>

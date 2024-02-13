@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Real Estate Project</title>
     <style>
+        html {
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 200;
+        }
         #hero {
             position: absolute;
             top: 0;
@@ -20,7 +24,7 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
+            
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -101,10 +105,17 @@
             display: flex;
             flex-direction: row;
         }
+        section#wise-house{
+            width: 40vw;
+            height: 400px;
+        }
 
         @media (max-width: 768px) {
             .side {
                 flex-direction: column;
+            }
+            section#wise-house {
+                width: 90vw;
             }
         }
     </style>
@@ -182,7 +193,7 @@
                 </div>
             </section>
 
-            <section>
+            <section id="wise-house">
                 <!-- ======================================= -->
                 <!-- THiS IS THE INTEGRATION WITH WISE HOUSE -->
                 <!-- ======================================= -->
@@ -200,7 +211,7 @@
                     You can apply styles to the iframe.
                  -->
                 <iframe 
-                    style="border:none;height:100%;width:500px" 
+                    style="border:none;height:100%;width:100%" 
                     src="https://wisehouse.app/chat/LkKNlwl7tjAFaMXliSDh?nochat&nosummary"
                 ></iframe>
             </section>
