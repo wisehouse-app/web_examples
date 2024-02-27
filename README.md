@@ -54,11 +54,12 @@ Customization options can be added in order to control what is—and is not—sh
 
 #### Selecting panels
 
-| Parameter   | Purpose                | Example use                                               |
-| ----------- | ---------------------- | --------------------------------------------------------- |
-| `nochat`    | Disables the chat      | https://wisehouse.app/chat/LkKNlwl7tjAFaMXliSDh?nochat    |
-| `no3d`      | Disables the 3D render | https://wisehouse.app/chat/LkKNlwl7tjAFaMXliSDh?no3d      |
-| `nosummary` | Disables the summary   | https://wisehouse.app/chat/LkKNlwl7tjAFaMXliSDh?nosummary |
+| Parameter   | Purpose                       | Example use                                               |
+| ----------- | ----------------------------- | --------------------------------------------------------- |
+| `nochat`    | Disables the chat             | https://wisehouse.app/chat/LkKNlwl7tjAFaMXliSDh?nochat    |
+| `no3d`      | Disables the 3D render        | https://wisehouse.app/chat/LkKNlwl7tjAFaMXliSDh?no3d      |
+| `nosummary` | Disables the summary          | https://wisehouse.app/chat/LkKNlwl7tjAFaMXliSDh?nosummary |
+| `notitle`   | Disables the title up the top | https://wisehouse.app/chat/LkKNlwl7tjAFaMXliSDh?notitle   |
 
 #### Selecting colors
 
@@ -128,6 +129,7 @@ Opciones de configuración pueden utilizarse para definir que paneles aparecen y
 | `nochat`    | Desactiva el chat                             | https://wisehouse.app/chat/LkKNlwl7tjAFaMXliSDh?nochat    |
 | `no3d`      | Desactiva el render 3D                        | https://wisehouse.app/chat/LkKNlwl7tjAFaMXliSDh?no3d      |
 | `nosummary` | Desactiva el resumen y las notas del vendedor | https://wisehouse.app/chat/LkKNlwl7tjAFaMXliSDh?nosummary |
+| `notitle`   | Desactiva el título                           | https://wisehouse.app/chat/LkKNlwl7tjAFaMXliSDh?notitle   |
 
 #### Seleccionando colores
 
