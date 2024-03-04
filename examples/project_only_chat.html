@@ -68,6 +68,7 @@
             width: 100%;
             max-width: 400px;
             margin: auto;
+            height: 100%;
         }
 
         .carousel-container {
@@ -88,7 +89,7 @@
 
         .side section {
             flex: 1;
-            margin-right: 20px;
+            margin-right: 20px;            
             /* Add margin between sections as needed */
         }
 
@@ -98,7 +99,10 @@
         }
 
         section#wise-house {
-            max-width: 400px;            
+            max-width: 320px;  
+            background-color: white;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+            border-radius: 10px;    
         }
         section#wise-house > h1 {
             display: none;
@@ -176,9 +180,9 @@
             </section>
         </div>
 
-        <div class="side">
+        <div class="side" style="height:600px">
 
-            <section class="gallery">
+            <section class="gallery" style="height:100%;">
                 <div class="carousel">
                     <div class="carousel-container">
                         <div class="carousel-item"><img src="../assets/Floorplan-1.jpeg" alt="Image 1"></div>
@@ -193,7 +197,7 @@
                 </div>
             </section>
 
-            <section id="wise-house">
+            <section id="wise-house" >
                 <h1>Talk to this property</h1>
                 <!-- ======================================= -->
                 <!-- THiS IS THE INTEGRATION WITH WISE HOUSE -->
@@ -213,7 +217,7 @@
                  -->
                 <iframe 
                     style="border:none;height:100%;width:100%" 
-                    src="https://wisehouse.app/chat/LkKNlwl7tjAFaMXliSDh?no3d&nosummary&bg=f4f4f4&receivedbg=1c355e&receivedcolor=fff&sentbg=ccc&sentcolor=5f504d"
+                    src="https://wisehouse.app/chat/LkKNlwl7tjAFaMXliSDh?no3d&nosummary&bg=f4f4f4&receivedbg=1c355e&receivedcolor=fff&sentbg=ccc&sentcolor=5f504d&notitle"
                 ></iframe>
             </section>
         </div>
