@@ -12,21 +12,26 @@
     *::before {
         margin: 0;
         padding: 0;
-        box-sizing: inherit; 
+        box-sizing: content-box;
     }      
     body {
-        width: 100vw;
+        width: 100%;
         font-family: Arial, Helvetica, sans-serif;
         justify-self: center;
     }      
     .gallery {
-        display: grid;
         grid-template-columns: repeat(8, 100px);
         grid-template-rows: repeat(8, 100px);
         grid-gap: 0.5rem; 
         height:26.5rem;
     }
-    
+    .gallery-small {
+        display: grid;
+
+    }
+    .gallery-large {
+        display: none;
+    }
     .gallery__img {
         width: 100%;
         height: 100%;
@@ -36,33 +41,12 @@
     p {
         margin-bottom: 1rem; 
     }
-    footer {
-        background-color: #f6f5f7;
-        padding: 50px 0;
-    }
-
-    .form-container {
-        background-color: #fff;
-        border-radius: 10px;
-        padding: 20px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        max-width: 800px; /* Adjust as needed */
-        width: 100%;
-        margin: 0 auto;
-    }
-
-    h2 {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
     .input-group {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 10px;
         margin-bottom: 15px;
     }
-
     .input-group input {
         width: 100%;
         padding: 10px;
@@ -70,11 +54,6 @@
         border: 1px solid #ccc;
         box-sizing: border-box;
     }
-
-    .message-group {
-        margin-bottom: 15px;
-    }
-
     .message-group textarea {
         width: 100%;
         padding: 10px;
@@ -83,35 +62,80 @@
         box-sizing: border-box;
         resize: vertical;
     }
-
-    .submit-group {
-        text-align: center;
-    }
-
-    .submit-group button {
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
     .submit-group button:hover {
-        background-color: #0056b3;
+        background-color: #e4002b;
     }
+    .container {
+        width: 100%;
+        background-color: #f6f5f7;
+        display: flex;
+        align-items: center;
+    }
+    /* PROPERTY NAME AND IMAGES */
+    .property {
+        display:flex;
+        flex-direction: column-reverse;
+    }
+    .property-details {
+        align-self: flex-start;
+        margin-bottom:170px;
+        margin-left:60px;
+        width: 40%;
+    }
+    /* DESCRIPTION CONTAINER */
+    .description {
+        display: flex;
+        align-items: flex-start;
+        gap: 50px;
+    }
+     /* WISE HOUSE CONTAINER */
+    .wise-house-wrapper {
+        position: sticky;
+        top: 0;
+        flex-grow: 0;
+        height: 580px;
+        padding:0.5rem;
+    }
+     /* FOOTER*/
+    footer {
+        background-color: #f6f5f7;
+        padding: 30px 0;
+    }
+    @media (min-width: 1200px) {
+        /* PROPERTY NAME AND IMAGES */
+        .property {
+            flex-direction: row;
+        }
+        .property-details {
+            align-self: flex-end;
+            margin-left:40px;
+        }
+        .gallery-large {
+            display: grid;
+        }
+        .gallery-small {
+            display: none;
+        }
+        .container {
+            justify-content: center;
+        }
+        .description {
+            justify-content: center;
+        }
+    }
+
     </style>
 </head>
 
 <body>
     <main>
-        <div class="container" style="width: 100%; background-color: #f6f5f7; display: flex; justify-content: center; align-items: center;">
-            <div class="property" style="display:flex">
-                <div class="property-name" style="align-self: flex-end; margin-bottom:170px;width: 40%;">
-                    <h1 style="font-size: 3rem;">234 Rosebrook Dr, Sydney, Australia </h1>
+        <div class="container">
+            <div class="property">
+                <div class="property-details">
+                    <h1 style="font-size:3em;">234 Rosebrook Dr, Sydney, Australia </h1>
                     <div style="display:flex;align-items:center;gap:0.2rem; padding-top:1em;">
                         <div style="display:flex;align-items:center;">
-                            <div style="font-size: 1.5rem;">
+                            <div style="font-size: 1rem;">
                                 <svg stroke="currentColor" fill="currentColor" stroke-width="0"
                                     viewBox="0 0 24 24" height="1em" width="1em"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -122,15 +146,15 @@
                             </div>
                         </div>
                         <div style="display:flex; align-items:end;gap:0.3rem;margin-right:0.5rem;">
-                            <p style="font-weight: light;margin:0.05rem;">
+                            <p style="font-weight: light;margin:0.05rem;font-size:0.9em;">
                                 Bedrooms:
                             </p>
                             <p
-                                style="font-weight:bold;text-align:left;font-size:1.0rem;margin:0.05rem;">
+                                style="font-weight:bold;text-align:left;font-size:1.0rem;margin:0.05rem;font-size:0.9em;">
                                 124</p>
                         </div>
                         <div style="display:flex;align-items:center;">
-                            <div style="font-size: 1.3rem;">
+                            <div style="font-size: 1rem;">
                                 <svg stroke="currentColor" fill="currentColor" stroke-width="0"
                                     viewBox="0 0 24 24" height="1em" width="1em"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -141,15 +165,15 @@
                             </div>
                         </div>
                         <div style="display:flex; align-items:end;gap:0.3rem;margin-right:0.5rem;">
-                            <p style="font-weight: light;margin:0.05rem;">
+                            <p style="font-weight: light;margin:0.05rem;font-size:0.9em;">
                                 Bathrooms:
                             </p>
                             <p
-                                style="font-weight:bold;text-align:left;font-size:1.0rem;margin:0.05rem;">
+                                style="font-weight:bold;text-align:left;font-size:0.9em;margin:0.05rem;">
                                 33</p>
                         </div>
                         <div style="display:flex;align-items:center;">
-                            <div style="font-size: 1.3rem;">
+                            <div style="font-size: 1em;">
                                 <svg stroke="currentColor" fill="currentColor" stroke-width="0"
                                     viewBox="0 0 24 24" height="1em" width="1em"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -162,15 +186,15 @@
                             </div>
                         </div>
                         <div style="display:flex; align-items:end;gap:0.3rem;margin-right:0.5rem;">
-                            <p style="font-weight: light;margin:0.05rem;">
+                            <p style="font-weight: light;margin:0.05rem;font-size:0.9em;">
                                 Parking:
                             </p>
                             <p
-                                style="font-weight:bold;text-align:left;font-size:1.0rem;margin:0.05rem;">
+                                style="font-weight:bold;text-align:left;font-size:0.9em;margin:0.05rem;">
                                 13</p>
                         </div>
                         <div style="display:flex;align-items:center;">
-                            <div style="font-size: 1.3rem;">
+                            <div style="font-size: 1rem;">
                                 <svg stroke="currentColor" fill="currentColor" stroke-width="0"
                                 viewBox="0 0 24 24" height="1em" width="1em"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -187,16 +211,16 @@
                             </div>
                         </div>
                         <div style="display:flex; align-items:end;gap:0.3rem;margin-right:0.5rem;">
-                            <p style="font-weight: light;margin:0.05rem;">
+                            <p style="font-weight: light;margin:0.05rem;font-size:0.9em;">
                                 Property size:
                             </p>
                             <p
-                                style="font-weight:bold;text-align:left;font-size:1.0rem;margin:0.05rem;">
+                                style="font-weight:bold;text-align:left;font-size:0.9em;margin:0.05rem;">
                                 976 m²</p>
                         </div>
                     </div>
                 </div>
-                <div class="gallery">
+                <div class="gallery gallery-large">
                     <figure class="gallery__item gallery__item--1" style="grid-column-start: 1; grid-column-end: 8; grid-row-start: 1; grid-row-end: 5;">
                         <img src="../assets/Designer-1.jpeg" alt="Gallery image 1" class="gallery__img">
                     </figure>
@@ -213,17 +237,63 @@
                         <img src="../assets/Designer-4.jpeg" alt="Gallery image 5" class="gallery__img">
                     </figure>
                 </div>
+                <br>
+                <div class="gallery gallery-small">
+                    <figure class="gallery__item gallery__item--1" style="grid-column-start: 1; grid-column-end: 10; grid-row-start: 1; grid-row-end: 4;">
+                        <img src="../assets/Designer-1.jpeg" alt="Gallery image 1" class="gallery__img">
+                    </figure>
+                    <figure class="gallery__item gallery__item--2" style="grid-column-start: 1; grid-column-end:3; grid-row-start: 5; grid-row-end: 4;">
+                        <img src="../assets/Designer-2.jpeg" alt="Gallery image 2" class="gallery__img">
+                    </figure>
+                    <figure class="gallery__item gallery__item--3" style="grid-column-start: 3; grid-column-end: 5; grid-row-start: 5; grid-row-end: 4;">
+                        <img src="../assets/Designer-3.jpeg" alt="Gallery image 3" class="gallery__img">
+                    </figure>
+                    <figure class="gallery__item gallery__item--4" style="grid-column-start: 5; grid-column-end: 7; grid-row-start: 5; grid-row-end: 4;">
+                        <img src="../assets/Floorplan-1.jpeg" alt="Gallery image 4" class="gallery__img">
+                    </figure>
+                    <figure class="gallery__item gallery__item--5" style="grid-column-start: 7; grid-column-end: 9; grid-row-start: 5; grid-row-end: 4;">
+                        <img src="../assets/Designer-4.jpeg" alt="Gallery image 5" class="gallery__img">
+                    </figure>
+                </div>
             </div>
         </div>
-        <div style="display: flex; justify-content: center; align-items: flex-start; gap: 50px;">
-            <div style="display: flex; gap: 20px;">
-                <div style="max-width: 600px;">
-                    <div style="padding-top:1rem; padding-bottom: 0.5rem;">
-                            <div class="relative">
-                                <p style="margin-bottom: 0.5rem; font-size:larger;font-weight: bold;">
-                                    Description</p>
-                                <div class="h-auto mb-3">
-                                <p style="margin-bottom:0.5rem">From the moment you step through the grand front entrance, you'll be
+        <div class="description">
+            <div style="max-width: 600px;">
+                <div style="padding-top:0.5em; padding-bottom: 0.5em;">
+                        <div class="relative">
+                            <p style="font-size:larger;font-weight: bold;">
+                                Description</p>
+                            <div class="information">
+                            <p style="margin-bottom:0.5rem">From the moment you step through the grand front entrance, you'll be
+                                captivated by the air of effortless elegance that permeates this
+                                exquisite dwelling.</p>
+    
+                            <p>Sun-drenched interiors seamlessly blend modern design with classic
+                                touches, creating a space that is both inviting and effortlessly
+                                stylish.</p>
+    
+                            <p>The gourmet kitchen, boasting gleaming stainless steel appliances and
+                                sleek countertops, is a chef's dream come true.</p>
+    
+                            <p>Gather with loved ones in the expansive living room, where cozy nights by
+                                the fireplace await.</p>
+    
+                            <p>The tranquil master suite is a private oasis, featuring a luxurious
+                                bathroom and a walk-in closet that will make you feel like royalty.</p>
+    
+                            <p>Step outside to discover a backyard that is an entertainer's paradise.</p>
+                            
+                            <p>Soak up the sun on the expansive patio, host unforgettable pool parties,
+                                or unwind in the tranquil garden.</p>
+    
+    
+                            <p>Located in the heart of a vibrant community, you'll enjoy easy access to
+                                top-rated schools, shopping, dining, and entertainment.</p>
+    
+                            <p>Don't miss your chance to make this extraordinary property your own.
+                                Schedule a private showing today!</p>
+                            
+                                <p>From the moment you step through the grand front entrance, you'll be
                                     captivated by the air of effortless elegance that permeates this
                                     exquisite dwelling.</p>
         
@@ -232,65 +302,34 @@
                                     stylish.</p>
         
                                 <p>The gourmet kitchen, boasting gleaming stainless steel appliances and
-                                    sleek countertops, is a chef's dream come true.</p>
-        
-                                <p>Gather with loved ones in the expansive living room, where cozy nights by
-                                    the fireplace await.</p>
-        
-                                <p>The tranquil master suite is a private oasis, featuring a luxurious
-                                    bathroom and a walk-in closet that will make you feel like royalty.</p>
-        
-                                <p>Step outside to discover a backyard that is an entertainer's paradise.
-                                </p>
-        
-                                <p>Soak up the sun on the expansive patio, host unforgettable pool parties,
-                                    or unwind in the tranquil garden.</p>
-        
-        
-                                <p>Located in the heart of a vibrant community, you'll enjoy easy access to
-                                    top-rated schools, shopping, dining, and entertainment.</p>
-        
-                                <p>Don't miss your chance to make this extraordinary property your own.
-                                    Schedule a private showing today!</p>
-                                
+                                    sleek countertops, is a chef's dream come true.</p>    
                                     <p>From the moment you step through the grand front entrance, you'll be
                                         captivated by the air of effortless elegance that permeates this
-                                        exquisite dwelling.</p>
-            
-                                    <p>Sun-drenched interiors seamlessly blend modern design with classic
-                                        touches, creating a space that is both inviting and effortlessly
-                                        stylish.</p>
-            
-                                    <p>The gourmet kitchen, boasting gleaming stainless steel appliances and
-                                        sleek countertops, is a chef's dream come true.</p>    
-                                        <p>From the moment you step through the grand front entrance, you'll be
-                                            captivated by the air of effortless elegance that permeates this
-                                            exquisite dwelling.</p>        
-                            </div>
-                            <div id="location">
-                                <div style="display:flex;flex-direction: column; width: 100%;">
-                                    <p style="margin-bottom: 0.5rem; font-size:larger;font-weight: bold;">Location</p>
-                                    <div style= "margin-top: 20px;">
-                                        <img alt="map" loading="lazy" decoding="async" data-nimg="1"
-                                            class="object-cover w-full rounded-xl"
-                                            style="color:transparent;background-size:cover;background-position:50% 50%;background-repeat:no-repeat;width: 600px; height:250px; object-fit:cover;"
-                                            src="../assets/Location.jpeg" />
-                                    </div>
-                                </div>
-                            </div>                    
+                                        exquisite dwelling.</p>        
                         </div>
+                        <div id="location">
+                            <div style="display:flex;flex-direction: column; width: 100%;">
+                                <p style="margin-bottom: 0.5rem; font-size:larger;font-weight: bold;">Location</p>
+                                <div style= "margin-top: 20px;">
+                                    <img alt="map" loading="lazy" decoding="async" data-nimg="1"
+                                        class="object-cover w-full rounded-xl"
+                                        style="color:transparent;background-size:cover;background-position:50% 50%;background-repeat:no-repeat;width: 600px; height:250px; object-fit:cover;"
+                                        src="../assets/Location.jpeg" />
+                                </div>
+                            </div>
+                        </div>                    
                     </div>
-                </div> 
+                </div>
             </div>
-            <div id="wise-house-wrapper" style="position: sticky; top: 0; flex-grow: 0;height: 580px; padding-top:2rem;">
+            <div class="wise-house-wrapper">
                 <div id="wise-house" style="border-radius: 25px; border: none; height: 100%; width: 100%;">
                     <iframe src="https://wisehouse.app/chat/LkKNlwl7tjAFaMXliSDh?ground=ffffff&bg=ffffff&notitle" style="border-radius: 25px; border: none; height: 100%; width: 100%;"></iframe>
                 </div>
             </div>
         </div>
-        <footer>
-            <div class="form-container">
-                <h2>Get in touch</h2>
+        <footer style="background-color: #f6f5f7;  padding: 30px 0;">
+            <div class="form-container" style="background-color: #fff;border-radius: 10px;padding: 20px;box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);max-width: 700px;width: 100%;margin: 0 auto;">
+                <h2 style="text-align: center;margin-bottom: 20px;">Get in touch</h2>
                 <form>
                     <div class="input-group">
                         <input type="text" placeholder="First Name" required>
@@ -300,11 +339,11 @@
                         <input type="email" placeholder="Email Address" required>
                         <input type="tel" placeholder="Phone Number" required>
                     </div>
-                    <div class="message-group">
+                    <div class="message-group" style="margin-bottom: 15px;"> 
                         <textarea placeholder="Your Message" rows="5" required></textarea>
                     </div>
-                    <div class="submit-group">
-                        <button type="submit">Send enquiry</button>
+                    <div class="submit-group" style="text-align: center;">
+                        <button type="submit" style="padding: 10px 20px;background-color: #e4002b;color: #fff;border: none;border-radius: 5px;cursor: pointer;">Send enquiry</button>
                     </div>
                 </form>
             </div>
