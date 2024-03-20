@@ -15,31 +15,40 @@
         box-sizing: content-box;
     }      
     body {
-        width: 100%;
+        width: 100vw;
         font-family: Arial, Helvetica, sans-serif;
         justify-self: center;
-    }      
+        margin: 0 auto;
+    }   
+    main>div {
+        max-width: 95vw;
+        margin-left: auto;
+        margin-right: auto;
+    }   
     .gallery {
-        grid-template-columns: repeat(8, 100px);
-        grid-template-rows: repeat(8, 100px);
+        grid-template-columns: repeat(4, 82px);
+        grid-template-rows: repeat(4, 100px);
         grid-gap: 0.5rem; 
-        height:26.5rem;
+
     }
     .gallery-small {
         display: grid;
-
     }
     .gallery-large {
         display: none;
     }
     .gallery__img {
-        width: 100%;
         height: 100%;
+        width: 100%;
         object-fit: cover;
         display: block; 
     }
     p {
         margin-bottom: 1rem; 
+    }
+    h1{
+        font-size: 1.25em;
+        padding-top: 1.5em;
     }
     .input-group {
         display: grid;
@@ -78,37 +87,50 @@
     }
     .property-details {
         align-self: flex-start;
-        margin-bottom:170px;
-        margin-left:60px;
-        width: 40%;
     }
     /* DESCRIPTION CONTAINER */
     .description {
         display: flex;
         align-items: flex-start;
-        gap: 50px;
+        flex-direction: column;
+        gap: 10px;
     }
      /* WISE HOUSE CONTAINER */
     .wise-house-wrapper {
         position: sticky;
         top: 0;
-        flex-grow: 0;
+        flex-grow: 1;
         height: 580px;
         padding:0.5rem;
+        width: 90vw;
     }
      /* FOOTER*/
     footer {
         background-color: #f6f5f7;
         padding: 30px 0;
+        width:100%;
+    }
+    .location {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 400px;
     }
     @media (min-width: 1200px) {
+        main>div {
+            max-width: 90vw;
+            margin-left: auto;
+            margin-right: auto;
+        }   
         /* PROPERTY NAME AND IMAGES */
         .property {
             flex-direction: row;
         }
         .property-details {
             align-self: flex-end;
-            margin-left:40px;
+            margin-bottom:170px;
+            margin-left:60px;
+            max-width: 500px;
         }
         .gallery-large {
             display: grid;
@@ -118,9 +140,24 @@
         }
         .container {
             justify-content: center;
+            max-width: 100vw;
         }
         .description {
+            display: flex;
             justify-content: center;
+            position: relative;
+        }
+        h1 {
+            font-size: 3em;
+        }
+        .description {
+            flex-direction:row;
+        }
+        .wise-house-wrapper {
+            position: sticky;
+            top: 0;
+            width:100%;
+            height:580px;
         }
     }
 
@@ -132,8 +169,8 @@
         <div class="container">
             <div class="property">
                 <div class="property-details">
-                    <h1 style="font-size:3em;">234 Rosebrook Dr, Sydney, Australia </h1>
-                    <div style="display:flex;align-items:center;gap:0.2rem; padding-top:1em;">
+                    <h1>234 Rosebrook Dr, Sydney, Australia </h1>
+                    <div style="display:flex;align-items:center;gap:0.2rem; padding-top:1em;width:100%;">
                         <div style="display:flex;align-items:center;">
                             <div style="font-size: 1rem;">
                                 <svg stroke="currentColor" fill="currentColor" stroke-width="0"
@@ -146,11 +183,8 @@
                             </div>
                         </div>
                         <div style="display:flex; align-items:end;gap:0.3rem;margin-right:0.5rem;">
-                            <p style="font-weight: light;margin:0.05rem;font-size:0.9em;">
-                                Bedrooms:
-                            </p>
                             <p
-                                style="font-weight:bold;text-align:left;font-size:1.0rem;margin:0.05rem;font-size:0.9em;">
+                                style="font-weight:200;text-align:left;font-size:1.0rem;margin:0.05rem;font-size:0.9em;">
                                 124</p>
                         </div>
                         <div style="display:flex;align-items:center;">
@@ -165,11 +199,8 @@
                             </div>
                         </div>
                         <div style="display:flex; align-items:end;gap:0.3rem;margin-right:0.5rem;">
-                            <p style="font-weight: light;margin:0.05rem;font-size:0.9em;">
-                                Bathrooms:
-                            </p>
                             <p
-                                style="font-weight:bold;text-align:left;font-size:0.9em;margin:0.05rem;">
+                                style="font-weight:200;text-align:left;font-size:0.9em;margin:0.05rem;">
                                 33</p>
                         </div>
                         <div style="display:flex;align-items:center;">
@@ -186,11 +217,8 @@
                             </div>
                         </div>
                         <div style="display:flex; align-items:end;gap:0.3rem;margin-right:0.5rem;">
-                            <p style="font-weight: light;margin:0.05rem;font-size:0.9em;">
-                                Parking:
-                            </p>
                             <p
-                                style="font-weight:bold;text-align:left;font-size:0.9em;margin:0.05rem;">
+                                style="font-weight:200;text-align:left;font-size:0.9em;margin:0.05rem;">
                                 13</p>
                         </div>
                         <div style="display:flex;align-items:center;">
@@ -211,15 +239,13 @@
                             </div>
                         </div>
                         <div style="display:flex; align-items:end;gap:0.3rem;margin-right:0.5rem;">
-                            <p style="font-weight: light;margin:0.05rem;font-size:0.9em;">
-                                Property size:
-                            </p>
                             <p
-                                style="font-weight:bold;text-align:left;font-size:0.9em;margin:0.05rem;">
+                                style="font-weight:200;text-align:left;font-size:0.9em;margin:0.05rem;">
                                 976 m²</p>
                         </div>
                     </div>
                 </div>
+                <!-- GALLERY FOR BIGGER SCREEN SIZE -->
                 <div class="gallery gallery-large">
                     <figure class="gallery__item gallery__item--1" style="grid-column-start: 1; grid-column-end: 8; grid-row-start: 1; grid-row-end: 5;">
                         <img src="../assets/Designer-1.jpeg" alt="Gallery image 1" class="gallery__img">
@@ -237,28 +263,28 @@
                         <img src="../assets/Designer-4.jpeg" alt="Gallery image 5" class="gallery__img">
                     </figure>
                 </div>
-                <br>
+                <!-- GALLERY FOR SMALLER SCREEN SIZE -->
                 <div class="gallery gallery-small">
                     <figure class="gallery__item gallery__item--1" style="grid-column-start: 1; grid-column-end: 10; grid-row-start: 1; grid-row-end: 4;">
                         <img src="../assets/Designer-1.jpeg" alt="Gallery image 1" class="gallery__img">
                     </figure>
-                    <figure class="gallery__item gallery__item--2" style="grid-column-start: 1; grid-column-end:3; grid-row-start: 5; grid-row-end: 4;">
+                    <figure class="gallery__item gallery__item--2" style="grid-column-start: 1; grid-column-end:2; grid-row-start: 5; grid-row-end: 4;">
                         <img src="../assets/Designer-2.jpeg" alt="Gallery image 2" class="gallery__img">
                     </figure>
-                    <figure class="gallery__item gallery__item--3" style="grid-column-start: 3; grid-column-end: 5; grid-row-start: 5; grid-row-end: 4;">
+                    <figure class="gallery__item gallery__item--3" style="grid-column-start: 2; grid-column-end: 3; grid-row-start: 5; grid-row-end: 4;">
                         <img src="../assets/Designer-3.jpeg" alt="Gallery image 3" class="gallery__img">
                     </figure>
-                    <figure class="gallery__item gallery__item--4" style="grid-column-start: 5; grid-column-end: 7; grid-row-start: 5; grid-row-end: 4;">
+                    <figure class="gallery__item gallery__item--4" style="grid-column-start: 3; grid-column-end: 4; grid-row-start: 5; grid-row-end: 4;">
                         <img src="../assets/Floorplan-1.jpeg" alt="Gallery image 4" class="gallery__img">
                     </figure>
-                    <figure class="gallery__item gallery__item--5" style="grid-column-start: 7; grid-column-end: 9; grid-row-start: 5; grid-row-end: 4;">
+                    <figure class="gallery__item gallery__item--5" style="grid-column-start: 4; grid-column-end: 5; grid-row-start: 5; grid-row-end: 4;">
                         <img src="../assets/Designer-4.jpeg" alt="Gallery image 5" class="gallery__img">
                     </figure>
                 </div>
             </div>
         </div>
         <div class="description">
-            <div style="max-width: 600px;">
+            <div style="width:100%;">
                 <div style="padding-top:0.5em; padding-bottom: 0.5em;">
                         <div class="relative">
                             <p style="font-size:larger;font-weight: bold;">
@@ -313,7 +339,7 @@
                                 <div style= "margin-top: 20px;">
                                     <img alt="map" loading="lazy" decoding="async" data-nimg="1"
                                         class="object-cover w-full rounded-xl"
-                                        style="color:transparent;background-size:cover;background-position:50% 50%;background-repeat:no-repeat;width: 600px; height:250px; object-fit:cover;"
+                                        style="color:transparent;background-size:cover;background-position:50% 50%;background-repeat:no-repeat;width: 100%; height:250px; object-fit:cover;"
                                         src="../assets/Location.jpeg" />
                                 </div>
                             </div>
@@ -328,7 +354,7 @@
             </div>
         </div>
         <footer style="background-color: #f6f5f7;  padding: 30px 0;">
-            <div class="form-container" style="background-color: #fff;border-radius: 10px;padding: 20px;box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);max-width: 700px;width: 100%;margin: 0 auto;">
+            <div class="form-container" style="background-color: #fff;border-radius: 10px;padding: 20px;box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);max-width: 700px;margin: 0 auto;">
                 <h2 style="text-align: center;margin-bottom: 20px;">Get in touch</h2>
                 <form>
                     <div class="input-group">
