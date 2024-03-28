@@ -35,7 +35,7 @@
     }
     .container {
         width: 100%;
-        background-color: #f6f5f7;
+        background-color: #f2f2f2;
         display: flex;
         align-items: center;
     }
@@ -84,7 +84,8 @@
         gap: 10px;
     }
     .form-container {
-        width: 320px;
+        width: 80%;
+        max-width:700px;
     }
     .input-group {
         display: grid;
@@ -124,19 +125,44 @@
         height: 650px;
         padding:0.5rem;
         width: 90vw;
+        max-width:400px;
+        align-self:center;
     }
     #wise-house{
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     }
      /* FOOTER*/
     footer {
-        background-color: #f6f5f7;
+        background-color: #00234B;
         padding: 30px 0;
         width:100%;
     }
-    @media (min-width: 1200px) {
+    .navbar {
+        width: 100%;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color:#00234B;
+    }
+    .navbar .links {
+        display:flex;
+        gap: 2rem;
+    }
+    li {
+        list-style-type: none;
+        color: white;
+        font-size: 1rem;
+    }
+    .navbar .toggle-btn img {
+        width: 40px;
+        height: 40px;
+    }
+    .navbar .links {
+        display:none;
+    }
+    @media (min-width: 992px) {
         main>div {
-            max-width: 90vw;
             margin-left: auto;
             margin-right: auto;
         }   
@@ -160,13 +186,13 @@
         }
         
         .gallery.gallery-large > .gallery__item:nth-child(1) .gallery__img {
-            width: 25vw;
-            height: 26vw;
+            width: 350px;
+            height: 350px;
         }
         
         .gallery.gallery-large > .gallery__item:not(:first-child) {
-            width: 6vw;
-            height: 6vw;
+            width: 80px;
+            height: 80px;
             display: flex;
             flex-direction: column; 
             margin: 2px 3px;
@@ -187,9 +213,6 @@
             position: relative;
             width:60%;
         }
-        .form-container {
-            width:700px;
-        }
         h1 {
             font-size: 3em;
         }
@@ -200,9 +223,32 @@
         .wise-house-wrapper {
             height:700px;
             width:600px;
+            align-self: auto;
         }
         #wise-house {
             box-shadow: none;
+        }
+        .navbar {
+            width: 100%;
+            height: 96px;
+        }
+        .navbar .links {
+            display:flex;
+            gap: 2rem;
+            padding-left: 50px;
+        }
+        .navbar .toggle-btn img {
+            display: none
+        }
+    }
+    @media (min-width: 1150px) {
+        .gallery.gallery-large > .gallery__item:nth-child(1) .gallery__img {
+            width: 450px;
+            height: 450px;
+        }
+        .gallery.gallery-large > .gallery__item:not(:first-child) {
+            width: 112px;
+            height: 100px;
         }
     }
 
@@ -210,6 +256,19 @@
 </head>
 
 <body>
+    <header>
+        <div class="navbar">
+            <ul class="links">
+                <li>Home</li>
+                <li>Buy</li>
+                <li>Sell</li>
+                <li>Rent</li>
+            </ul>
+            <div class="toggle-btn">
+                <img src="../assets/Menu-icon.svg">
+            </div>
+        </div>
+    </header>
     <main>
         <div class="container">
             <div class="property">
@@ -394,11 +453,11 @@
             </div>
             <div class="wise-house-wrapper">
                 <div id="wise-house" style="border-radius: 25px; border: none; height: 100%; width: 100%;">
-                    <iframe src="https://wisehouse.app/chat/LkKNlwl7tjAFaMXliSDh?sentcolor=fff&receivedbg=ebebeb&sentbg=9a031e&accent=cb793a&no3d&nosummary&notitle" style="border-radius: 25px; border: none; height: 100%; width: 100%;"></iframe>
+                    <iframe src="https://wisehouse.app/chat/LkKNlwl7tjAFaMXliSDh?sentcolor=fff&receivedbg=ebebeb&sentbg=00234B&accent=fff&no3d&nosummary&notitle" style="border-radius: 25px; border: none; height: 100%; width: 100%;"></iframe>
                 </div>
             </div>
         </div>
-        <footer style="background-color: #f6f5f7;  padding: 30px 0;">
+        <footer>
             <div class="form-container" style="background-color: #fff;border-radius: 20px;padding: 15px;box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);margin: 0 auto;">
                 <h2 style="text-align: center;margin-bottom: 20px;">Get in touch</h2>
                 <form>
@@ -414,7 +473,7 @@
                         <textarea placeholder="Your Message" rows="5" required></textarea>
                     </div>
                     <div class="submit-group" style="text-align: center;">
-                        <button type="submit" style="padding: 10px 20px;background-color: #e4002b;color: #fff;border: none;border-radius: 5px;cursor: pointer;">Send enquiry</button>
+                        <button type="submit" style="padding: 10px 20px;background-color: #fff;font-weight:bold;color: #00234B;border:1px solid #00234B;border-radius: 5px;cursor: pointer;">Send enquiry</button>
                     </div>
                 </form>
             </div>
