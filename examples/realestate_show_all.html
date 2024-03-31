@@ -7,364 +7,393 @@
     <title>234 Rosebrook Dr, Sydney, Australia</title>
 
     <style>
-    *,
-    *::after,
-    *::before {
-        margin: 0;
-        padding: 0;
-        box-sizing: content-box;
-    }      
-    body {
-        width: 100vw;
-        font-family: Arial, Helvetica, sans-serif;
-        justify-self: center;
-        margin: 0 auto;
-    }   
-    main>div {
-        max-width: 95vw;
-        margin-left: auto;
-        margin-right: auto;
-    } 
-    /* PROPERTY NAME AND IMAGES */
-    .property {
-        display:flex;
-        flex-direction: column-reverse;
-    }
-    .property-details {
-        align-self: flex-start;
-    }
-    .container {
-        width: 100%;
-        background-color: #f6f5f7;
-        display: flex;
-        align-items: center;
-    }
-    .name-icons {
-        padding-top: 0.5em;
-        padding-bottom: 0.5em;
-    }
-    /* IMAGE GALLERY */
-    .gallery-small {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-    }
-    .gallery.gallery-small > .gallery__item:nth-child(1) .gallery__img {
-        width: 95vw;
-        height: 55vw;
-    }
-    .gallery.gallery-small > .gallery__item:not(:first-child) {
-        width: 22vw;
-        height: 20vw;
-        margin:0 auto;
-    }
-    .gallery-large {
-        display: none;
-    }
-    .gallery__img {
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-    }
-    /* DESCRIPTION AND CONTACT */
-    p {
-        margin-bottom: 1rem; 
-    }
-    h1{
-        font-size: 1.25em;
-        padding-top: 1em;
-    }
-    h2 {
-        font-size: 1em;
-    }
-    .description {
-        display: flex;
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 10px;
-    }
-    .form-container {
-        width: 320px;
-    }
-    .input-group {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-        margin-bottom: 15px;
-    }
-    .input-group input {
-        width: 100%;
-        padding: 10px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-        box-sizing: border-box;
-    }
-    .message-group textarea {
-        width: 100%;
-        padding: 10px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-        box-sizing: border-box;
-        resize: vertical;
-    }
-    .submit-group button:hover {
-        background-color: #e4002b;
-    }
-    .location {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        max-width: 400px;
-    }
-     /* WISE HOUSE CONTAINER */
-    .wise-house-wrapper {
-        position: sticky;
-        top: 0;
-        flex-grow: 1;
-        height: 650px;
-        padding:0.5rem;
-        width: 90vw;
-    }
-    #wise-house{
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    }
-     /* FOOTER*/
-    footer {
-        background-color: #f6f5f7;
-        padding: 30px 0;
-        width:100%;
-    }
-    @media (min-width: 1200px) {
+        *,
+        *::after,
+        *::before {
+            margin: 0;
+            padding: 0;
+            box-sizing: content-box;
+        }      
+        body {
+            width: 100vw;
+            font-family: Arial, Helvetica, sans-serif;
+            justify-self: center;
+            margin: 0 auto;
+        }   
         main>div {
-            max-width: 90vw;
+            max-width: 95vw;
             margin-left: auto;
             margin-right: auto;
-        }   
+        } 
         /* PROPERTY NAME AND IMAGES */
         .property {
-            flex-direction: row;
+            display:flex;
+            flex-direction: column-reverse;
         }
         .property-details {
-            align-self: flex-end;
-            margin-bottom:130px;
-            margin-left:60px;
-            max-width: 500px;
-        }
-        .name-icons {
-            padding-top: 1em;
-        }
-        .gallery-large {
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-gap: 5px;
-        }
-        
-        .gallery.gallery-large > .gallery__item:nth-child(1) .gallery__img {
-            width: 25vw;
-            height: 26vw;
-        }
-        
-        .gallery.gallery-large > .gallery__item:not(:first-child) {
-            width: 6vw;
-            height: 6vw;
-            display: flex;
-            flex-direction: column; 
-            margin: 2px 3px;
-        }
-    
-        .gallery-small {
-            display: none;
+            align-self: flex-start;
         }
         .container {
-            justify-content: center;
-            max-width: 100vw;
+            width: 100%;
+            background-color: #f2f2f2;
+            display: flex;
+            align-items: center;
+        }
+        .name-icons {
+            padding-top: 0.5em;
+            padding-bottom: 0.5em;
+        }
+        /* IMAGE GALLERY */
+        .gallery-small {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+        }
+        .gallery.gallery-small > .gallery__item:nth-child(1) .gallery__img {
+            width: 95vw;
+            height: 55vw;
+        }
+        .gallery.gallery-small > .gallery__item:not(:first-child) {
+            width: 22vw;
+            height: 20vw;
+            margin:0 auto;
+        }
+        .gallery-large {
+            display: none;
+        }
+        .gallery__img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
         }
         /* DESCRIPTION AND CONTACT */
+        p {
+            margin-bottom: 1rem; 
+        }
+        h1{
+            font-size: 1.25em;
+            padding-top: 1em;
+        }
+        h2 {
+            font-size: 1em;
+        }
         .description {
             display: flex;
-            flex-direction:row;
-            justify-content: center;
-            position: relative;
-            width:60%;
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 10px;
         }
         .form-container {
-            width:700px;
+            width: 80%;
+            max-width:700px;
         }
-        h1 {
-            font-size: 3em;
+        .input-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
         }
-        h2{
-            font-size: 2em;
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
         }
-        /* WISE HOUSE */
+        .message-group textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+        .submit-group button:hover {
+            background-color: #e4002b;
+        }
+        .location {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 400px;
+        }
+         /* WISE HOUSE CONTAINER */
         .wise-house-wrapper {
-            height:700px;
-            width:600px;
+            position: sticky;
+            top: 0;
+            flex-grow: 1;
+            height: 650px;
+            padding:0.5rem;
+            width: 90vw;
+            max-width:400px;
+            align-self:center;
         }
-        #wise-house {
-            box-shadow: none;
+        #wise-house{
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
         }
-    }
-
-    </style>
-</head>
-
-<body>
-    <main>
-        <div class="container">
-            <div class="property">
-                <div class="property-details">
-                    <h1>234 Rosebrook Dr, Sydney, Australia </h1>
-                    <div class="name-icons" style="display:flex;align-items:center;gap:0.2rem;width:100%;">
-                        <div style="display:flex;align-items:center;">
-                            <div style="font-size: 1rem;">
-                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                    viewBox="0 0 24 24" height="1em" width="1em"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M20 9.557V3h-2v2H6V3H4v6.557C2.81 10.25 2 11.525 2 13v4a1 1 0 0 0 1 1h1v4h2v-4h12v4h2v-4h1a1 1 0 0 0 1-1v-4c0-1.475-.811-2.75-2-3.443zM18 7v2h-5V7h5zM6 7h5v2H6V7zm14 9H4v-3c0-1.103.897-2 2-2h12c1.103 0 2 .897 2 2v3z">
-                                    </path>
-                                </svg>
-                            </div>
-                        </div>
-                        <div style="display:flex; align-items:end;gap:0.3rem;margin-right:0.5rem;">
-                            <p
-                                style="font-weight:200;text-align:left;font-size:1.0rem;margin:0.05rem;font-size:0.9em;">
-                                124</p>
-                        </div>
-                        <div style="display:flex;align-items:center;">
-                            <div style="font-size: 1rem;">
-                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                    viewBox="0 0 24 24" height="1em" width="1em"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M21 10H7V7c0-1.103.897-2 2-2s2 .897 2 2h2c0-2.206-1.794-4-4-4S5 4.794 5 7v3H3a1 1 0 0 0-1 1v2c0 2.606 1.674 4.823 4 5.65V22h2v-3h8v3h2v-3.35c2.326-.827 4-3.044 4-5.65v-2a1 1 0 0 0-1-1zm-1 3c0 2.206-1.794 4-4 4H8c-2.206 0-4-1.794-4-4v-1h16v1z">
-                                    </path>
-                                </svg>
-                            </div>
-                        </div>
-                        <div style="display:flex; align-items:end;gap:0.3rem;margin-right:0.5rem;">
-                            <p
-                                style="font-weight:200;text-align:left;font-size:0.9em;margin:0.05rem;">
-                                33</p>
-                        </div>
-                        <div style="display:flex;align-items:center;">
-                            <div style="font-size: 1em;">
-                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                    viewBox="0 0 24 24" height="1em" width="1em"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="m20.772 10.156-1.368-4.105A2.995 2.995 0 0 0 16.559 4H7.441a2.995 2.995 0 0 0-2.845 2.051l-1.368 4.105A2.003 2.003 0 0 0 2 12v5c0 .753.423 1.402 1.039 1.743-.013.066-.039.126-.039.195V21a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-2h12v2a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-2.062c0-.069-.026-.13-.039-.195A1.993 1.993 0 0 0 22 17v-5c0-.829-.508-1.541-1.228-1.844zM4 17v-5h16l.002 5H4zM7.441 6h9.117c.431 0 .813.274.949.684L18.613 10H5.387l1.105-3.316A1 1 0 0 1 7.441 6z">
-                                    </path>
-                                    <circle cx="6.5" cy="14.5" r="1.5"></circle>
-                                    <circle cx="17.5" cy="14.5" r="1.5"></circle>
-                                </svg>
-                            </div>
-                        </div>
-                        <div style="display:flex; align-items:end;gap:0.3rem;margin-right:0.5rem;">
-                            <p
-                                style="font-weight:200;text-align:left;font-size:0.9em;margin:0.05rem;">
-                                13</p>
-                        </div>
-                        <div style="display:flex;align-items:center;">
-                            <div style="font-size: 1rem;">
-                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                viewBox="0 0 24 24" height="1em" width="1em"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M22 7.999a1 1 0 0 0-.516-.874l-9.022-5a1.003 1.003 0 0 0-.968 0l-8.978 4.96a1 1 0 0 0-.003 1.748l9.022 5.04a.995.995 0 0 0 .973.001l8.978-5A1 1 0 0 0 22 7.999zm-9.977 3.855L5.06 7.965l6.917-3.822 6.964 3.859-6.918 3.852z">
-                                </path>
-                                <path
-                                    d="M20.515 11.126 12 15.856l-8.515-4.73-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5-.97-1.748z">
-                                </path>
-                                <path
-                                    d="M20.515 15.126 12 19.856l-8.515-4.73-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5-.97-1.748z">
-                                </path>
-                            </svg>
-                            </div>
-                        </div>
-                        <div style="display:flex; align-items:end;gap:0.3rem;margin-right:0.5rem;">
-                            <p
-                                style="font-weight:200;text-align:left;font-size:0.9em;margin:0.05rem;">
-                                976 m²</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- GALLERY FOR BIGGER SCREEN SIZE -->
-                <div class="gallery gallery-large">
-                    <figure class="gallery__item gallery__item--1" style="grid-column-start: 1; grid-column-end: 8; grid-row-start: 1; grid-row-end: 5;">
-                        <img src="../assets/Designer-1.jpeg" alt="Gallery image 1" class="gallery__img">
-                    </figure>
-                    <figure class="gallery__item gallery__item--2" style="grid-column-start: 8; grid-column-end: 10; grid-row-start: 1; grid-row-end: 2;">
-                        <img src="../assets/Designer-2.jpeg" alt="Gallery image 2" class="gallery__img">
-                    </figure>
-                    <figure class="gallery__item gallery__item--3" style="grid-column-start: 8; grid-column-end: 10; grid-row-start: 2; grid-row-end: 3;">
-                        <img src="../assets/Designer-3.jpeg" alt="Gallery image 3" class="gallery__img">
-                    </figure>
-                    <figure class="gallery__item gallery__item--4" style="grid-column-start: 8; grid-column-end: 10; grid-row-start: 3; grid-row-end: 4;">
-                        <img src="../assets/Floorplan-1.jpeg" alt="Gallery image 4" class="gallery__img">
-                    </figure>
-                    <figure class="gallery__item gallery__item--5" style="grid-column-start: 8; grid-column-end: 10; grid-row-start: 4; grid-row-end: 5;">
-                        <img src="../assets/Designer-4.jpeg" alt="Gallery image 5" class="gallery__img">
-                    </figure>
-                </div>
-                <!-- GALLERY FOR SMALLER SCREEN SIZE -->
-                <div class="gallery gallery-small">
-                    <figure class="gallery__item gallery__item--1">
-                        <img src="../assets/Designer-1.jpeg" alt="Gallery image 1" class="gallery__img">
-                    </figure>
-                    <figure class="gallery__item gallery__item--2">
-                        <img src="../assets/Designer-2.jpeg" alt="Gallery image 2" class="gallery__img">
-                    </figure>
-                    <figure class="gallery__item gallery__item--3">
-                        <img src="../assets/Designer-3.jpeg" alt="Gallery image 3" class="gallery__img">
-                    </figure>
-                    <figure class="gallery__item gallery__item--4">
-                        <img src="../assets/Floorplan-1.jpeg" alt="Gallery image 4" class="gallery__img">
-                    </figure>
-                    <figure class="gallery__item gallery__item--5">
-                        <img src="../assets/Designer-4.jpeg" alt="Gallery image 5" class="gallery__img">
-                    </figure>
+         /* FOOTER*/
+        footer {
+            background-color: #00234B;
+            padding: 30px 0;
+            width:100%;
+        }
+        .navbar {
+            width: 100%;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color:#00234B;
+        }
+        .navbar .links {
+            display:flex;
+            gap: 2rem;
+        }
+        li {
+            list-style-type: none;
+            color: white;
+            font-size: 1rem;
+        }
+        .navbar .toggle-btn img {
+            width: 40px;
+            height: 40px;
+        }
+        .navbar .links {
+            display:none;
+        }
+        @media (min-width: 992px) {
+            main>div {
+                margin-left: auto;
+                margin-right: auto;
+            }   
+            /* PROPERTY NAME AND IMAGES */
+            .property {
+                flex-direction: row;
+            }
+            .property-details {
+                align-self: flex-end;
+                margin-bottom:130px;
+                margin-left:60px;
+                max-width: 500px;
+            }
+            .name-icons {
+                padding-top: 1em;
+            }
+            .gallery-large {
+                display: grid;
+                grid-template-columns: 1fr;
+                grid-gap: 5px;
+            }
+            
+            .gallery.gallery-large > .gallery__item:nth-child(1) .gallery__img {
+                width: 350px;
+                height: 350px;
+            }
+            
+            .gallery.gallery-large > .gallery__item:not(:first-child) {
+                width: 80px;
+                height: 80px;
+                display: flex;
+                flex-direction: column; 
+                margin: 2px 3px;
+            }
+        
+            .gallery-small {
+                display: none;
+            }
+            .container {
+                justify-content: center;
+                max-width: 100vw;
+            }
+            /* DESCRIPTION AND CONTACT */
+            .description {
+                display: flex;
+                flex-direction:row;
+                justify-content: center;
+                position: relative;
+                width:60%;
+            }
+            h1 {
+                font-size: 3em;
+            }
+            h2{
+                font-size: 2em;
+            }
+            /* WISE HOUSE */
+            .wise-house-wrapper {
+                height:700px;
+                width:600px;
+                align-self: auto;
+            }
+            #wise-house {
+                box-shadow: none;
+            }
+            .navbar {
+                width: 100%;
+                height: 96px;
+            }
+            .navbar .links {
+                display:flex;
+                gap: 2rem;
+                padding-left: 50px;
+            }
+            .navbar .toggle-btn img {
+                display: none
+            }
+        }
+        @media (min-width: 1150px) {
+            .gallery.gallery-large > .gallery__item:nth-child(1) .gallery__img {
+                width: 450px;
+                height: 450px;
+            }
+            .gallery.gallery-large > .gallery__item:not(:first-child) {
+                width: 112px;
+                height: 100px;
+            }
+        }
+        </style>
+    </head>
+    
+    <body>
+        <header>
+            <div class="navbar">
+                <ul class="links">
+                    <li>Home</li>
+                    <li>Buy</li>
+                    <li>Sell</li>
+                    <li>Rent</li>
+                </ul>
+                <div class="toggle-btn">
+                    <img src="../assets/Menu-icon.svg">
                 </div>
             </div>
-        </div>
-        <div class="description">
-            <div style="width:100%;">
-                <div style="padding-top:0.5em; padding-bottom: 0.5em;">
-                        <div class="relative">
-                            <p style="font-size:larger;font-weight: bold;">
-                                Description</p>
-                            <div class="information">
-                            <p style="margin-bottom:0.5rem">From the moment you step through the grand front entrance, you'll be
-                                captivated by the air of effortless elegance that permeates this
-                                exquisite dwelling.</p>
-    
-                            <p>Sun-drenched interiors seamlessly blend modern design with classic
-                                touches, creating a space that is both inviting and effortlessly
-                                stylish.</p>
-    
-                            <p>The gourmet kitchen, boasting gleaming stainless steel appliances and
-                                sleek countertops, is a chef's dream come true.</p>
-    
-                            <p>Gather with loved ones in the expansive living room, where cozy nights by
-                                the fireplace await.</p>
-    
-                            <p>The tranquil master suite is a private oasis, featuring a luxurious
-                                bathroom and a walk-in closet that will make you feel like royalty.</p>
-    
-                            <p>Step outside to discover a backyard that is an entertainer's paradise.</p>
-                            
-                            <p>Soak up the sun on the expansive patio, host unforgettable pool parties,
-                                or unwind in the tranquil garden.</p>
-    
-    
-                            <p>Located in the heart of a vibrant community, you'll enjoy easy access to
-                                top-rated schools, shopping, dining, and entertainment.</p>
-    
-                            <p>Don't miss your chance to make this extraordinary property your own.
-                                Schedule a private showing today!</p>
-                            
-                                <p>From the moment you step through the grand front entrance, you'll be
+        </header>
+        <main>
+            <div class="container">
+                <div class="property">
+                    <div class="property-details">
+                        <h1>234 Rosebrook Dr, Sydney, Australia </h1>
+                        <div class="name-icons" style="display:flex;align-items:center;gap:0.2rem;width:100%;">
+                            <div style="display:flex;align-items:center;">
+                                <div style="font-size: 1rem;">
+                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0"
+                                        viewBox="0 0 24 24" height="1em" width="1em"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M20 9.557V3h-2v2H6V3H4v6.557C2.81 10.25 2 11.525 2 13v4a1 1 0 0 0 1 1h1v4h2v-4h12v4h2v-4h1a1 1 0 0 0 1-1v-4c0-1.475-.811-2.75-2-3.443zM18 7v2h-5V7h5zM6 7h5v2H6V7zm14 9H4v-3c0-1.103.897-2 2-2h12c1.103 0 2 .897 2 2v3z">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div style="display:flex; align-items:end;gap:0.3rem;margin-right:0.5rem;">
+                                <p
+                                    style="font-weight:200;text-align:left;font-size:1.0rem;margin:0.05rem;font-size:0.9em;">
+                                    124</p>
+                            </div>
+                            <div style="display:flex;align-items:center;">
+                                <div style="font-size: 1rem;">
+                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0"
+                                        viewBox="0 0 24 24" height="1em" width="1em"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M21 10H7V7c0-1.103.897-2 2-2s2 .897 2 2h2c0-2.206-1.794-4-4-4S5 4.794 5 7v3H3a1 1 0 0 0-1 1v2c0 2.606 1.674 4.823 4 5.65V22h2v-3h8v3h2v-3.35c2.326-.827 4-3.044 4-5.65v-2a1 1 0 0 0-1-1zm-1 3c0 2.206-1.794 4-4 4H8c-2.206 0-4-1.794-4-4v-1h16v1z">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div style="display:flex; align-items:end;gap:0.3rem;margin-right:0.5rem;">
+                                <p
+                                    style="font-weight:200;text-align:left;font-size:0.9em;margin:0.05rem;">
+                                    33</p>
+                            </div>
+                            <div style="display:flex;align-items:center;">
+                                <div style="font-size: 1em;">
+                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0"
+                                        viewBox="0 0 24 24" height="1em" width="1em"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="m20.772 10.156-1.368-4.105A2.995 2.995 0 0 0 16.559 4H7.441a2.995 2.995 0 0 0-2.845 2.051l-1.368 4.105A2.003 2.003 0 0 0 2 12v5c0 .753.423 1.402 1.039 1.743-.013.066-.039.126-.039.195V21a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-2h12v2a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-2.062c0-.069-.026-.13-.039-.195A1.993 1.993 0 0 0 22 17v-5c0-.829-.508-1.541-1.228-1.844zM4 17v-5h16l.002 5H4zM7.441 6h9.117c.431 0 .813.274.949.684L18.613 10H5.387l1.105-3.316A1 1 0 0 1 7.441 6z">
+                                        </path>
+                                        <circle cx="6.5" cy="14.5" r="1.5"></circle>
+                                        <circle cx="17.5" cy="14.5" r="1.5"></circle>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div style="display:flex; align-items:end;gap:0.3rem;margin-right:0.5rem;">
+                                <p
+                                    style="font-weight:200;text-align:left;font-size:0.9em;margin:0.05rem;">
+                                    13</p>
+                            </div>
+                            <div style="display:flex;align-items:center;">
+                                <div style="font-size: 1rem;">
+                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0"
+                                    viewBox="0 0 24 24" height="1em" width="1em"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M22 7.999a1 1 0 0 0-.516-.874l-9.022-5a1.003 1.003 0 0 0-.968 0l-8.978 4.96a1 1 0 0 0-.003 1.748l9.022 5.04a.995.995 0 0 0 .973.001l8.978-5A1 1 0 0 0 22 7.999zm-9.977 3.855L5.06 7.965l6.917-3.822 6.964 3.859-6.918 3.852z">
+                                    </path>
+                                    <path
+                                        d="M20.515 11.126 12 15.856l-8.515-4.73-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5-.97-1.748z">
+                                    </path>
+                                    <path
+                                        d="M20.515 15.126 12 19.856l-8.515-4.73-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5-.97-1.748z">
+                                    </path>
+                                </svg>
+                                </div>
+                            </div>
+                            <div style="display:flex; align-items:end;gap:0.3rem;margin-right:0.5rem;">
+                                <p
+                                    style="font-weight:200;text-align:left;font-size:0.9em;margin:0.05rem;">
+                                    976 m²</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- GALLERY FOR BIGGER SCREEN SIZE -->
+                    <div class="gallery gallery-large">
+                        <figure class="gallery__item gallery__item--1" style="grid-column-start: 1; grid-column-end: 8; grid-row-start: 1; grid-row-end: 5;">
+                            <img src="../assets/Designer-1.jpeg" alt="Gallery image 1" class="gallery__img">
+                        </figure>
+                        <figure class="gallery__item gallery__item--2" style="grid-column-start: 8; grid-column-end: 10; grid-row-start: 1; grid-row-end: 2;">
+                            <img src="../assets/Designer-2.jpeg" alt="Gallery image 2" class="gallery__img">
+                        </figure>
+                        <figure class="gallery__item gallery__item--3" style="grid-column-start: 8; grid-column-end: 10; grid-row-start: 2; grid-row-end: 3;">
+                            <img src="../assets/Designer-3.jpeg" alt="Gallery image 3" class="gallery__img">
+                        </figure>
+                        <figure class="gallery__item gallery__item--4" style="grid-column-start: 8; grid-column-end: 10; grid-row-start: 3; grid-row-end: 4;">
+                            <img src="../assets/Floorplan-1.jpeg" alt="Gallery image 4" class="gallery__img">
+                        </figure>
+                        <figure class="gallery__item gallery__item--5" style="grid-column-start: 8; grid-column-end: 10; grid-row-start: 4; grid-row-end: 5;">
+                            <img src="../assets/Designer-4.jpeg" alt="Gallery image 5" class="gallery__img">
+                        </figure>
+                    </div>
+                    <!-- GALLERY FOR SMALLER SCREEN SIZE -->
+                    <div class="gallery gallery-small">
+                        <figure class="gallery__item gallery__item--1">
+                            <img src="../assets/Designer-1.jpeg" alt="Gallery image 1" class="gallery__img">
+                        </figure>
+                        <figure class="gallery__item gallery__item--2">
+                            <img src="../assets/Designer-2.jpeg" alt="Gallery image 2" class="gallery__img">
+                        </figure>
+                        <figure class="gallery__item gallery__item--3">
+                            <img src="../assets/Designer-3.jpeg" alt="Gallery image 3" class="gallery__img">
+                        </figure>
+                        <figure class="gallery__item gallery__item--4">
+                            <img src="../assets/Floorplan-1.jpeg" alt="Gallery image 4" class="gallery__img">
+                        </figure>
+                        <figure class="gallery__item gallery__item--5">
+                            <img src="../assets/Designer-4.jpeg" alt="Gallery image 5" class="gallery__img">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+            <div class="description">
+                <div style="width:100%;">
+                    <div style="padding-top:0.5em; padding-bottom: 0.5em;">
+                            <div class="relative">
+                                <p style="font-size:larger;font-weight: bold;">
+                                    Description</p>
+                                <div class="information">
+                                <p style="margin-bottom:0.5rem">From the moment you step through the grand front entrance, you'll be
                                     captivated by the air of effortless elegance that permeates this
                                     exquisite dwelling.</p>
         
@@ -373,52 +402,81 @@
                                     stylish.</p>
         
                                 <p>The gourmet kitchen, boasting gleaming stainless steel appliances and
-                                    sleek countertops, is a chef's dream come true.</p>    
+                                    sleek countertops, is a chef's dream come true.</p>
+        
+                                <p>Gather with loved ones in the expansive living room, where cozy nights by
+                                    the fireplace await.</p>
+        
+                                <p>The tranquil master suite is a private oasis, featuring a luxurious
+                                    bathroom and a walk-in closet that will make you feel like royalty.</p>
+        
+                                <p>Step outside to discover a backyard that is an entertainer's paradise.</p>
+                                
+                                <p>Soak up the sun on the expansive patio, host unforgettable pool parties,
+                                    or unwind in the tranquil garden.</p>
+        
+        
+                                <p>Located in the heart of a vibrant community, you'll enjoy easy access to
+                                    top-rated schools, shopping, dining, and entertainment.</p>
+        
+                                <p>Don't miss your chance to make this extraordinary property your own.
+                                    Schedule a private showing today!</p>
+                                
                                     <p>From the moment you step through the grand front entrance, you'll be
                                         captivated by the air of effortless elegance that permeates this
-                                        exquisite dwelling.</p>        
-                        </div>
-                        <div id="location">
-                            <div style="display:flex;flex-direction: column; width: 100%;">
-                                <p style="margin-bottom: 0.5rem; font-size:larger;font-weight: bold;">Location</p>
-                                <div style= "margin-top: 20px;">
-                                    <img alt="map" loading="lazy" decoding="async" data-nimg="1"
-                                        class="object-cover w-full rounded-xl"
-                                        style="color:transparent;background-size:cover;background-position:50% 50%;background-repeat:no-repeat;width: 100%; height:250px; object-fit:cover;"
-                                        src="../assets/Location.jpeg" />
-                                </div>
+                                        exquisite dwelling.</p>
+            
+                                    <p>Sun-drenched interiors seamlessly blend modern design with classic
+                                        touches, creating a space that is both inviting and effortlessly
+                                        stylish.</p>
+            
+                                    <p>The gourmet kitchen, boasting gleaming stainless steel appliances and
+                                        sleek countertops, is a chef's dream come true.</p>    
+                                        <p>From the moment you step through the grand front entrance, you'll be
+                                            captivated by the air of effortless elegance that permeates this
+                                            exquisite dwelling.</p>        
                             </div>
-                        </div>                    
+                            <div id="location">
+                                <div style="display:flex;flex-direction: column; width: 100%;">
+                                    <p style="margin-bottom: 0.5rem; font-size:larger;font-weight: bold;">Location</p>
+                                    <div style= "margin-top: 20px;">
+                                        <img alt="map" loading="lazy" decoding="async" data-nimg="1"
+                                            class="object-cover w-full rounded-xl"
+                                            style="color:transparent;background-size:cover;background-position:50% 50%;background-repeat:no-repeat;width: 100%; height:250px; object-fit:cover;"
+                                            src="../assets/Location.jpeg" />
+                                    </div>
+                                </div>
+                            </div>                    
+                        </div>
+                    </div>
+                </div>
+                <div class="wise-house-wrapper">
+                    <div id="wise-house" style="border-radius: 25px; border: none; height: 100%; width: 100%;">
+                        <iframe src="https://wisehouse.app/chat/LkKNlwl7tjAFaMXliSDh?sentcolor=fff&receivedbg=ebebeb&sentbg=1c355e&accent=98dfd6&nosummary&notitle" style="border-radius: 25px; border: none; height: 100%; width: 100%;"></iframe>
                     </div>
                 </div>
             </div>
-            <div class="wise-house-wrapper">
-                <div id="wise-house" style="border-radius: 25px; border: none; height: 100%; width: 100%;">
-                    <iframe src="https://wisehouse.app/chat/LkKNlwl7tjAFaMXliSDh?ground=ffffff&bg=f4f4f4&accent=1c355e&receivedbg=1c355e&receivedcolor=fff&sentbg=b80f0a&sentcolor=fff&notitle" style="border-radius: 25px; border: none; height: 100%; width: 100%;"></iframe>
+            <footer>
+                <div class="form-container" style="background-color: #fff;border-radius: 20px;padding: 15px;box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);margin: 0 auto;">
+                    <h2 style="text-align: center;margin-bottom: 20px;">Get in touch</h2>
+                    <form>
+                        <div class="input-group">
+                            <input type="text" placeholder="First Name" required>
+                            <input type="text" placeholder="Last Name" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="email" placeholder="Email Address" required>
+                            <input type="tel" placeholder="Phone Number" required>
+                        </div>
+                        <div class="message-group" style="margin-bottom: 15px;"> 
+                            <textarea placeholder="Your Message" rows="5" required></textarea>
+                        </div>
+                        <div class="submit-group" style="text-align: center;">
+                            <button type="submit" style="padding: 10px 20px;background-color: #fff;font-weight:bold;color: #00234B;border:1px solid #00234B;border-radius: 5px;cursor: pointer;">Send enquiry</button>
+                        </div>
+                    </form>
                 </div>
-            </div>
-        </div>
-        <footer style="background-color: #f6f5f7;  padding: 30px 0;">
-            <div class="form-container" style="background-color: #fff;border-radius: 20px;padding: 15px;box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);margin: 0 auto;">
-                <h2 style="text-align: center;margin-bottom: 20px;">Get in touch</h2>
-                <form>
-                    <div class="input-group">
-                        <input type="text" placeholder="First Name" required>
-                        <input type="text" placeholder="Last Name" required>
-                    </div>
-                    <div class="input-group">
-                        <input type="email" placeholder="Email Address" required>
-                        <input type="tel" placeholder="Phone Number" required>
-                    </div>
-                    <div class="message-group" style="margin-bottom: 15px;"> 
-                        <textarea placeholder="Your Message" rows="5" required></textarea>
-                    </div>
-                    <div class="submit-group" style="text-align: center;">
-                        <button type="submit" style="padding: 10px 20px;background-color: #e4002b;color: #fff;border: none;border-radius: 5px;cursor: pointer;">Send enquiry</button>
-                    </div>
-                </form>
-            </div>
-        </footer>
-        
-    </main>
-</body>
+            </footer>
+            
+        </main>
+    </body>

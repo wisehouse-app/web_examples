@@ -7,244 +7,248 @@
     <title>Harmony Heights Residences</title>
     <style>
     * {
-    margin:0;
-    padding: 0;
-    box-sizing: border-box;
-    scroll-behavior: smooth !important;
-    }
-    body {
-        width: 100vw;
-        font-family: Arial, Helvetica, sans-serif;
-        justify-self: center;
-        margin: 0 auto;
-    }
-    html, body, .background {
-        height: 100%;
-    }
-    /*SECTION HEIGHT*/
-    section {
-        height:100vh;
-    }
-    /*CHAT POPUP*/
-    label {
-        position:fixed;
-        right:15px;
-        bottom:20px;
-        height:55px;
-        width:55px;
-        background:#477b72; 
-        border-radius: 50px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    label img {
-        position: absolute;
-        top: 50%;
-        bottom: 50%;
-        transform:translate(-0.1%,-50%);
-        transition: all 0.4s ease;
-    }
-    label .icon2 {
-        opacity:0;
-        pointer-events: none;
-    }
-    #click:checked ~ label .icon2 {
-        opacity:1;
-        pointer-events: auto;
-        transform:translate(-0.1%,-50%) rotate(180deg);
-    }
-    #click:checked ~label .icon1 {
-        opacity:0;
-        pointer-events:none;
-        transform:translate(-0.1%,-50%) rotate(180deg);
-    }
-    #click:checked ~ .chat-wrapper {
-        opacity: 1;
-        bottom:30px;
-        pointer-events: auto;
-    }
-    .icon1, .icon2 {
-        height:40px;
-        width:45px;
-    }
-    .chat-wrapper {
-        height: 600px;
-        width: 400px;
-        position: fixed;   
-        max-width: 400px;
-        border-radius: 8px;
-        opacity: 0;
-        pointer-events: none;
-        transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        transform: scale(0.8);
-    }
-    #click{
-        display: none;
-    }
-    /*SECTION 1 BACKGROUND IMAGE  AND TITLE*/
-    .one {
-        width: 100vw;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-size:1000px 900px;
-        background-image: url("../assets/Designer-9.jpg");
-        display: flex;
-        justify-content: center; 
-        align-items: center; 
-        height: 100vh; 
-    }
-    .one h1 {
-        text-align: center; 
-    }
-    .property-name {
-        color:white;
-        font-size: 2em;
-        font-weight: 400;
-    }
-    /*EXPLORE BUTTON*/
-    .explore-button {
-        position: absolute;
-        display: grid;
-        place-items: center;
-        bottom: 34px;
-        left: 50%;
-        transform: translatex(-50%);
-        background: none;
-        border: none;
+        margin:0;
         padding: 0;
-        font-size: 14px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        cursor: pointer;
-    }
-    .explore {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-decoration: none;
-    }
-    a{
-        text-decoration: none;
-        color: white;
-    }
-    .explore-button .text {
-        margin-bottom: 8px;
-    }
-    /*SECTION 2 IMAGE*/
-    .image1 {
-        width: 85vw;
-        height:65vw;
-    }
-    .image1-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 50%;   
-    }
-    /*SECTION 2 GALLERY*/
-    .gallery {
-        flex-direction: column; 
-        align-items: center; 
-        padding: 20px;
-    }
-    .gallery__item {
-        flex: 1 0 calc(100% - 20px); 
-        margin: 10px 0;
-    } 
-    .gallery__img {
-        display: block;
-        object-position: 50% 50%;
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-    } 
-    /*DESCRIPTION*/
-    p {
-        margin-bottom: 1rem; 
-    }
-    .description {
-        font-size: small;
-    }
-    /*SECTION 2'S WIDTH AND MARGIN FOR SMALLER SCREEN*/
-    @media (max-width: 1200px) {
-        #section2 {
-            max-width: 85vw;
-            margin-left: auto;
-            margin-right: auto;
+        box-sizing: border-box;
+        scroll-behavior: smooth !important;
         }
-    }
-    /*LARGE SCREEN*/
-    @media (min-width: 1200px) {
-        /*SECTION 1 BACKGROUND IMAGE SIZE AND TITLE*/
-        .one {
-            background-size:2000px 100%;
+        body {
+            width: 100vw;
+            font-family: Arial, Helvetica, sans-serif;
+            justify-self: center;
+            margin: 0 auto;
         }
-        .property-name {
-            font-size: 5em;
-            font-weight: 400;
-        }
-        /*SECTION 2 IMAGE */
-        .image1 {
-            width: 45vw;
-            height: 35vw;
-        }
-        .image1-container {
-            display: flex; 
-            align-items: center; 
+        html, body, .background {
             height: 100%;
-            margin-top:1em;
-        } 
-        /*SECTION 2 DESCRIPTION */
-        .description {
-            max-width: 600px; 
-            margin-left: 20px; 
         }
-        .description {
-            margin-left: 10%;
-            margin-top: 10%;
-            max-width: 600px;
-            font-size: medium;
-        }
-        /*SECTION 2 GALLERY */
-        .gallery {
-            display: flex;
-            flex-flow: wrap;
-            gap: 10px; 
-            padding-inline: 50px;
-        }
-        .gallery__item {
-            flex: 1 0 calc(33.33% - 10px);
-            margin: 10px; 
-        }  
-        .gallery__img {
-            width: 100%;
-            height: 45vw;
-        } 
-        /*SECTION 2 STYLE */
-        .two {
-            display: flex;
-            flex-wrap: wrap; 
-        }
+    
         /*CHAT POPUP*/
         label {
-            right:30px;
+            position:fixed;
+            right:15px;
             bottom:20px;
-            height:65px;
-            width:65px;
+            height:55px;
+            width:55px;
+            background:#477b72; 
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .chat-wrapper {
-            right:30px;
-            bottom:0;
-            transform: scale(1);
+        label img {
+            position: absolute;
+            top: 50%;
+            bottom: 50%;
+            transform:translate(-0.1%,-50%);
+            transition: all 0.4s ease;
+        }
+        label .icon2 {
+            opacity:0;
+            pointer-events: none;
+        }
+        #click:checked ~ label .icon2 {
+            opacity:1;
+            pointer-events: auto;
+            transform:translate(-0.1%,-50%) rotate(180deg);
+        }
+        #click:checked ~label .icon1 {
+            opacity:0;
+            pointer-events:none;
+            transform:translate(-0.1%,-50%) rotate(180deg);
         }
         #click:checked ~ .chat-wrapper {
             opacity: 1;
-            bottom:90px;
+            bottom:30px;
             pointer-events: auto;
         }
-    }    
+        .icon1, .icon2 {
+            height:40px;
+            width:45px;
+        }
+        .chat-wrapper {
+            height: 600px;
+            width: 400px;
+            position: fixed;   
+            max-width: 400px;
+            border-radius: 8px;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transform: scale(0.8);
+        }
+        #click{
+            display: none;
+        }
+        /*SECTION 1 BACKGROUND IMAGE  AND TITLE*/
+        .one {
+            width: 100vw;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size:1200px 900px;
+            background-image: url("../assets/Designer-9.jpg");
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh;
+        }
+        .one h1 {
+            text-align: center; 
+        }
+        .property-name {
+            color:white;
+            font-size: 2em;
+            font-weight: 400;
+        }
+        /*EXPLORE BUTTON*/
+        .explore-button {
+            position: absolute;
+            display: grid;
+            place-items: center;
+            bottom: 34px;
+            left: 50%;
+            transform: translatex(-50%);
+            background: none;
+            border: none;
+            padding: 0;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+        .explore {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+        }
+        a{
+            text-decoration: none;
+            color: white;
+        }
+        .explore-button .text {
+            margin-bottom: 8px;
+        }
+        /*SECTION 2 IMAGE*/
+        .image1 {
+            width: 85vw;
+            height:65vw;
+        }
+        .image1-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50%;   
+            padding-top: 3em;
+        }
+        /*SECTION 2 GALLERY*/
+        .gallery {
+            flex-direction: column; 
+            align-items: center; 
+        }
+        .gallery__item {
+            flex: 1 0 calc(100% - 20px); 
+            margin: 10px 0;
+        } 
+        .gallery__img {
+            display: block;
+            object-position: 50% 50%;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        } 
+        /*DESCRIPTION*/
+        p {
+            margin-bottom: 1rem; 
+        }
+        .description {
+            font-size: small;
+        }
+    
+        /*SECTION 2'S WIDTH AND MARGIN FOR SMALLER SCREEN*/
+        @media (max-width: 719px) {
+            #section2 {
+                max-width: 85vw;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+        /*LARGE SCREEN*/
+        @media (min-width: 720px) {
+            /*SECTION 1 BACKGROUND IMAGE SIZE AND TITLE*/
+            .one {
+                background-size:2000px 100%;
+            }
+            .property-name {
+                font-size: 5em;
+                font-weight: 400;
+            }
+            /*SECTION 2 IMAGE */
+            .image1 {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+            .image1-container {
+                height:80vh;
+                flex:0 1 40%;
+                margin-top:5em;
+                margin-bottom: 5em; 
+                overflow: hidden;
+                position: relative;
+                padding-top: 0;
+            } 
+            /*SECTION 2 DESCRIPTION */
+            .description {
+                display: flex;
+                margin-top: 5em;
+                max-width: 800px;
+                font-size: medium;
+                flex: 1 1 20%;
+                margin-left: 3em;
+                margin-right: 3em;
+                height: fit-content;
+                margin-bottom: 5em; 
+            }
+            /*SECTION 2 GALLERY */
+            .gallery {
+                display: flex;
+                flex-flow: wrap;
+                gap: 10px; 
+                padding-inline: 50px;
+            }
+            .gallery__item {
+                flex: 1 0 calc(33.33% - 10px);
+                margin: 10px; 
+            }  
+            .gallery__img {
+                width: 100%;
+                height: 45vw;
+            } 
+            /*SECTION 2 STYLE */
+            .two {
+                display: flex;
+                flex-wrap: wrap;
+            }
+            /*CHAT POPUP*/
+            label {
+                right:30px;
+                bottom:20px;
+                height:65px;
+                width:65px;
+            }
+            .chat-wrapper {
+                right:30px;
+                bottom:0;
+                transform: scale(1);
+            }
+            #click:checked ~ .chat-wrapper {
+                opacity: 1;
+                bottom:90px;
+                pointer-events: auto;
+            }
+        }    
     </style>
 </head>
 
