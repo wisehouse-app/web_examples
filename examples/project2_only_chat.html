@@ -21,10 +21,7 @@
     html, body, .background {
         height: 100%;
     }
-    /*SECTION HEIGHT*/
-    section {
-        height:100vh;
-    }
+
     /*CHAT POPUP*/
     label {
         position:fixed;
@@ -88,12 +85,12 @@
         width: 100vw;
         background-repeat: no-repeat;
         background-attachment: fixed;
-        background-size:1000px 900px;
+        background-size:1200px 900px;
         background-image: url("../assets/Designer-9.jpg");
         display: flex;
         justify-content: center; 
         align-items: center; 
-        height: 100vh; 
+        height: 100vh;
     }
     .one h1 {
         text-align: center; 
@@ -142,12 +139,12 @@
         justify-content: center;
         align-items: center;
         height: 50%;   
+        padding-top: 3em;
     }
     /*SECTION 2 GALLERY*/
     .gallery {
         flex-direction: column; 
         align-items: center; 
-        padding: 20px;
     }
     .gallery__item {
         flex: 1 0 calc(100% - 20px); 
@@ -167,8 +164,9 @@
     .description {
         font-size: small;
     }
+
     /*SECTION 2'S WIDTH AND MARGIN FOR SMALLER SCREEN*/
-    @media (max-width: 1200px) {
+    @media (max-width: 719px) {
         #section2 {
             max-width: 85vw;
             margin-left: auto;
@@ -176,7 +174,7 @@
         }
     }
     /*LARGE SCREEN*/
-    @media (min-width: 1200px) {
+    @media (min-width: 720px) {
         /*SECTION 1 BACKGROUND IMAGE SIZE AND TITLE*/
         .one {
             background-size:2000px 100%;
@@ -187,25 +185,31 @@
         }
         /*SECTION 2 IMAGE */
         .image1 {
-            width: 45vw;
-            height: 35vw;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
         }
         .image1-container {
-            display: flex; 
-            align-items: center; 
-            height: 100%;
-            margin-top:1em;
+            height:80vh;
+            flex:0 1 40%;
+            margin-top:5em;
+            margin-bottom: 5em; 
+            overflow: hidden;
+            position: relative;
+            padding-top: 0;
         } 
         /*SECTION 2 DESCRIPTION */
         .description {
-            max-width: 600px; 
-            margin-left: 20px; 
-        }
-        .description {
-            margin-left: 10%;
-            margin-top: 10%;
-            max-width: 600px;
+            display: flex;
+            margin-top: 5em;
+            max-width: 800px;
             font-size: medium;
+            flex: 1 1 20%;
+            margin-left: 3em;
+            margin-right: 3em;
+            height: fit-content;
+            margin-bottom: 5em; 
         }
         /*SECTION 2 GALLERY */
         .gallery {
@@ -225,7 +229,7 @@
         /*SECTION 2 STYLE */
         .two {
             display: flex;
-            flex-wrap: wrap; 
+            flex-wrap: wrap;
         }
         /*CHAT POPUP*/
         label {
@@ -265,7 +269,7 @@
                     <img class="image1" src="../assets/Designer-8.jpeg">
                 </div>
                 <div class="description">
-                    <div style="padding-top:0.7em; padding-bottom: 0.5em;">
+                    <div style="padding-top:1.5em; padding-bottom: 0.5em;">
                         <div class="relative">
                             <p style="font-size:larger;font-weight: bold;">
                                 Vividia's graceful lines and subtle tones seamlessly complement its sturdy foundation, 
