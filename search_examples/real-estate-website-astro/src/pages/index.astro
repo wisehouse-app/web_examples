@@ -1,0 +1,405 @@
+---
+
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        * {
+            font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+                "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        div#header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 1em 100px 1em 100px;
+        }
+        div#search-hero {
+            background-image: url("/kitchen.jpg");
+            height: 80vh;
+            max-height: 80vh;
+            background-size: cover;
+            background-position-y: bottom;
+            position: relative; /* Ensure proper positioning of the pseudo-element */
+        }
+
+        div#search-hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        div#search-wrap {
+            position: relative;
+            z-index: 2;
+            height: fit-content;
+            width: 80vw;
+            max-height: 80vh;
+            background-color: rgba(256, 256, 256, 0.75);
+            border-radius: 9px;
+            display: flex;
+            margin: 0.5em auto 0 auto;
+            transition: margin-top 0.4s ease-in-out;
+        }
+
+        div#search-wrap #search-bar {
+            flex-grow: 1;
+            border: none;
+            background: transparent;
+            padding: 0.5em 1em 0.5em 1em;
+            resize: none;
+            line-height: normal; /* Reset line-height */
+            vertical-align: middle; /* Vertically align text */
+            font-size: 1em;
+        }
+        div#search-wrap #search-bar:focus {
+            outline: none;
+        }
+        #search-button {
+            cursor: pointer;
+            background-color: black;
+            color: white;
+            text-align: center;
+            display: inline-block;
+            line-height: 2.5em;
+            margin: 0 0 0 0.3em;
+            padding: 0.25em 1em;
+            border-radius: 0.5em;
+        }
+        #search-button span {
+            display: inline-block;
+            width: fit-content;
+        }
+
+        #messages-container {
+            font-size: 1rem;
+            z-index: 10;
+            margin: 5px auto 0 auto;
+            transition: height 0.4s ease-in-out;
+            width: 80vw;
+            border-radius: 0.5em;
+            background-color: transparent;
+            position: relative;
+            height: 35vh;
+            overflow-y: scroll;
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
+            padding: 1em;
+            box-sizing: border-box;
+        }
+        #messages-container::-webkit-scrollbar {
+            display: none;
+        }
+        #messages-container div.carousel-card {
+            color: green;
+        }
+        a {
+            text-decoration: none;
+        }
+
+        @media only screen and (max-width: 600px) {
+            div#search-wrap,
+            #messages-container {
+                width: 95vw;
+            }
+        }
+    </style>
+    <body>
+        <div id="header">
+            <span>Home</span>
+            <span>About us</span>
+            <span>Find a property</span>
+            <span>Contact</span>
+        </div>
+        <div id="search-hero">
+            <div id="messages-container"></div>
+            <div id="search-wrap">
+                <input type="text" autocomplete="off" name="" id="search-bar" />
+                <span id="search-button">
+                    <span>SEARCH</span>
+                </span>
+            </div>
+        </div>
+        <div id="other-content"></div>
+    </body>
+    <script>
+        /*****
+         * THESE ARE DEFINITIONS THAT HELP WITH TYPESCRIPT...
+         * If you are using Javascript, remove this section, and
+         * also remove all the exclamation marks and the types.
+         **** */
+        type msgType = "text" | "carousel";
+        type Message = {
+            content: any;
+            origin: string;
+            type: msgType;
+        };
+
+        type CarouselCard = {
+            title: string;
+            canonical: string;
+            avatar: string;
+        };
+        type CarouselContent = {
+            msg: string;
+            cards: CarouselCard[];
+        };
+
+        type SessionIdResponse = {
+            id: string;
+        };
+
+        type WiseHouseError = {
+            msg: string;
+            moment: string;
+        };
+
+        class Carousel extends HTMLElement {
+            constructor() {
+                super();
+            }
+            connectedCallback() {
+                if (!this.shadowRoot) {
+                    this.attachShadow({ mode: "open" });
+                }
+                this.shadowRoot!.innerHTML = `
+                <style>
+                    div {
+                        display: flex;
+                        overflow-x: scroll;                        
+                        padding-bottom: 2em;
+                    }                    
+                    div::-webkit-scrollbar {
+                        display: none;
+                    }
+                    div {
+                        -ms-overflow-style: none;  /* IE and Edge */
+                        scrollbar-width: none;  /* Firefox */
+                    }
+                </style>
+                <div>
+                    <slot></slot>
+                </div>
+                `;
+            }
+        }
+        if (!customElements.get("property-carousel")) {
+            customElements.define("property-carousel", Carousel);
+        }
+
+        class Card extends HTMLElement {
+            title: string = "";
+            canonical: string = "";
+            avatar: string = "";
+
+            constructor() {
+                super();
+            }
+
+            connectedCallback() {
+                if (!this.shadowRoot) {
+                    this.attachShadow({ mode: "open" });
+                }
+                this.shadowRoot!.innerHTML = `
+                <style>
+                    a {                        
+                        cursor: pointer;
+                    }
+                    div {
+                        margin: 0 0.8em;
+                        background: white;
+                        padding: 0.7em;
+                        border-radius: 9px;
+                        width: 220px;
+                        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+                        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+                    }
+                    div:hover{
+                        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+                    }
+                    h1 {
+                        font-size: 1em;
+                    }
+                    img {
+                        margin: 0 auto;
+                        width: 100%;
+                    }
+                </style>
+                <a target="_blank" src="${this.canonical}">
+                    <div>
+                        <img  src="${this.avatar}"></img>
+                        <h1>${this.title}</h1>                       
+                    </div>
+                </a>
+                `;
+            }
+        }
+        if (!customElements.get("property-card")) {
+            customElements.define("property-card", Card);
+        }
+
+        /*****
+         * GATHER RELEVANT ELEMENTS
+         **** */
+        // the "search" buttonn
+        const searchButton = document.getElementById("search-button")!;
+        // The container of the messages
+        const msgCanvas = document.getElementById("messages-container")!;
+        // The bar itself
+        const searchBar = document.getElementById(
+            "search-bar",
+        )! as HTMLInputElement;
+
+        // Creates a container and puts the name of the author in it.
+        function getMsgContainer(origin: string): HTMLElement {
+            const ret = document.createElement("div");
+            const h = document.createElement("h3");
+            if (origin === "client") {
+                h.innerText = "You";
+            } else {
+                h.innerText = "Jo Wise";
+            }
+            ret.appendChild(h);
+            return ret;
+        }
+
+        // Pushes a Carousel of response into the container
+        function appendCarousel(container: HTMLElement, msg: CarouselContent) {
+            // Add message
+            appendTextMsg(container, msg.msg);
+            // Append carousel
+            let mainDiv = document.createElement(
+                "property-carousel",
+            ) as Carousel;
+            
+            msg.cards.forEach((c: CarouselCard) => {
+                console.log(c)
+                let a = document.createElement("property-card") as Card;
+                a.canonical = c.canonical;
+                a.avatar = c.avatar;
+                a.title = c.title;
+                mainDiv.appendChild(a);
+            });
+
+            container.appendChild(mainDiv);
+            msgCanvas.appendChild(container);
+        }
+
+        // Pushes a Text msg into the container
+        function appendTextMsg(container: HTMLElement, msg: string) {
+            let p = document.createElement("p");
+            p.innerText = msg;
+            container.appendChild(p);
+            msgCanvas.appendChild(container);
+        }
+
+        // Extends the Messages canvas
+        function deployMsgCanvas() {
+            msgCanvas.style.backgroundColor = "rgba(256, 256, 256, 0.83)";
+            msgCanvas.style.height = "70vh";
+        }
+
+        // Sends an message to Wise House
+        let sendingMsg = false;
+        async function sendMsg() {
+            // Don't send empty requests
+            const v = searchBar.value.trim();
+            if (v.length === 0) {
+                return;
+            }
+            searchBar.value = "";
+            searchBar.focus();
+            sendingMsg = true;
+            // Deploy canvas if not done already
+            deployMsgCanvas();
+            // Append user message
+            const container = getMsgContainer("client");
+            appendTextMsg(container, v);
+            // Send the message to Wise House
+            fetch("/api/search", {
+                method: "POST",
+                body: JSON.stringify({
+                    message: v,
+                    type: "text",
+                    locale: "en",
+                    session_id: sessionID,
+                }),
+            })
+                .then(async (response) => {
+                    sendingMsg = false;
+                    if (response.ok) {
+                        const res: Message = await response.json();
+                        const c = getMsgContainer(res.origin);
+                        if (res.type === "text") {
+                            appendTextMsg(c, res.content.msg);
+                        } else if (res.type === "carousel") {
+                            appendCarousel(c, res.content);
+                        }
+                    } else {
+                        const error: WiseHouseError = await response.json();
+                        throw new Error(
+                            `error when '${error.moment}': ${error.msg}`,
+                        );
+                    }
+                })
+                .catch(async (error) => {
+                    const e = await error.json();
+                    throw new Error(JSON.stringify(e));
+                });
+        }
+        // Send messages when clicking "send"
+        searchButton.onclick = sendMsg;
+        // Send messages when pressing enter on the search bar.
+        searchBar.onkeyup = (e: any) => {
+            if (e.key === "Enter") {
+                sendMsg();
+            }
+        };
+
+        let sessionID: string | undefined = undefined;
+
+        window.onload = async () => {
+            // Initialize by getting a session ID.
+            fetch("/api/search", {
+                method: "GET",
+            })
+                .then(async (response) => {
+                    // Do something with the response
+                    if (response.ok) {
+                        const data: SessionIdResponse = await response.json();
+                        sessionID = data.id;
+                    } else {
+                        const error: WiseHouseError = await response.json();
+                        throw new Error(
+                            `error when '${error.moment}': ${error.msg}`,
+                        );
+                    }
+                })
+                .catch(async (e) => {
+                    // Catch any error
+                    const error = await e.json();
+                    throw new Error(JSON.stringify(error));
+                });
+        };
+    </script>
+</html>
