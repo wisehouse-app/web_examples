@@ -19,7 +19,7 @@
             box-sizing: border-box;
         }
 
-        main>div {
+        main>div:not(.header)  {
             margin-left: auto;
             margin-right: auto;
             max-width: 70rem;
@@ -109,7 +109,41 @@
         div#location img {
             max-width: 100%;
         }
+        /* HEADER*/
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: #c5e7ff;
+            box-shadow: 0px 5px 5px -5px rgba(0, 0, 0, 0.35);
+        }
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+            height:100%;
+            margin-bottom: 1rem;
+        }
+        li a {
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            padding: 25px;
+        }
+        .active {
+            background-color:white;
+            color: #c5e7ff;
+            border: 1px solid #c5e7ff;
+        }
 
+        .icon {
+            display: none;
+        }
 
         @media (max-width: 720px) {
             body {
@@ -176,7 +210,18 @@
                 text-align: center;
                 font-size: 1.6rem;
             }
-
+            /* HEADER */
+            li a {
+                padding:20px;
+            }
+            .icon {
+                display: inline-block;
+                width:25px;
+                height:25px;
+            }
+            span {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -186,6 +231,13 @@
 
 
     <main>
+        <div class="header">
+            <ul>
+                <li><a href="#watchlist" class="watchlist"><img class="icon" src="../assets/Watchlist-icon.svg"><span>Watchlist</span></a></li>
+                <li><a class="active" href="#email"><img class="icon" src="../assets/Email-icon.svg"><span>Email</span></a></li>
+                <li><a href="#share"><img class="icon" src="../assets/Share-icon.svg"><span>Share</span></a></li>
+            </ul>
+        </div>
         <!-- <div>
             <div>-->
         <div>
