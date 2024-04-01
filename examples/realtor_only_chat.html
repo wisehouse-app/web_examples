@@ -13,10 +13,11 @@
         }
         * {
             box-sizing: content-box;
+            margin: 0;
         }
 
         body {
-            width: 100vw;
+            width: 100%;
             font-family: Arial, Helvetica, sans-serif;
             justify-self: center;
             box-sizing: border-box;
@@ -118,7 +119,7 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            background-color: #c5e7ff;
+            background-color: #ffe916;
             box-shadow: 0px 5px 5px -5px rgba(0, 0, 0, 0.35);
         }
         ul {
@@ -141,8 +142,8 @@
         }
         .active {
             background-color:white;
-            color: #c5e7ff;
-            border: 1px solid #c5e7ff;
+            color: #ffe916;
+            border: 1px solid #ffe916;
         }
 
         .icon {
@@ -152,9 +153,10 @@
         @media (max-width: 720px) {
             body {
                 padding: 0;
+                width:100vw;
             }
 
-            main>div {
+            main>div:not(.header) {
                 max-width: 95vw;
             }
 
