@@ -7,23 +7,20 @@
 
 ### Real Estate Projects / Proyectos inmobiliarios
 
-| Showing / Mostrando | Links                                                                                                                                         |
-| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| Everything / Todo   | [In action](https://wisehouse-app.github.io/web_examples/examples/project_show_all.html) // [`source code`](examples/project_show_all.html)   |
-| Chat                | [In action](https://wisehouse-app.github.io/web_examples/examples/project_only_chat.html) // [`source code`](examples/project_only_chat.html) |
-| 3D                  | [In action](https://wisehouse-app.github.io/web_examples/examples/project_only_3d.html) // [`source code`](examples/project_only_3d.html)     |
+| Showing / Mostrando | Links                                                                                                                                           |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------   |
+| Everything / Todo   | [In action](https://wisehouse-app.github.io/web_examples/examples/project_show_all.html) // [`source code`](examples/project_show_all.html)     |
+| Chat                | [In action](https://wisehouse-app.github.io/web_examples/examples/project2_only_chat.html) // [`source code`](examples/project2_only_chat.html) |
+| 3D                  | [In action](https://wisehouse-app.github.io/web_examples/examples/project2_only_3d.html) // [`source code`](examples/project2_only_3d.html)     |
 
 ### Real Estate Agencies / Agencias de bienes raíces
 
-| Showing / Mostrando | Links                                                                                                                                              |
-| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Everything / Todo   | [In action](https://wisehouse-app.github.io/web_examples/examples/realtor_show_all.html) // [`source code`](examples/realtor_show_all.html)        |
-| Chat                | [In action](https://wisehouse-app.github.io/web_examples/examples/realtor_only_chat.html) // [`source code`](examples/realtor_only_chat.html)      |
-| 3D                  | [In action](https://wisehouse-app.github.io/web_examples/examples/realtor_only_3d.html) // [`source code`](examples/realtor_only_3d.html)          |
-| Everything / Todo   | [In action](https://wisehouse-app.github.io/web_examples/examples/realestate_show_all.html) // [`source code`](examples/realestate_show_all.html)  |
-| Chat                | [In action](https://wisehouse-app.github.io/web_examples/examples/realestate_only_chat.html) // [`source code`](examples/realestate_only_chat.html)|
-| 3D                  | [In action](https://wisehouse-app.github.io/web_examples/examples/realestate_only_3d.html) // [`source code`](examples/realestate_only_3d.html)    |
-
+| Showing / Mostrando | Links                                                                                                                                           |
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------   |
+| Everything / Todo   | [In action](https://wisehouse-app.github.io/web_examples/examples/property_show_all.html) // [`source code`](examples/property_show_all.html)   |
+| Chat                | [In action](https://wisehouse-app.github.io/web_examples/examples/realtor_only_chat.html) // [`source code`](examples/realtor_only_chat.html)   |
+| 3D                  | [In action](https://wisehouse-app.github.io/web_examples/examples/property_only_3d.html) // [`source code`](examples/property_only_3d.html)     |
+ 
 ## In English
 
 Wise House offers a single point of entry for accesing and embedding the chat and render of a property. We call this the **property website**.
