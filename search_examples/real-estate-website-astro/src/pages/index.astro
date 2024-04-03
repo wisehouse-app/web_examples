@@ -148,21 +148,22 @@
          * If you are using Javascript, remove this section, and
          * also remove all the exclamation marks and the types.
          **** */
-        type msgType = "text" | "carousel";
+        type msgType = "text" | "search_result";
         type Message = {
             content: any;
             origin: string;
             type: msgType;
         };
 
-        type CarouselCard = {
-            title: string;
-            canonical: string;
-            avatar: string;
+        type SearchResult = {
+            id: string;
+            title?: string;
+            canonical?: string;
+            avatar?: string;
         };
         type CarouselContent = {
             msg: string;
-            cards: CarouselCard[];
+            results: SearchResult[];
         };
 
         type SessionIdResponse = {
@@ -207,14 +208,14 @@
             customElements.define("property-carousel", Carousel);
         }
 
-        class Card extends HTMLElement {
-            title: string = "";
+        class Card extends HTMLElement {            
             canonical: string = "";
             avatar: string = "";
-
             constructor() {
                 super();
             }
+
+            
 
             connectedCallback() {
                 if (!this.shadowRoot) {
@@ -245,13 +246,33 @@
                         width: 100%;
                     }
                 </style>
-                <a target="_blank" src="${this.canonical}">
-                    <div>
-                        <img  src="${this.avatar}"></img>
-                        <h1>${this.title}</h1>                       
-                    </div>
-                </a>
+
+                <div id="the-div">                                    
+                </div>
                 `;
+
+
+                const div = this.shadowRoot!.getElementById("the-div")!
+                let container = div
+                if(this.canonical !== "" ){
+                    container = document.createElement("a") 
+                    div.appendChild(container)
+                    //@ts-ignore
+                    container.href = this.canonical
+                    //@ts-ignore
+                    container.target = "_blank"
+
+                }
+                if (this.title !== ""){
+                    const h = document.createElement("h1")
+                    h.innerText = this.title
+                    container.appendChild(h)
+                }
+                if (this.avatar !== ""){
+                    const img = document.createElement("img")
+                    img.src = this.avatar
+                    container.appendChild(img)
+                }
             }
         }
         if (!customElements.get("property-card")) {
@@ -284,7 +305,12 @@
         }
 
         // Pushes a Carousel of response into the container
-        function appendCarousel(container: HTMLElement, msg: CarouselContent) {
+        function appendCarousel(container: HTMLElement, msg: CarouselContent) {            
+            if(msg.results.length === 0 ){
+                appendTextMsg(container, "Hmmm... there seems to be no properties matching your requirements. Do you want to try a different search?");
+                return
+            }
+
             // Add message
             appendTextMsg(container, msg.msg);
             // Append carousel
@@ -292,12 +318,17 @@
                 "property-carousel",
             ) as Carousel;
             
-            msg.cards.forEach((c: CarouselCard) => {
-                console.log(c)
+            msg.results.forEach((c: SearchResult) => {                
                 let a = document.createElement("property-card") as Card;
-                a.canonical = c.canonical;
-                a.avatar = c.avatar;
-                a.title = c.title;
+                if (c.canonical){
+                    a.canonical = c.canonical;
+                }
+                if(c.avatar){
+                    a.avatar = c.avatar;
+                }
+                if (c.title){
+                    a.title = c.title;
+                }
                 mainDiv.appendChild(a);
             });
 
@@ -352,7 +383,7 @@
                         const c = getMsgContainer(res.origin);
                         if (res.type === "text") {
                             appendTextMsg(c, res.content.msg);
-                        } else if (res.type === "carousel") {
+                        } else if (res.type === "search_result") {
                             appendCarousel(c, res.content);
                         }
                     } else {
@@ -362,7 +393,7 @@
                         );
                     }
                 })
-                .catch(async (error) => {
+                .catch(async (error) => {                    
                     const e = await error.json();
                     throw new Error(JSON.stringify(e));
                 });
