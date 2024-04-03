@@ -393,9 +393,8 @@
                         );
                     }
                 })
-                .catch(async (error) => {                    
-                    const e = await error.json();
-                    throw new Error(JSON.stringify(e));
+                .catch(async (error) => {                                        
+                    throw new Error(JSON.stringify(error));
                 });
         }
         // Send messages when clicking "send"
