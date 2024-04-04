@@ -1,0 +1,18 @@
+---
+
+interface Props {
+    title?: string;
+    avatar?:string;
+    canonical?:string;
+}
+
+const {title, avatar, canonical} = Astro.props
+
+---
+<property-card title={title} avatar={avatar} canonical={canonical}></property-card>
+<script>
+    import PropertyCard from "../components/web/PropertyCard";
+    if (!customElements.get("property-card")) {
+        customElements.define("property-card", PropertyCard);
+    }
+</script>

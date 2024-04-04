@@ -9,7 +9,7 @@ import type { APIRoute } from "astro";
 export function getURL(route: string): string {
     const aux = route.split("api/")
     const newURL = aux[aux.length - 1]
-    const base = "http://localhost:3030";    
+    const base = "http://localhost:3030";
     return `${base}/${newURL}`
 }
 
@@ -36,11 +36,7 @@ export function wisehouseMiddleware(method: HTML_METHOD): APIRoute {
 export function getHeaders({ contentType, token }: { contentType?: string, token?: any }): any {
     let wisehouse_key = import.meta.env.WISEHOUSE_API_KEY;
     if (!wisehouse_key) {
-        if (import.meta.env.DEV) {
-            wisehouse_key = "some key";
-        } else {
-            throw new Error("Could not find API key.");
-        }
+        throw new Error("Could not find API key.");
     }
     let headers: any = {
         "Content-Type": contentType || "application/json",

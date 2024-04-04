@@ -1,4 +1,29 @@
 ---
+import SearchBar from "../components/index/SearchBar.astro";
+import Navbar from "../components/Navbar.astro";
+import type SearchResult from "../utils/index_type";
+import type WiseHouseError from "../utils/wise_house_error";
+
+let latestListings : SearchResult[] = []
+let wisehouse_key = import.meta.env.WISEHOUSE_API_KEY;
+await fetch("http://localhost:3030/index",{
+    headers: {
+        "WiseHouse-API-Key": wisehouse_key,
+    }
+}).then(async(response)=>{    
+    if (response.ok){
+        const data : SearchResult[] = await response.json()
+        latestListings = data;              
+    }else{
+        const err : WiseHouseError = await response.json() 
+        throw new Error(`when ${err.moment}: ${err.msg}`)
+    }
+
+}).catch((error)=>{
+    throw new Error(error)
+})
+
+
 
 ---
 
@@ -23,19 +48,16 @@
             display: flex;
             flex-direction: column;
         }
-        div#header {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            padding: 1em 100px 1em 100px;
-        }
+
         div#search-hero {
             background-image: url("/kitchen.jpg");
             height: 80vh;
             max-height: 80vh;
             background-size: cover;
             background-position-y: bottom;
-            position: relative; /* Ensure proper positioning of the pseudo-element */
+            position: relative;
+            display: flex;
+            flex-direction: column;
         }
 
         div#search-hero::before {
@@ -47,48 +69,6 @@
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
             z-index: 1;
-        }
-
-        div#search-wrap {
-            position: relative;
-            z-index: 2;
-            height: fit-content;
-            width: 80vw;
-            max-height: 80vh;
-            background-color: rgba(256, 256, 256, 0.75);
-            border-radius: 9px;
-            display: flex;
-            margin: 0.5em auto 0 auto;
-            transition: margin-top 0.4s ease-in-out;
-        }
-
-        div#search-wrap #search-bar {
-            flex-grow: 1;
-            border: none;
-            background: transparent;
-            padding: 0.5em 1em 0.5em 1em;
-            resize: none;
-            line-height: normal; /* Reset line-height */
-            vertical-align: middle; /* Vertically align text */
-            font-size: 1em;
-        }
-        div#search-wrap #search-bar:focus {
-            outline: none;
-        }
-        #search-button {
-            cursor: pointer;
-            background-color: black;
-            color: white;
-            text-align: center;
-            display: inline-block;
-            line-height: 2.5em;
-            margin: 0 0 0 0.3em;
-            padding: 0.25em 1em;
-            border-radius: 0.5em;
-        }
-        #search-button span {
-            display: inline-block;
-            width: fit-content;
         }
 
         #messages-container {
@@ -110,39 +90,41 @@
         #messages-container::-webkit-scrollbar {
             display: none;
         }
-        #messages-container div.carousel-card {
-            color: green;
-        }
         a {
             text-decoration: none;
         }
 
         @media only screen and (max-width: 600px) {
-            div#search-wrap,
             #messages-container {
                 width: 95vw;
             }
         }
     </style>
     <body>
-        <div id="header">
-            <span>Home</span>
-            <span>About us</span>
-            <span>Find a property</span>
-            <span>Contact</span>
-        </div>
+        <Navbar />
         <div id="search-hero">
             <div id="messages-container"></div>
-            <div id="search-wrap">
-                <input type="text" autocomplete="off" name="" id="search-bar" />
-                <span id="search-button">
-                    <span>SEARCH</span>
-                </span>
+            <SearchBar />
+        </div>
+        <div id="other-content">
+            <h1>Latest listings</h1>
+            <div id="latest-listings">
+                {
+                    latestListings.map((d: SearchResult)=>{
+                        return <property-card title={d.title}></property-card>
+                    })
+                }
             </div>
         </div>
-        <div id="other-content"></div>
     </body>
+
     <script>
+        import PropertyCard from "../components/web/PropertyCard";
+        if (!customElements.get("property-card")) {
+            customElements.define("property-card", PropertyCard);
+        }
+        import type SearchResult from "../utils/index_type";
+        import type WiseHouseError from "../utils/wise_house_error";
         /*****
          * THESE ARE DEFINITIONS THAT HELP WITH TYPESCRIPT...
          * If you are using Javascript, remove this section, and
@@ -155,12 +137,7 @@
             type: msgType;
         };
 
-        type SearchResult = {
-            id: string;
-            title?: string;
-            canonical?: string;
-            avatar?: string;
-        };
+        
         type CarouselContent = {
             msg: string;
             results: SearchResult[];
@@ -170,10 +147,7 @@
             id: string;
         };
 
-        type WiseHouseError = {
-            msg: string;
-            moment: string;
-        };
+        
 
         class Carousel extends HTMLElement {
             constructor() {
@@ -208,79 +182,8 @@
             customElements.define("property-carousel", Carousel);
         }
 
-        class Card extends HTMLElement {            
-            canonical: string = "";
-            avatar: string = "";
-            constructor() {
-                super();
-            }
-
-            
-
-            connectedCallback() {
-                if (!this.shadowRoot) {
-                    this.attachShadow({ mode: "open" });
-                }
-                this.shadowRoot!.innerHTML = `
-                <style>
-                    a {                        
-                        cursor: pointer;
-                    }
-                    div {
-                        margin: 0 0.8em;
-                        background: white;
-                        padding: 0.7em;
-                        border-radius: 9px;
-                        width: 220px;
-                        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-                        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-                    }
-                    div:hover{
-                        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-                    }
-                    h1 {
-                        font-size: 1em;
-                    }
-                    img {
-                        margin: 0 auto;
-                        width: 100%;
-                    }
-                </style>
-
-                <div id="the-div">                                    
-                </div>
-                `;
-
-
-                const div = this.shadowRoot!.getElementById("the-div")!
-                let container = div
-                if(this.canonical !== "" ){
-                    container = document.createElement("a") 
-                    div.appendChild(container)
-                    //@ts-ignore
-                    container.href = this.canonical
-                    //@ts-ignore
-                    container.target = "_blank"
-
-                }
-                if (this.title !== ""){
-                    const h = document.createElement("h1")
-                    h.innerText = this.title
-                    container.appendChild(h)
-                }
-                if (this.avatar !== ""){
-                    const img = document.createElement("img")
-                    img.src = this.avatar
-                    container.appendChild(img)
-                }
-            }
-        }
-        if (!customElements.get("property-card")) {
-            customElements.define("property-card", Card);
-        }
-
         /*****
-         * GATHER RELEVANT ELEMENTS
+         * GATHER RELEVANT ELEMENTS FOR THE SEARCH
          **** */
         // the "search" buttonn
         const searchButton = document.getElementById("search-button")!;
@@ -305,10 +208,13 @@
         }
 
         // Pushes a Carousel of response into the container
-        function appendCarousel(container: HTMLElement, msg: CarouselContent) {            
-            if(msg.results.length === 0 ){
-                appendTextMsg(container, "Hmmm... there seems to be no properties matching your requirements. Do you want to try a different search?");
-                return
+        function appendCarousel(container: HTMLElement, msg: CarouselContent) {
+            if (msg.results.length === 0) {
+                appendTextMsg(
+                    container,
+                    "Hmmm... there seems to be no properties matching your requirements. Do you want to try a different search?",
+                );
+                return;
             }
 
             // Add message
@@ -317,16 +223,16 @@
             let mainDiv = document.createElement(
                 "property-carousel",
             ) as Carousel;
-            
-            msg.results.forEach((c: SearchResult) => {                
-                let a = document.createElement("property-card") as Card;
-                if (c.canonical){
+
+            msg.results.forEach((c: SearchResult) => {
+                let a = document.createElement("property-card") as PropertyCard;
+                if (c.canonical) {
                     a.canonical = c.canonical;
                 }
-                if(c.avatar){
+                if (c.avatar) {
                     a.avatar = c.avatar;
                 }
-                if (c.title){
+                if (c.title) {
                     a.title = c.title;
                 }
                 mainDiv.appendChild(a);
@@ -366,15 +272,99 @@
             // Append user message
             const container = getMsgContainer("client");
             appendTextMsg(container, v);
+
+            /* GATHER FILTERS */
+
+            // Price restrictions
+            const minPriceInput = document.getElementById(
+                "min-price",
+            )! as HTMLInputElement;
+            const min_price = parseFloat(minPriceInput.value);
+            const maxPriceInput = document.getElementById(
+                "max-price",
+            )! as HTMLInputElement;
+            const max_price = parseFloat(maxPriceInput.value);
+
+            // Bedrooms restrictions
+            const minBedroomsInput = document.getElementById(
+                "min-bedrooms",
+            )! as HTMLInputElement;
+            const min_bedrooms = parseInt(minBedroomsInput.value);
+            // const maxBedroomsInput = document.getElementById(
+            //     "max-bedrooms",
+            // )! as HTMLInputElement;
+            // const max_bedrooms = parseInt(maxBedroomsInput.value);
+
+            // Bathroom restrictions
+            const minBathroomInput = document.getElementById(
+                "min-bathrooms",
+            )! as HTMLInputElement;
+            const min_bathrooms = parseInt(minBathroomInput.value);
+            // const maxBathroomInput = document.getElementById(
+            //     "max-bathrooms",
+            // )! as HTMLInputElement;
+            // const max_bathrooms = parseInt(maxBathroomInput.value);
+
+            // Contract
+            const contractInput = document.getElementById(
+                "contract",
+            )! as HTMLInputElement;
+            const buy_rent =
+                contractInput.value !== "" ? contractInput.value : null;
+
+            // Location
+            const locationInput = document.getElementById(
+                "location",
+            )! as HTMLInputElement;
+            const location = locationInput.value;
+            const locations: string[] = [];
+            if (location.length !== 0) {
+                locations.push(location);
+            }
+
+            // Assemble
+            const body = {
+                message: v,
+                type: "text", // we only accept text for now
+                locale: "en", // Supported values are 'en' and 'es'
+                session_id: sessionID,
+
+                /* OPTIONAL PARAMETERS */
+                /* 
+                        Any property without restrictions can be potentially matched,
+                        no matter the filters provided by the searcher.
+                    */
+
+                // Let's limit the number of results, avoiding things
+                // being too slow
+                max_search_results: 20,
+
+                min_price,
+                max_price,
+                min_bedrooms,
+                // max_bedrooms,
+
+                // Bathrooms restrictions
+                min_bathrooms,
+                // max_bathrooms,
+
+                // Size restrictions (in m2)
+                // min_sqm: 30,
+                // max_sqm: 12312,
+
+                // min_land_sqm: 30,
+                // max_land_sqm: 12312,
+
+                // Locations restriction
+                locations,
+
+                // Contract
+                buy_rent,
+            };
             // Send the message to Wise House
             fetch("/api/search", {
                 method: "POST",
-                body: JSON.stringify({
-                    message: v,
-                    type: "text",
-                    locale: "en",
-                    session_id: sessionID,
-                }),
+                body: JSON.stringify(body),
             })
                 .then(async (response) => {
                     sendingMsg = false;
@@ -393,7 +383,7 @@
                         );
                     }
                 })
-                .catch(async (error) => {                                        
+                .catch(async (error) => {
                     throw new Error(JSON.stringify(error));
                 });
         }
