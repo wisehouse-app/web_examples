@@ -2,8 +2,8 @@
 import BathroomIcon from "../icons/BathroomIcon.astro";
 import TenureIcon from "../icons/TenureIcon.astro";
 import LocationIcon from "../icons/LocationIcon.astro";
-import PriceIcon from "../icons/PriceIcon.astro"
-import BedroomIcon from "../icons/BedroomIcon.astro"
+import PriceIcon from "../icons/PriceIcon.astro";
+import BedroomIcon from "../icons/BedroomIcon.astro";
 ---
 
 <style>
@@ -11,7 +11,7 @@ import BedroomIcon from "../icons/BedroomIcon.astro"
         padding: 0.5em 0.2em 0.5em 0.2em;
         background: inherit;
         color: inherit;
-        width: fit-content;               
+        width: fit-content;
     }
     div.selector:first-child {
         border-top-left-radius: inherit;
@@ -28,7 +28,7 @@ import BedroomIcon from "../icons/BedroomIcon.astro"
     select,
     option {
         width: fit-content;
-        background-color: inherit;        
+        background-color: inherit;
         font-size: 0.9em;
         padding: 0.2em 0.2em 0.2em 0.1em;
         color: inherit;
@@ -37,8 +37,8 @@ import BedroomIcon from "../icons/BedroomIcon.astro"
     }
     div#search-filters {
         display: flex;
-        background:black;
-        color:white;
+        background: black;
+        color: white;
         justify-content: space-between;
         border-top-left-radius: inherit;
         border-top-right-radius: inherit;
@@ -50,8 +50,7 @@ import BedroomIcon from "../icons/BedroomIcon.astro"
 </style>
 <div id="search-filters">
     <div class="selector">
-        <!-- <p>Location</p> -->
-        <span class="icon"><LocationIcon/></span>
+        <span class="icon"><LocationIcon /></span>
         <select name="" id="location">
             <option value="">Anywhere</option>
             <option value="karori">Karori</option>
@@ -60,8 +59,8 @@ import BedroomIcon from "../icons/BedroomIcon.astro"
         </select>
     </div>
 
-    <div class="selector">        
-        <span class="icon"><PriceIcon/>   </span>     
+    <div class="selector">
+        <span class="icon"><PriceIcon /> </span>
         <select name="" id="min-price">
             <option value="100000">from 100k</option>
             <option value="150000">from 150k</option>
@@ -105,10 +104,7 @@ import BedroomIcon from "../icons/BedroomIcon.astro"
             <option value="9000000">from 9M</option>
             <option value="10000000">from 10M</option>
         </select>
-        <!-- </div>
-    <div class="selector">
-        <p>Max. Price</p> -->
-        
+
         <select name="" id="max-price">
             <option value="100000">to 100k</option>
             <option value="150000">to 150k</option>
@@ -150,14 +146,11 @@ import BedroomIcon from "../icons/BedroomIcon.astro"
             <option value="7000000">to 7M</option>
             <option value="8000000">to 8M</option>
             <option value="9000000">to 9M</option>
-            <option value="10000000">to 10M</option>
+            <option selected value="10000000">to 10M</option>
         </select>
     </div>
     <div class="selector">
-        <!-- <span> -->
-        <!-- Min. Bedrooms -->
-        <span class="icon"><BedroomIcon/></span>
-        <!-- </span> -->
+        <span class="icon"><BedroomIcon /></span>
         <select style="display:inline;" name="" id="min-bedrooms">
             <option value="1">1+</option>
             <option value="2">2+</option>
@@ -171,8 +164,7 @@ import BedroomIcon from "../icons/BedroomIcon.astro"
         </select>
     </div>
     <div class="selector">
-        <!-- <p>Min. bathrooms</p> -->
-        <span class="icon"><BathroomIcon/></span>
+        <span class="icon"><BathroomIcon /></span>
         <select name="" id="min-bathrooms">
             <option value="1">1+</option>
             <option value="2">2+</option>
@@ -186,8 +178,7 @@ import BedroomIcon from "../icons/BedroomIcon.astro"
         </select>
     </div>
     <div class="selector">
-        <!-- <p>Contract</p> -->
-        <span class="icon"><TenureIcon/></span>
+        <span class="icon"><TenureIcon /></span>
         <select name="" id="contract">
             <option value="">Rent or Buy</option>
             <option value="rent">For Rent</option>
