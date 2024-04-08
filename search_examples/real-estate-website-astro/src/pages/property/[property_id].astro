@@ -1,0 +1,101 @@
+---
+import type WiseHouseError from "../../utils/wise_house_error";
+
+export const prerender = false;
+
+export interface Location {
+    city: string;
+    neighbourhood: string;
+}
+export interface Construction {
+    name: string;
+    layers: Layer[];
+}
+export interface Layer {
+    thickness_m: number;
+    material: string;
+}
+type PropertySummary = {
+    location?: Location;
+    total_area_m2: number;
+    rooms: Room[];
+    constructions: Construction[];
+    in_the_neighbourhood?: string[];
+    nstoreys?: number;
+    notes: string[];
+    locale?: string;
+    images?: string[];
+};
+type RoomPurpose =
+    | "Bathroom"
+    | "Bedroom"
+    | "Dining Room"
+    | "Kitchen"
+    | "Living Room"
+    | "Office"
+    | "Storage"
+    | "Garage"
+    | "Hallway"
+    | "Laundry"
+    | "Other";
+
+export interface Room {
+    name: string;
+    area_m2: number;
+    storey?: number;
+    purposes?: RoomPurpose[];
+}
+
+type PropertyData = {
+    title?: string;
+    description?: string;
+    summary?: PropertySummary;
+};
+
+// GET MODEL ID OR FAIL!
+const { property_id: propID } = Astro.params;
+if (!propID) {
+    throw new Error("Could not find property id.");
+}
+let wisehouse_key = import.meta.env.WISEHOUSE_API_KEY;
+
+let propertyData: PropertyData | undefined = await fetch(
+    `http://localhost:3030/property?id=${propID}`,
+    {
+        headers: {
+            "WiseHouse-API-Key": wisehouse_key,
+        },
+    },
+)
+    .then(async (response) => {
+        if (response.ok) {
+            let prop: PropertyData = await response.json();
+            return prop;
+        } else {
+            let err: WiseHouseError = await response.json();
+            console.error(`when ${err.moment} : ${err.msg}`);
+            return undefined;
+        }
+    })
+    .catch((err) => {
+        console.error(JSON.stringify(err));
+        return undefined;
+    });
+
+if (!propertyData) {
+    console.error("No property data");
+}
+const sessionID: string | null = Astro.url.searchParams.get("session");
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{propertyData!.title!}</title>
+    </head>
+    <body>
+        
+    </body>
+</html>

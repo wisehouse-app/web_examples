@@ -1,49 +1,47 @@
 ---
 import SearchBar from "../components/index/SearchBar.astro";
-import Navbar from "../components/Navbar.astro";
+import MainLayout from "../layouts/MainLayout.astro";
+
 import type SearchResult from "../utils/index_type";
 import type WiseHouseError from "../utils/wise_house_error";
+import CardsContainer from "../components/CardsContainer.astro";
 
-let latestListings : SearchResult[] = []
+let latestListings: SearchResult[] = [];
 let wisehouse_key = import.meta.env.WISEHOUSE_API_KEY;
-await fetch("http://localhost:3030/index",{
+await fetch("http://localhost:3030/index", {
     headers: {
         "WiseHouse-API-Key": wisehouse_key,
-    }
-}).then(async(response)=>{    
-    if (response.ok){
-        const data : SearchResult[] = await response.json()
-        latestListings = data;              
-    }else{
-        const err : WiseHouseError = await response.json() 
-        throw new Error(`when ${err.moment}: ${err.msg}`)
-    }
-
-}).catch((error)=>{
-    throw new Error(error)
+    },
 })
-
-
-
+    .then(async (response) => {
+        if (response.ok) {
+            const data: SearchResult[] = await response.json();            
+            latestListings = data;
+        } else {
+            const err: WiseHouseError = await response.json();
+            throw new Error(`when ${err.moment}: ${err.msg}`);
+        }
+    })
+    .catch((error) => {
+        throw new Error(error);
+    });
 ---
 
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-    </head>
+<MainLayout>
     <style>
+        html {
+            font-family: "Montserrat Variable", sans-serif;
+            font-weight: 300;
+        }
         html,
         body {
             margin: 0;
             padding: 0;
         }
-        * {
-            font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-                "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+        body {
+            padding-bottom: 3rem;
         }
+
         body {
             display: flex;
             flex-direction: column;
@@ -90,9 +88,10 @@ await fetch("http://localhost:3030/index",{
         #messages-container::-webkit-scrollbar {
             display: none;
         }
+        
         a {
             text-decoration: none;
-        }
+        }        
 
         @media only screen and (max-width: 600px) {
             #messages-container {
@@ -100,23 +99,59 @@ await fetch("http://localhost:3030/index",{
             }
         }
     </style>
-    <body>
-        <Navbar />
-        <div id="search-hero">
-            <div id="messages-container"></div>
-            <SearchBar />
+
+    <div id="search-hero">
+        <div id="messages-container"></div>
+        <SearchBar />
+    </div>
+    <div id="other-content">
+        <div style="width:100%;text-align:center;margin-bottom: 2em;">
+            <p style="font-size:1.4rem;margin-bottom:0;">
+                Our latest listings
+            </p>
+            <svg
+                stroke="currentColor"
+                fill="currentColor"
+                stroke-width="0"
+                viewBox="0 0 16 16"
+                height="1em"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+                ><path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M7.976 10.072l4.357-4.357.62.618L8.284 11h-.618L3 6.333l.619-.618 4.357 4.357z"
+                ></path></svg
+            >
         </div>
-        <div id="other-content">
-            <h1>Latest listings</h1>
-            <div id="latest-listings">
-                {
-                    latestListings.map((d: SearchResult)=>{
-                        return <property-card title={d.title}></property-card>
-                    })
-                }
-            </div>
-        </div>
-    </body>
+        <CardsContainer>
+            {
+                latestListings.map((d: SearchResult) => {
+                    d.canonical = `/property/${d.id}`
+                    return (
+                        <property-card
+                            id={d.id}
+                            title={d.title}
+                            canonical={d.canonical}
+                            avatar={d.avatar}
+                            price={d.price}
+                            n_bedrooms={d.n_bedrooms}
+                            n_bathrooms={d.n_bathrooms}
+                            area_sqm={d.area_sqm}
+                            land_area_sqm={d.land_area_sqm}
+                            location={
+                                d.locations && d.locations.length !== 0
+                                    ? d.locations[0]
+                                    : 0
+                            }
+                            buy_rent={d.buy_rent}
+                            property_type={d.property_type}
+                        />
+                    );
+                })
+            }
+        </CardsContainer>
+    </div>
 
     <script>
         import PropertyCard from "../components/web/PropertyCard";
@@ -137,7 +172,6 @@ await fetch("http://localhost:3030/index",{
             type: msgType;
         };
 
-        
         type CarouselContent = {
             msg: string;
             results: SearchResult[];
@@ -146,8 +180,6 @@ await fetch("http://localhost:3030/index",{
         type SessionIdResponse = {
             id: string;
         };
-
-        
 
         class Carousel extends HTMLElement {
             constructor() {
@@ -161,6 +193,7 @@ await fetch("http://localhost:3030/index",{
                 <style>
                     div {
                         display: flex;
+                        gap: 0.5em;
                         overflow-x: scroll;                        
                         padding-bottom: 2em;
                     }                    
@@ -197,16 +230,24 @@ await fetch("http://localhost:3030/index",{
         // Creates a container and puts the name of the author in it.
         function getMsgContainer(origin: string): HTMLElement {
             const ret = document.createElement("div");
-            const h = document.createElement("h3");
+            const h = document.createElement("h1");
+            h.style.fontSize="1em"
             if (origin === "client") {
                 h.innerText = "You";
             } else {
                 h.innerText = "Jo Wise";
             }
+            
             ret.appendChild(h);
             return ret;
         }
 
+        function displayName(id: string | undefined): string | undefined {
+            if (!id) {
+                return undefined;
+            }
+            return id.replaceAll("_", " ");
+        }
         // Pushes a Carousel of response into the container
         function appendCarousel(container: HTMLElement, msg: CarouselContent) {
             if (msg.results.length === 0) {
@@ -224,18 +265,26 @@ await fetch("http://localhost:3030/index",{
                 "property-carousel",
             ) as Carousel;
 
-            msg.results.forEach((c: SearchResult) => {
-                let a = document.createElement("property-card") as PropertyCard;
-                if (c.canonical) {
-                    a.canonical = c.canonical;
+            msg.results.forEach((c: SearchResult) => {                
+                let property = document.createElement(
+                    "property-card",
+                ) as PropertyCard;
+                property._id = c.id
+                property._title = c.title;
+                property._canonical =  `/property/${c.id}?session=${sessionID}`
+                property._avatar = c.avatar;
+
+                property._price = c.price;
+                property._n_bedrooms = c.n_bedrooms;
+                property._n_bathrooms = c.n_bathrooms;
+                property._area_sqm = c.area_sqm;
+                property._land_arae_sqm = c.land_area_sqm;
+                if (c.locations && c.locations.length > 0) {
+                    property._location = displayName(c.locations[0]);
                 }
-                if (c.avatar) {
-                    a.avatar = c.avatar;
-                }
-                if (c.title) {
-                    a.title = c.title;
-                }
-                mainDiv.appendChild(a);
+                property._property_type = displayName(c.property_type);
+
+                mainDiv.appendChild(property);
             });
 
             container.appendChild(mainDiv);
@@ -290,6 +339,7 @@ await fetch("http://localhost:3030/index",{
                 "min-bedrooms",
             )! as HTMLInputElement;
             const min_bedrooms = parseInt(minBedroomsInput.value);
+
             // const maxBedroomsInput = document.getElementById(
             //     "max-bedrooms",
             // )! as HTMLInputElement;
@@ -310,7 +360,7 @@ await fetch("http://localhost:3030/index",{
                 "contract",
             )! as HTMLInputElement;
             const buy_rent =
-                contractInput.value !== "" ? contractInput.value : null;
+                contractInput.value !== "" ? [contractInput.value] : [];
 
             // Location
             const locationInput = document.getElementById(
@@ -331,9 +381,9 @@ await fetch("http://localhost:3030/index",{
 
                 /* OPTIONAL PARAMETERS */
                 /* 
-                        Any property without restrictions can be potentially matched,
-                        no matter the filters provided by the searcher.
-                    */
+                NOTE: Properties that has been not assigned this 
+                information will NOT be matched, ever.
+            */
 
                 // Let's limit the number of results, avoiding things
                 // being too slow
@@ -342,24 +392,23 @@ await fetch("http://localhost:3030/index",{
                 min_price,
                 max_price,
                 min_bedrooms,
-                // max_bedrooms,
 
                 // Bathrooms restrictions
                 min_bathrooms,
-                // max_bathrooms,
-
-                // Size restrictions (in m2)
-                // min_sqm: 30,
-                // max_sqm: 12312,
-
-                // min_land_sqm: 30,
-                // max_land_sqm: 12312,
+                /* 
+            max_bedrooms,            
+            max_bathrooms,            
+            min_sqm: 30,
+            max_sqm: 12312,            
+            min_land_sqm: 30,
+            max_land_sqm: 12312,
+            */
 
                 // Locations restriction
                 locations,
 
                 // Contract
-                buy_rent,
+                // buy_rent,
             };
             // Send the message to Wise House
             fetch("/api/search", {
@@ -422,4 +471,4 @@ await fetch("http://localhost:3030/index",{
                 });
         };
     </script>
-</html>
+</MainLayout>

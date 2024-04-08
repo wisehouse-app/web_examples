@@ -45,7 +45,21 @@ import BedroomIcon from "../icons/BedroomIcon.astro";
         z-index: 2;
     }
     span.icon {
-        font-size: 1.25em;
+        font-size: 1.1em;
+        margin:0;
+        padding:0;
+    }
+    @media only screen and (max-width: 750px) {
+        div.selector{
+            text-align: center;
+            font-size:0.9em;
+        }
+        div.selector * {
+            display:block;
+        }
+        div#min-bathrooms-section,div#min-bedrooms-section{
+            display:none;
+        }
     }
 </style>
 <div id="search-filters">
@@ -149,7 +163,7 @@ import BedroomIcon from "../icons/BedroomIcon.astro";
             <option selected value="10000000">to 10M</option>
         </select>
     </div>
-    <div class="selector">
+    <div id="min-bedrooms-section" class="selector">
         <span class="icon"><BedroomIcon /></span>
         <select style="display:inline;" name="" id="min-bedrooms">
             <option value="1">1+</option>
@@ -163,7 +177,7 @@ import BedroomIcon from "../icons/BedroomIcon.astro";
             <option value="9">9+</option>
         </select>
     </div>
-    <div class="selector">
+    <div id="min-bathrooms-section" class="selector">
         <span class="icon"><BathroomIcon /></span>
         <select name="" id="min-bathrooms">
             <option value="1">1+</option>
@@ -177,7 +191,7 @@ import BedroomIcon from "../icons/BedroomIcon.astro";
             <option value="9">9+</option>
         </select>
     </div>
-    <div class="selector">
+    <div  class="selector">
         <span class="icon"><TenureIcon /></span>
         <select name="" id="contract">
             <option value="">Rent or Buy</option>

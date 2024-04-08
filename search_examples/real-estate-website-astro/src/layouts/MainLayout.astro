@@ -1,0 +1,25 @@
+---
+import '@fontsource-variable/montserrat';
+import Navbar from "../components/Navbar.astro";
+
+---
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Wise House's Fake Real Estate</title>
+    </head>
+    <style is:global>
+        p {
+            font-family: 'Montserrat Variable', sans-serif;
+            font-weight: 300;
+        }
+    </style>
+    <body>
+        <Navbar />
+        <slot></slot>
+    </body>
+</html>
+
+
