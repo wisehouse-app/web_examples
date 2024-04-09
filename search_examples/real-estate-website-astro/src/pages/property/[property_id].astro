@@ -1,4 +1,8 @@
 ---
+import BedroomIcon from "../../components/icons/BedroomIcon.astro";
+import BathroomIcon from "../../components/icons/BathroomIcon.astro";
+import PriceIcon from "../../components/icons/PriceIcon.astro";
+import MainLayout from "../../layouts/MainLayout.astro";
 import type WiseHouseError from "../../utils/wise_house_error";
 
 export const prerender = false;
@@ -46,9 +50,22 @@ export interface Room {
     purposes?: RoomPurpose[];
 }
 
+type Index = {
+    description?: string;
+    price?: number;
+    n_bedrooms?: number;
+    n_bathrooms?: number;
+    area_sqm?: number;
+    locations: string[];
+    buy_rent: "buy" | "rent";
+    property_type?: string;
+    id: string;
+    avatar?: string;
+};
+
 type PropertyData = {
     title?: string;
-    description?: string;
+    index: Index;
     summary?: PropertySummary;
 };
 
@@ -86,16 +103,278 @@ if (!propertyData) {
     console.error("No property data");
 }
 const sessionID: string | null = Astro.url.searchParams.get("session");
+
+/* GET SOME SIZE DATA */
+let nBedrooms: number | undefined = propertyData?.index.n_bedrooms;
+let nBathrooms: number | undefined = propertyData?.index.n_bathrooms;
+if (!nBedrooms || !nBathrooms) {
+    nBedrooms = 0;
+    nBathrooms = 0;
+    propertyData!.summary?.rooms.forEach((r: Room) => {
+        if (!r.purposes) {
+        } else {
+            if (r.purposes!.indexOf("Bedroom") >= 0) {
+                nBedrooms! += 1;
+            }
+            if (r.purposes!.indexOf("Bathroom") >= 0) {
+                nBathrooms! += 1;
+            }
+        }
+    });
+}
+
+/* ADD FORMAT TO PRICE */
+function parsePrice(price: number | undefined): string | undefined {
+    if (!price) {
+        return undefined;
+    }
+    let priceString = price.toString();
+    // Reverse the string
+    const reversedString = priceString.split("").reverse().join("");
+
+    // Add commas every 3 characters (except the first)
+    let formattedPrice = "";
+    for (let i = 0; i < reversedString.length; i++) {
+        if (i > 0 && i % 3 === 0) {
+            formattedPrice += ",";
+        }
+        formattedPrice += reversedString[i];
+    }
+
+    // Reverse the formatted string back to normal order
+    return formattedPrice.split("").reverse().join("");
+}
+const thePrice: string | undefined = parsePrice(propertyData?.index.price);
+const avatarURL = propertyData?.index.avatar;
+
+/* PROCESS DESCRIPTION */
+const description = propertyData?.index?.description?.split("\n");
+
 ---
 
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>{propertyData!.title!}</title>
-    </head>
-    <body>
-        
-    </body>
-</html>
+<MainLayout>
+    <style>
+        div#main {
+            width: 100vw;
+            min-height: 100vh;
+        }
+
+        #main {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #header {
+            width: 100%;
+            height: 75vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #dde3ea;
+        }
+
+        #big-image {
+            flex: 1;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        #images {
+            width: auto;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            overflow-x: scroll;
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
+        }
+        #images::-webkit-scrollbar {
+            display: none;
+        }
+
+        #content {
+            padding: 1em;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+        #intro h1 {
+            margin: 0.2em 0;
+        }
+        #images img {
+            margin: 2px;
+            max-height: 100%;
+            cursor: pointer;
+            border-radius: 0.4em;
+        }
+        p#price {
+            margin: 0;
+            margin-bottom: 0.3em;
+        }
+
+        div#size {
+            margin-bottom:2em;
+        }
+
+        div#size > span {
+            margin-right: 1em;
+        }
+        div#room-breakdown {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        div#room-breakdown div {
+            padding: 0.8em;
+            margin: 0.2em;
+            text-align: center;
+        }
+        div#room-breakdown div p:first-child {
+            font-size: 0.8em;
+            opacity: 0.5;
+            font-weight: bold;
+            margin: 0;
+            margin-bottom: 0.2em;
+        }
+        div#room-breakdown div p {
+            margin: 0;
+        }
+        div#details {
+            width: 100%;            
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 auto;
+            justify-content: center;
+        }
+        div#left {
+            max-width: 600px;
+        }
+        #chat {
+            height: 650px;
+            width: 280px;
+            border:none;
+        }
+        div#right {            
+            padding: 0;
+            border-radius: 0.5em;
+            margin-left: 1em;            
+            box-shadow:
+                0 1px 3px rgba(0, 0, 0, 0.12),
+                0 1px 2px rgba(0, 0, 0, 0.24);
+        }
+        span.size-icon {
+            font-size: 1.2em;            
+        }
+    </style>
+    <div id="main">
+        <div id="header">
+            <div id="big-image"></div>
+            <div id="images">
+                {
+                    propertyData?.summary?.images?.map((src: string) => {
+                        return <img src={src} />;
+                    })
+                }
+            </div>
+        </div>
+        <div id="content">
+            <div id="intro">
+                {propertyData?.title && <h1>{propertyData?.title}</h1>}
+                {
+                    thePrice && (
+                        <p id="price">
+                            <span class="size-icon"><PriceIcon /></span>
+                            {thePrice}
+                        </p>
+                    )
+                }
+                <div id="size">
+                    {
+                        propertyData?.index.area_sqm && (
+                            <span> {propertyData?.index.area_sqm} m² </span>
+                        )
+                    }
+                    {
+                        propertyData?.summary?.nstoreys && (
+                            <span>
+                                {propertyData?.summary?.nstoreys}
+                                {propertyData?.summary?.nstoreys! === 1
+                                    ? "storey"
+                                    : "storeys"}
+                            </span>
+                        )
+                    }
+
+                    {
+                        nBedrooms && (
+                            <span>
+                                <span class="size-icon"><BedroomIcon /></span>
+                                {nBedrooms}
+                            </span>
+                        )
+                    }
+                    {
+                        nBathrooms && (
+                            <span>
+                                <span class="size-icon"><BathroomIcon /></span>
+                                {nBathrooms}
+                            </span>
+                        )
+                    }
+
+                    
+                </div>
+                <div id="details">
+                    <div id="left">
+                        <div id="description">
+                            {
+                                description &&
+                                    description.map((d: string) => {
+                                        return <p>{d}</p>;
+                                    })
+                            }
+                        </div>
+                        {
+                            propertyData?.summary?.rooms && (
+                                <div>
+                                    <p style="font-weight:bold;">
+                                        {propertyData?.summary?.rooms.length}{" "}
+                                        spaces
+                                    </p>
+                                    <div id="room-breakdown">
+                                        {propertyData?.summary?.rooms.map(
+                                            (room: Room) => {
+                                                return (
+                                                    <div>
+                                                        <p>{room.name}</p>
+                                                        <p>{room.area_m2}m²</p>
+                                                    </div>
+                                                );
+                                            },
+                                        )}
+                                    </div>
+                                </div>
+                            )
+                        }
+                    </div>
+                    <div id="right">
+                        <iframe 
+                            id="chat"
+                            src="http://localhost:4321/chat/uztR8tNRtWWDWxT0GFCq?no3d&notitle&bg=fff" 
+                        ></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script define:vars={{ avatarURL }}>
+        const bigImage = document.getElementById("big-image");
+        bigImage.style.backgroundImage = `url("${avatarURL}")`;
+
+        const imageGallery = document.getElementById("images");
+        imageGallery.childNodes.forEach((v) => {
+            v.onclick = () => {
+                bigImage.style.backgroundImage = `url("${v.src}")`;
+            };
+        });
+    </script>
+</MainLayout>
