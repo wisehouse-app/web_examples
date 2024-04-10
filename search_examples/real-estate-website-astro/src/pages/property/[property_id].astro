@@ -51,7 +51,7 @@ export interface Room {
 }
 
 type Index = {
-    description?: string;
+    listing_text?: string;
     price?: number;
     n_bedrooms?: number;
     n_bathrooms?: number;
@@ -74,34 +74,35 @@ const { property_id: propID } = Astro.params;
 if (!propID) {
     throw new Error("Could not find property id.");
 }
+
 let wisehouse_key = import.meta.env.WISEHOUSE_API_KEY;
 
-let propertyData: PropertyData | undefined = await fetch(
-    `http://localhost:3030/property?id=${propID}`,
+let response: Response = await fetch(
+    `http://localhost:3030/listings?id=${propID}`,
     {
         headers: {
             "WiseHouse-API-Key": wisehouse_key,
         },
     },
-)
-    .then(async (response) => {
-        if (response.ok) {
-            let prop: PropertyData = await response.json();
-            return prop;
-        } else {
-            let err: WiseHouseError = await response.json();
-            console.error(`when ${err.moment} : ${err.msg}`);
-            return undefined;
-        }
-    })
-    .catch((err) => {
-        console.error(JSON.stringify(err));
-        return undefined;
-    });
+);
+
+let propertyData: PropertyData | undefined = undefined;
+try {
+    if (response.ok) {
+        const ret = await response.json();
+        propertyData = ret;
+    } else {
+        let err: WiseHouseError = await response.json();
+        console.error(`when ${err.moment} : ${err.msg}`);
+    }
+} catch (err) {
+    console.error(JSON.stringify(err));
+}
 
 if (!propertyData) {
-    console.error("No property data");
+    throw new Error("No property data");
 }
+
 const sessionID: string | null = Astro.url.searchParams.get("session");
 
 /* GET SOME SIZE DATA */
@@ -110,7 +111,7 @@ let nBathrooms: number | undefined = propertyData?.index.n_bathrooms;
 if (!nBedrooms || !nBathrooms) {
     nBedrooms = 0;
     nBathrooms = 0;
-    propertyData!.summary?.rooms.forEach((r: Room) => {
+    propertyData?.summary?.rooms.forEach((r: Room) => {
         if (!r.purposes) {
         } else {
             if (r.purposes!.indexOf("Bedroom") >= 0) {
@@ -148,8 +149,7 @@ const thePrice: string | undefined = parsePrice(propertyData?.index.price);
 const avatarURL = propertyData?.index.avatar;
 
 /* PROCESS DESCRIPTION */
-const description = propertyData?.index?.description?.split("\n");
-
+const description = propertyData?.index?.listing_text?.split('\\n');
 ---
 
 <MainLayout>
@@ -195,7 +195,7 @@ const description = propertyData?.index?.description?.split("\n");
         #content {
             padding: 1em;
             margin: 0 auto;
-            max-width: 1200px;
+            max-width: 1000px;
         }
         #intro h1 {
             margin: 0.2em 0;
@@ -212,7 +212,7 @@ const description = propertyData?.index?.description?.split("\n");
         }
 
         div#size {
-            margin-bottom:2em;
+            margin-bottom: 2em;
         }
 
         div#size > span {
@@ -239,30 +239,46 @@ const description = propertyData?.index?.description?.split("\n");
             margin: 0;
         }
         div#details {
-            width: 100%;            
+            width: 100%;
             display: flex;
-            flex-wrap: wrap;
             margin: 0 auto;
             justify-content: center;
         }
         div#left {
             max-width: 600px;
+            min-width: 320px;
+            margin-right: 2em;
+            flex-grow: 1;
         }
+        
         #chat {
             height: 650px;
             width: 280px;
-            border:none;
+            border: none;
         }
-        div#right {            
-            padding: 0;
-            border-radius: 0.5em;
-            margin-left: 1em;            
+        div#right {
+            width: fit-content;
+            min-width: fit-content;
+            padding: 0.4em;
+            border-radius: 0.5em;            
             box-shadow:
-                0 1px 3px rgba(0, 0, 0, 0.12),
-                0 1px 2px rgba(0, 0, 0, 0.24);
+                0 3px 6px rgba(0, 0, 0, 0.16),
+                0 3px 6px rgba(0, 0, 0, 0.23);
         }
         span.size-icon {
-            font-size: 1.2em;            
+            font-size: 1.2em;
+        }
+        div.section {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+            margin-bottom: 3em;
+        }
+        div.section > p:first-child {
+            font-weight: bold;
+        }
+        @media (max-width: 720px) {
+            div#details {
+                flex-wrap: wrap;
+            }
         }
     </style>
     <div id="main">
@@ -282,7 +298,9 @@ const description = propertyData?.index?.description?.split("\n");
                 {
                     thePrice && (
                         <p id="price">
-                            <span class="size-icon"><PriceIcon /></span>
+                            <span class="size-icon">
+                                <PriceIcon />
+                            </span>
                             {thePrice}
                         </p>
                     )
@@ -307,7 +325,9 @@ const description = propertyData?.index?.description?.split("\n");
                     {
                         nBedrooms && (
                             <span>
-                                <span class="size-icon"><BedroomIcon /></span>
+                                <span class="size-icon">
+                                    <BedroomIcon />
+                                </span>
                                 {nBedrooms}
                             </span>
                         )
@@ -315,30 +335,35 @@ const description = propertyData?.index?.description?.split("\n");
                     {
                         nBathrooms && (
                             <span>
-                                <span class="size-icon"><BathroomIcon /></span>
+                                <span class="size-icon">
+                                    <BathroomIcon />
+                                </span>
                                 {nBathrooms}
                             </span>
                         )
                     }
-
-                    
                 </div>
                 <div id="details">
                     <div id="left">
-                        <div id="description">
-                            {
-                                description &&
-                                    description.map((d: string) => {
-                                        return <p>{d}</p>;
-                                    })
-                            }
+                        <div class="section">
+                            <p>About the property</p>
+                            <div id="description">
+                                {
+                                    description &&
+                                        description.map((d: string) => {
+                                            return <p>{d}</p>;
+                                        })
+                                }
+                            </div>
                         </div>
                         {
                             propertyData?.summary?.rooms && (
-                                <div>
-                                    <p style="font-weight:bold;">
-                                        {propertyData?.summary?.rooms.length}{" "}
-                                        spaces
+                                <div class="section">
+                                    <p>
+                                        {propertyData?.summary?.rooms.length ===
+                                        1
+                                            ? "About the space"
+                                            : `About the ${propertyData?.summary?.rooms.length} spaces`}
                                     </p>
                                     <div id="room-breakdown">
                                         {propertyData?.summary?.rooms.map(
@@ -357,9 +382,9 @@ const description = propertyData?.index?.description?.split("\n");
                         }
                     </div>
                     <div id="right">
-                        <iframe 
+                        <iframe
                             id="chat"
-                            src="http://localhost:4321/chat/uztR8tNRtWWDWxT0GFCq?no3d&notitle&bg=fff" 
+                            src=`http://localhost:4321/chat/${propID}?no3d&notitle&bg=fff`
                         ></iframe>
                     </div>
                 </div>
