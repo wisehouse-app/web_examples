@@ -1,73 +1,13 @@
 ---
+import type { PropertyData, Room } from "../../components/listings/types";
 import BedroomIcon from "../../components/icons/BedroomIcon.astro";
 import BathroomIcon from "../../components/icons/BathroomIcon.astro";
 import PriceIcon from "../../components/icons/PriceIcon.astro";
 import MainLayout from "../../layouts/MainLayout.astro";
 import type WiseHouseError from "../../utils/wise_house_error";
+import RoomBreakdown from "../../components/listings/RoomBreakdown.astro";
 
 export const prerender = false;
-
-export interface Location {
-    city: string;
-    neighbourhood: string;
-}
-export interface Construction {
-    name: string;
-    layers: Layer[];
-}
-export interface Layer {
-    thickness_m: number;
-    material: string;
-}
-type PropertySummary = {
-    location?: Location;
-    total_area_m2: number;
-    rooms: Room[];
-    constructions: Construction[];
-    in_the_neighbourhood?: string[];
-    nstoreys?: number;
-    notes: string[];
-    locale?: string;
-    images?: string[];
-};
-type RoomPurpose =
-    | "Bathroom"
-    | "Bedroom"
-    | "Dining Room"
-    | "Kitchen"
-    | "Living Room"
-    | "Office"
-    | "Storage"
-    | "Garage"
-    | "Hallway"
-    | "Laundry"
-    | "Other";
-
-export interface Room {
-    name: string;
-    area_m2: number;
-    storey?: number;
-    purposes?: RoomPurpose[];
-}
-
-type Index = {
-    listing_text?: string;
-    price?: number;
-    n_bedrooms?: number;
-    n_bathrooms?: number;
-    area_sqm?: number;
-    locations: string[];
-    buy_rent: "buy" | "rent";
-    property_type?: string;
-    id: string;
-    avatar?: string;
-};
-
-type PropertyData = {
-    title?: string;
-    index: Index;
-    summary?: PropertySummary;
-};
 
 // GET MODEL ID OR FAIL!
 const { property_id: propID } = Astro.params;
@@ -164,6 +104,21 @@ if (dynamicResponse.ok) {
     const r = await dynamicResponse.json();
     dynamicDecription = r.listing.split("\\n");
 }
+
+// Rooms
+const nrooms = propertyData?.summary?.rooms.length;
+const nstoreys = propertyData?.summary?.nstoreys;
+let storeyBreakdown: Room[][] | undefined = undefined;
+if (nstoreys) {
+    storeyBreakdown = Array.apply(null, Array(nstoreys)).map((x) => []);
+    propertyData?.summary?.rooms.forEach((r: Room) => {
+        if (r.storey && storeyBreakdown) {
+            storeyBreakdown![r.storey - 1].push(r);
+        } else {
+            storeyBreakdown = undefined;
+        }
+    });
+}
 ---
 
 <MainLayout>
@@ -232,26 +187,7 @@ if (dynamicResponse.ok) {
         div#size > span {
             margin-right: 1em;
         }
-        div#room-breakdown {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        div#room-breakdown div {
-            padding: 0.8em;
-            margin: 0.2em;
-            text-align: center;
-        }
-        div#room-breakdown div p:first-child {
-            font-size: 0.8em;
-            opacity: 0.5;
-            font-weight: bold;
-            margin: 0;
-            margin-bottom: 0.2em;
-        }
-        div#room-breakdown div p {
-            margin: 0;
-        }
+
         div#details {
             width: 100%;
             display: flex;
@@ -326,12 +262,10 @@ if (dynamicResponse.ok) {
                         )
                     }
                     {
-                        propertyData?.summary?.nstoreys && (
+                        nstoreys && (
                             <span>
-                                {propertyData?.summary?.nstoreys}
-                                {propertyData?.summary?.nstoreys! === 1
-                                    ? "storey"
-                                    : "storeys"}
+                                {nstoreys}
+                                {nstoreys === 1 ? "storey" : "storeys"}
                             </span>
                         )
                     }
@@ -361,9 +295,9 @@ if (dynamicResponse.ok) {
                     <div id="left">
                         {
                             dynamicDecription && (
-                                <div class="section"> 
+                                <div class="section">
                                     <p>Reasons you will love this property</p>
-                                    <div >
+                                    <div>
                                         {dynamicDecription.map((d: string) => {
                                             return <p>{d}</p>;
                                         })}
@@ -375,7 +309,7 @@ if (dynamicResponse.ok) {
                             description && (
                                 <div class="section">
                                     <p>About the property</p>
-                                    <div >
+                                    <div>
                                         {description.map((d: string) => {
                                             return <p>{d}</p>;
                                         })}
@@ -384,7 +318,7 @@ if (dynamicResponse.ok) {
                             )
                         }
                         {
-                            propertyData?.summary?.rooms && (
+                            nrooms && (!storeyBreakdown || nstoreys === 1) && (
                                 <div class="section">
                                     <p>
                                         {propertyData?.summary?.rooms.length ===
@@ -392,13 +326,32 @@ if (dynamicResponse.ok) {
                                             ? "About the space"
                                             : `About the ${propertyData?.summary?.rooms.length} spaces`}
                                     </p>
-                                    <div id="room-breakdown">
-                                        {propertyData?.summary?.rooms.map(
-                                            (room: Room) => {
+                                    <RoomBreakdown
+                                        rooms={propertyData?.summary?.rooms}
+                                    />
+                                </div>
+                            )
+                        }
+                        {
+                            nrooms && storeyBreakdown && nstoreys !== 1 && (
+                                <div class="section">
+                                    <p>
+                                        {propertyData?.summary?.rooms.length ===
+                                        1
+                                            ? "About the space"
+                                            : `About the ${propertyData?.summary?.rooms.length} spaces`}
+                                    </p>
+                                    <div>
+                                        {storeyBreakdown.map(
+                                            (rooms: Room[], storey: number) => {
                                                 return (
                                                     <div>
-                                                        <p>{room.name}</p>
-                                                        <p>{room.area_m2}m²</p>
+                                                        <small style="font-weight:bold;">
+                                                            Storey {storey + 1}
+                                                        </small>
+                                                        <RoomBreakdown
+                                                            rooms={rooms}
+                                                        />
                                                     </div>
                                                 );
                                             },
@@ -408,12 +361,15 @@ if (dynamicResponse.ok) {
                             )
                         }
                     </div>
-                    <div id="right">
-                        <iframe
-                            id="chat"
-                            src=`http://localhost:4321/chat/${propID}?no3d&notitle&bg=fff`
-                        ></iframe>
-                    </div>
+                    {
+                        propertyData?.summary && 
+                        <div id="right">
+                            <iframe
+                                id="chat"
+                                src=`http://localhost:4321/chat/${propID}?no3d&notitle&bg=fff`
+                            ></iframe>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
