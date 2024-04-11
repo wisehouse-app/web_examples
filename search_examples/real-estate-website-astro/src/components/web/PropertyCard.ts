@@ -2,7 +2,7 @@ import BedroomIcon from "../icons/BedroomIcon";
 import PriceIcon from "../icons/PriceIcon";
 import BathroomsIcon from "../icons/BathroomsIcon";
 export default class PropertyCard extends HTMLElement {
-    _id : string | undefined = undefined
+    _id: string | undefined = undefined
     _title: string | undefined = undefined
     _canonical: string | undefined = undefined;
     _avatar: string | undefined = undefined;
@@ -115,11 +115,13 @@ export default class PropertyCard extends HTMLElement {
                 width:fit-content;
             }            
             div#the-div {
-                display:block;                
+                display:flex;
+                flex-direction:column;                
                 cursor:pointer;                
                 background: white;                
                 border-radius: 9px;
                 width: 180px;
+                height: 350px;
                 box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
                 transition: all 0.3s cubic-bezier(.25,.8,.25,1);
             }
@@ -128,9 +130,11 @@ export default class PropertyCard extends HTMLElement {
             }
             h1 {
                 font-size: 1em;
-                margin: 0.2em 0;
+                margin:0;
                 margin-bottom:0.1em;
                 font-weight:normal;
+                height: 4.6em;                
+                overflow-y: hidden;
             }
             img {
                 margin: 0 auto;
@@ -144,13 +148,16 @@ export default class PropertyCard extends HTMLElement {
             small{
                 display:block;
             }
-            div{
+            div#text{
+                padding-top: 0.5em;
                 display:flex;
-                justify-content:space-between;        
+                flex-direction: column;
+                flex-grow:1;
+                justify-content: top;
             }
             #location{
                 text-transform:capitalize;
-                margin-bottom: 0.8em;
+                margin-bottom: 0.3em;
                 opacity:0.7;
             }
             #size-data{
@@ -163,7 +170,7 @@ export default class PropertyCard extends HTMLElement {
                 display:block;
             }
             #price{
-                font-size: 1em;
+                font-size: 0.9em;
                 margin-bottom: 0.2em;
             }
         </style>
@@ -175,20 +182,21 @@ export default class PropertyCard extends HTMLElement {
                 `: ""}
 
                 <div id="text">
+                    ${this._location ? `
+                        <small id="location">${this._location.replaceAll("_", " ")}</small>
+                    `: ""}
+                    ${this._price ? `
+                        <small id="price">${PriceIcon}${this.thePrice()}</small>
+                    `: ""}
                     ${this._title ? `
                         <h1>${this._title}</h1>
                     `: ""}
                     
-                    ${this._location ? `
-                        <small id="location">${this._location.replaceAll("_", " ")}</small>
-                    `: ""}
-
-                    ${this._price ? `
-                        <small id="price">${PriceIcon}${this.thePrice()}</small>
-                    `: ""}
+                    <div style="flex-grow:1"></div>
+                    
                     <div id="size-data">
                         ${this._area_sqm ? `
-                            <small>${this._area_sqm}m²</small>
+                            <small>${Math.round(this._area_sqm)}m²</small>
                         `: ""}
                         ${this._n_bedrooms ? `
                             <small><span class="icon">${BedroomIcon}</span>${this._n_bedrooms}</small>

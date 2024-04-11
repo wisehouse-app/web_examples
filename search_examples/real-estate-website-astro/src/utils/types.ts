@@ -48,11 +48,17 @@ export type Index = {
     n_bedrooms?: number;
     n_bathrooms?: number;
     area_sqm?: number;
+    land_area_sqm?:number;
     locations: string[];
     buy_rent: "buy" | "rent";
     property_type?: string;
     id: string;
     avatar?: string;
+    associated_model?: string;
+    description?: string;
+    title?: string;
+    canonical?: string;
+    
 };
 
 export type PropertyData = {

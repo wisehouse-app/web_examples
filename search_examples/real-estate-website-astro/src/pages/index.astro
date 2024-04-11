@@ -1,21 +1,24 @@
 ---
+import * as card_data_db from "./api/own_database/card_data";
+
+import type { CardData } from "./api/own_database/card_data";
 import SearchBar from "../components/index/SearchBar.astro";
 import MainLayout from "../layouts/MainLayout.astro";
 
-import type SearchResult from "../utils/index_type";
+import type { Index } from "../utils/types";
 import type WiseHouseError from "../utils/wise_house_error";
 import CardsContainer from "../components/CardsContainer.astro";
 
-let latestListings: SearchResult[] = [];
+let latestListings: Index[] = [];
 let wisehouse_key = import.meta.env.WISEHOUSE_API_KEY;
-await fetch("http://localhost:3030/index", {
+await fetch("http://localhost:3030/index?n=12", {
     headers: {
         "WiseHouse-API-Key": wisehouse_key,
     },
 })
     .then(async (response) => {
         if (response.ok) {
-            const data: SearchResult[] = await response.json();            
+            const data: Index[] = await response.json();
             latestListings = data;
         } else {
             const err: WiseHouseError = await response.json();
@@ -88,10 +91,10 @@ await fetch("http://localhost:3030/index", {
         #messages-container::-webkit-scrollbar {
             display: none;
         }
-        
+
         a {
             text-decoration: none;
-        }        
+        }
 
         @media only screen and (max-width: 600px) {
             #messages-container {
@@ -106,9 +109,7 @@ await fetch("http://localhost:3030/index", {
     </div>
     <div id="other-content">
         <div style="width:100%;text-align:center;margin-bottom: 2em;">
-            <p style="font-size:1.4rem;margin-bottom:0;">
-                Our latest listings
-            </p>
+            <p style="font-size:1.4rem;margin-bottom:0;">Our latest listings</p>
             <svg
                 stroke="currentColor"
                 fill="currentColor"
@@ -126,8 +127,22 @@ await fetch("http://localhost:3030/index", {
         </div>
         <CardsContainer>
             {
-                latestListings.map((d: SearchResult) => {
-                    d.canonical = `/property/${d.id}`
+                latestListings.map(async (d: Index) => {
+                    if (d.associated_model) {
+                        d.canonical = `/property/wh_hosted_${d.id}`;
+                    } else {
+                        // Query your own database for the data... we are simulating here
+                        const response = await card_data_db.GET({
+                            params: { id: d.id },
+                        });
+                        if (response.ok) {
+                            const cardData: CardData = await response.json();
+                            d.title = cardData.title;
+                            d.avatar = cardData.avatar;
+                        }
+
+                        d.canonical = `/property/self_hosted_${d.id}`;
+                    }
                     return (
                         <property-card
                             id={d.id}
@@ -154,11 +169,13 @@ await fetch("http://localhost:3030/index", {
     </div>
 
     <script>
+        import type { CardData } from "./api/own_database/card_data";
+        import * as card_data_db from "./api/own_database/card_data";
         import PropertyCard from "../components/web/PropertyCard";
         if (!customElements.get("property-card")) {
             customElements.define("property-card", PropertyCard);
         }
-        import type SearchResult from "../utils/index_type";
+        import type { Index } from "../utils/types";
         import type WiseHouseError from "../utils/wise_house_error";
         /*****
          * THESE ARE DEFINITIONS THAT HELP WITH TYPESCRIPT...
@@ -174,7 +191,7 @@ await fetch("http://localhost:3030/index", {
 
         type CarouselContent = {
             msg: string;
-            results: SearchResult[];
+            results: Index[];
         };
 
         type SessionIdResponse = {
@@ -231,13 +248,13 @@ await fetch("http://localhost:3030/index", {
         function getMsgContainer(origin: string): HTMLElement {
             const ret = document.createElement("div");
             const h = document.createElement("h1");
-            h.style.fontSize="1em"
+            h.style.fontSize = "1em";
             if (origin === "client") {
                 h.innerText = "You";
             } else {
                 h.innerText = "Jo Wise";
             }
-            
+
             ret.appendChild(h);
             return ret;
         }
@@ -265,13 +282,33 @@ await fetch("http://localhost:3030/index", {
                 "property-carousel",
             ) as Carousel;
 
-            msg.results.forEach((c: SearchResult) => {                
+            msg.results.forEach(async (c: Index) => {
                 let property = document.createElement(
                     "property-card",
                 ) as PropertyCard;
-                property._id = c.id
+                property._id = c.id;
                 property._title = c.title;
-                property._canonical =  `/property/${c.id}?session=${sessionID}`
+
+                if (c.associated_model) {
+                    property._canonical = `/property/wh_hosted_${c.id}?session=${sessionID}`;
+                } else {
+                    property._canonical = `/property/self_hosted_${c.id}?session=${sessionID}`;
+                    // Query your own database for the data... we are simulating here
+                    const response = await card_data_db.GET({
+                        params: { id: c.id },
+                    });
+                    if (response.ok) {
+                        const cardData: CardData = await response.json();
+                        c.title = cardData.title;
+                        c.avatar = cardData.avatar;
+                    }
+
+                    c.canonical = `/property/self_hosted_${c.id}`;
+                    // Enable dynamic listing if available
+                    if (c.description) {
+                        c.canonical += `&sessionID=${sessionID}`;
+                    }
+                }
                 property._avatar = c.avatar;
 
                 property._price = c.price;

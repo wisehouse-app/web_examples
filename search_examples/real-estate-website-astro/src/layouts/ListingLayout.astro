@@ -1,126 +1,45 @@
 ---
-import type { PropertyData, Room } from "../../components/listings/types";
-import BedroomIcon from "../../components/icons/BedroomIcon.astro";
-import BathroomIcon from "../../components/icons/BathroomIcon.astro";
-import PriceIcon from "../../components/icons/PriceIcon.astro";
-import MainLayout from "../../layouts/MainLayout.astro";
-import type WiseHouseError from "../../utils/wise_house_error";
-import RoomBreakdown from "../../components/listings/RoomBreakdown.astro";
+import MainLayout from "./MainLayout.astro";
+import RoomBreakdown from "../components/listings/RoomBreakdown.astro";
+import BedroomIcon from "../components/icons/BedroomIcon.astro";
+import BathroomIcon from "../components/icons/BathroomIcon.astro";
+import PriceIcon from "../components/icons/PriceIcon.astro";
+import parsePrice from "../utils/parse_price";
+import type { Room } from "../utils/types";
 
-export const prerender = false;
-
-// GET MODEL ID OR FAIL!
-const { property_id: propID } = Astro.params;
-if (!propID) {
-    throw new Error("Could not find property id.");
+interface Props {
+    images?: string[],
+    title?:string,
+    price?: number,
+    area_sqm?: number,
+    nstoreys?:number,
+    n_bedrooms?:number,
+    n_bathrooms?:number,
+    dynamic_description?:string[],
+    description?:string[],
+    associated_model?:string,
+    avatar?:string,
+    storey_breakdown?:Room[][]
 }
 
-let wisehouse_key = import.meta.env.WISEHOUSE_API_KEY;
+const {
+    images = undefined,
+    title=undefined,
+    price=undefined,
+    area_sqm = undefined,
+    nstoreys=undefined,
+    n_bedrooms=undefined,
+    n_bathrooms=undefined,
+    dynamic_description=undefined,
+    description=undefined,
+    associated_model=undefined,
+    avatar=undefined,
+    storey_breakdown=undefined
+} = Astro.props
 
-let response: Response = await fetch(
-    `http://localhost:3030/listings?id=${propID}`,
-    {
-        headers: {
-            "WiseHouse-API-Key": wisehouse_key,
-        },
-    },
-);
+const nBrokenDownStoreys = storey_breakdown?.length
 
-let propertyData: PropertyData | undefined = undefined;
-try {
-    if (response.ok) {
-        const ret = await response.json();
-        propertyData = ret;
-    } else {
-        let err: WiseHouseError = await response.json();
-        console.error(`when ${err.moment} : ${err.msg}`);
-    }
-} catch (err) {
-    console.error(JSON.stringify(err));
-}
-
-if (!propertyData) {
-    throw new Error("No property data");
-}
-
-/* GET SOME SIZE DATA */
-let nBedrooms: number | undefined = propertyData?.index.n_bedrooms;
-let nBathrooms: number | undefined = propertyData?.index.n_bathrooms;
-if (!nBedrooms || !nBathrooms) {
-    nBedrooms = 0;
-    nBathrooms = 0;
-    propertyData?.summary?.rooms.forEach((r: Room) => {
-        if (!r.purposes) {
-        } else {
-            if (r.purposes!.indexOf("Bedroom") >= 0) {
-                nBedrooms! += 1;
-            }
-            if (r.purposes!.indexOf("Bathroom") >= 0) {
-                nBathrooms! += 1;
-            }
-        }
-    });
-}
-
-/* ADD FORMAT TO PRICE */
-function parsePrice(price: number | undefined): string | undefined {
-    if (!price) {
-        return undefined;
-    }
-    let priceString = price.toString();
-    // Reverse the string
-    const reversedString = priceString.split("").reverse().join("");
-
-    // Add commas every 3 characters (except the first)
-    let formattedPrice = "";
-    for (let i = 0; i < reversedString.length; i++) {
-        if (i > 0 && i % 3 === 0) {
-            formattedPrice += ",";
-        }
-        formattedPrice += reversedString[i];
-    }
-
-    // Reverse the formatted string back to normal order
-    return formattedPrice.split("").reverse().join("");
-}
-const thePrice: string | undefined = parsePrice(propertyData?.index.price);
-const avatarURL = propertyData?.index.avatar;
-
-/* PROCESS DESCRIPTION */
-const description: string[] | undefined =
-    propertyData?.index?.listing_text?.split("\\n");
-
-const sessionID: string | null = Astro.url.searchParams.get("session");
-const dynamicResponse: Response = await fetch(
-    `http://localhost:3030/dynamic_listing?id=${propID}&session_id=${sessionID}`,
-    {
-        headers: {
-            "WiseHouse-API-Key": wisehouse_key,
-        },
-    },
-);
-let dynamicDecription: string[] | undefined = undefined;
-if (dynamicResponse.ok) {
-    const r = await dynamicResponse.json();
-    dynamicDecription = r.listing.split("\\n");
-}
-
-// Rooms
-const nrooms = propertyData?.summary?.rooms.length;
-const nstoreys = propertyData?.summary?.nstoreys;
-let storeyBreakdown: Room[][] | undefined = undefined;
-if (nstoreys) {
-    storeyBreakdown = Array.apply(null, Array(nstoreys)).map((x) => []);
-    propertyData?.summary?.rooms.forEach((r: Room) => {
-        if (r.storey && storeyBreakdown) {
-            storeyBreakdown![r.storey - 1].push(r);
-        } else {
-            storeyBreakdown = undefined;
-        }
-    });
-}
 ---
-
 <MainLayout>
     <style>
         div#main {
@@ -234,31 +153,35 @@ if (nstoreys) {
     <div id="main">
         <div id="header">
             <div id="big-image"></div>
-            <div id="images">
+            {images && 
+                <div id="images">
                 {
-                    propertyData?.summary?.images?.map((src: string) => {
+                    images?.map((src: string) => {
                         return <img src={src} />;
                     })
                 }
             </div>
+            }
         </div>
         <div id="content">
             <div id="intro">
-                {propertyData?.title && <h1>{propertyData?.title}</h1>}
+                {title &&
+                     <h1>{title}</h1>
+                }
                 {
-                    thePrice && (
+                    price && (
                         <p id="price">
                             <span class="size-icon">
                                 <PriceIcon />
                             </span>
-                            {thePrice}
+                            {parsePrice(price)}
                         </p>
                     )
                 }
                 <div id="size">
                     {
-                        propertyData?.index.area_sqm && (
-                            <span> {propertyData?.index.area_sqm} m² </span>
+                        area_sqm && (
+                            <span> {Math.round(area_sqm)} m² </span>
                         )
                     }
                     {
@@ -271,22 +194,22 @@ if (nstoreys) {
                     }
 
                     {
-                        nBedrooms && (
+                        n_bedrooms && (
                             <span>
                                 <span class="size-icon">
                                     <BedroomIcon />
                                 </span>
-                                {nBedrooms}
+                                {n_bedrooms}
                             </span>
                         )
                     }
                     {
-                        nBathrooms && (
+                        n_bathrooms && (
                             <span>
                                 <span class="size-icon">
                                     <BathroomIcon />
                                 </span>
-                                {nBathrooms}
+                                {n_bathrooms}
                             </span>
                         )
                     }
@@ -294,11 +217,11 @@ if (nstoreys) {
                 <div id="details">
                     <div id="left">
                         {
-                            dynamicDecription && (
+                            dynamic_description && (
                                 <div class="section">
                                     <p>Reasons you will love this property</p>
                                     <div>
-                                        {dynamicDecription.map((d: string) => {
+                                        {dynamic_description.map((d: string) => {
                                             return <p>{d}</p>;
                                         })}
                                     </div>
@@ -318,31 +241,23 @@ if (nstoreys) {
                             )
                         }
                         {
-                            nrooms && (!storeyBreakdown || nstoreys === 1) && (
+                            nBrokenDownStoreys === 1 && (
                                 <div class="section">
-                                    <p>
-                                        {propertyData?.summary?.rooms.length ===
-                                        1
-                                            ? "About the space"
-                                            : `About the ${propertyData?.summary?.rooms.length} spaces`}
-                                    </p>
+                                    <p>Property Layout</p>
                                     <RoomBreakdown
-                                        rooms={propertyData?.summary?.rooms}
+                                        rooms={storey_breakdown![0]}
                                     />
                                 </div>
                             )
                         }
                         {
-                            nrooms && storeyBreakdown && nstoreys !== 1 && (
+                            nBrokenDownStoreys && nBrokenDownStoreys > 1 && (
                                 <div class="section">
                                     <p>
-                                        {propertyData?.summary?.rooms.length ===
-                                        1
-                                            ? "About the space"
-                                            : `About the ${propertyData?.summary?.rooms.length} spaces`}
+                                        Property layout
                                     </p>
                                     <div>
-                                        {storeyBreakdown.map(
+                                        {storey_breakdown!.map(
                                             (rooms: Room[], storey: number) => {
                                                 return (
                                                     <div>
@@ -362,11 +277,11 @@ if (nstoreys) {
                         }
                     </div>
                     {
-                        propertyData?.summary && 
+                        associated_model && 
                         <div id="right">
                             <iframe
                                 id="chat"
-                                src=`http://localhost:4321/chat/${propID}?no3d&notitle&bg=fff`
+                                src=`http://localhost:4321/chat/${associated_model}?no3d&notitle&bg=fff`
                             ></iframe>
                         </div>
                     }
@@ -374,15 +289,17 @@ if (nstoreys) {
             </div>
         </div>
     </div>
-    <script define:vars={{ avatarURL }}>
+    <script define:vars={{ avatar }}>
         const bigImage = document.getElementById("big-image");
-        bigImage.style.backgroundImage = `url("${avatarURL}")`;
+        bigImage.style.backgroundImage = `url("${avatar}")`;
 
         const imageGallery = document.getElementById("images");
-        imageGallery.childNodes.forEach((v) => {
-            v.onclick = () => {
-                bigImage.style.backgroundImage = `url("${v.src}")`;
-            };
-        });
+        if(imageGallery){
+            imageGallery.childNodes.forEach((v) => {
+                v.onclick = () => {
+                    bigImage.style.backgroundImage = `url("${v.src}")`;
+                };
+            });
+        }
     </script>
 </MainLayout>
