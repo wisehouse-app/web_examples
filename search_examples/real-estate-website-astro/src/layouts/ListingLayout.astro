@@ -153,7 +153,7 @@ const nBrokenDownStoreys = storey_breakdown?.length
     <div id="main">
         <div id="header">
             <div id="big-image"></div>
-            {images && 
+            {images &&
                 <div id="images">
                 {
                     images?.map((src: string) => {
@@ -277,11 +277,11 @@ const nBrokenDownStoreys = storey_breakdown?.length
                         }
                     </div>
                     {
-                        associated_model && 
+                        associated_model &&
                         <div id="right">
                             <iframe
                                 id="chat"
-                                src=`http://localhost:4321/chat/${associated_model}?no3d&notitle&bg=fff`
+                                src=`https://wisehouse.app/chat/${associated_model}?no3d&notitle&bg=fff`
                             ></iframe>
                         </div>
                     }

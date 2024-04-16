@@ -11,7 +11,7 @@ import CardsContainer from "../components/CardsContainer.astro";
 
 let latestListings: Index[] = [];
 let wisehouse_key = import.meta.env.WISEHOUSE_API_KEY;
-await fetch("http://localhost:3030/index?n=12", {
+await fetch("https://api1-2v6xvmx6xq-as.a.run.app/index?n=12", {
     headers: {
         "WiseHouse-API-Key": wisehouse_key,
     },
@@ -212,9 +212,9 @@ await fetch("http://localhost:3030/index?n=12", {
                     div {
                         display: flex;
                         gap: 0.5em;
-                        overflow-x: scroll;                        
+                        overflow-x: scroll;
                         padding-bottom: 2em;
-                    }                    
+                    }
                     div::-webkit-scrollbar {
                         display: none;
                     }
@@ -418,8 +418,8 @@ await fetch("http://localhost:3030/index?n=12", {
                 session_id: sessionID,
 
                 /* OPTIONAL PARAMETERS */
-                /* 
-                NOTE: Properties that has been not assigned this 
+                /*
+                NOTE: Properties that has been not assigned this
                 information will NOT be matched, ever.
             */
 
@@ -433,11 +433,11 @@ await fetch("http://localhost:3030/index?n=12", {
 
                 // Bathrooms restrictions
                 min_bathrooms,
-                /* 
-            max_bedrooms,            
-            max_bathrooms,            
+                /*
+            max_bedrooms,
+            max_bathrooms,
             min_sqm: 30,
-            max_sqm: 12312,            
+            max_sqm: 12312,
             min_land_sqm: 30,
             max_land_sqm: 12312,
             */

@@ -35,6 +35,7 @@ import BedroomIcon from "../icons/BedroomIcon.astro";
         border: none;
         border-radius: inherit;
     }
+
     div#search-filters {
         display: flex;
         background: black;
@@ -46,19 +47,20 @@ import BedroomIcon from "../icons/BedroomIcon.astro";
     }
     span.icon {
         font-size: 1.1em;
-        margin:0;
-        padding:0;
+        margin: 0;
+        padding: 0;
     }
     @media only screen and (max-width: 750px) {
-        div.selector{
+        div.selector {
             text-align: center;
-            font-size:0.9em;
+            font-size: 0.9em;
         }
         div.selector * {
-            display:block;
+            display: block;
         }
-        div#min-bathrooms-section,div#min-bedrooms-section{
-            display:none;
+        div#min-bathrooms-section,
+        div#min-bedrooms-section {
+            display: none;
         }
     }
 </style>
@@ -191,7 +193,7 @@ import BedroomIcon from "../icons/BedroomIcon.astro";
             <option value="9">9+</option>
         </select>
     </div>
-    <div  class="selector">
+    <div class="selector">
         <span class="icon"><TenureIcon /></span>
         <select name="" id="contract">
             <option value="">Rent or Buy</option>
